@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Archival Project | Malhar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --green-900:#1B4332;--green-800:#2D6A4F;--green-700:#40916C;
+  --green-500:#52B788;--green-300:#95D5B2;--green-100:#D8F3DC;--green-50:#F0FFF4;
+  --sand-100:#FAF8F5;--sand-200:#F5F0EA;--sand-300:#E8DFD5;
+  --text-900:#1a1a1a;--text-700:#3a3a3a;--text-500:#666;--text-300:#999;
+  --white:#fff;--red-soft:#E63946;
+  --font-display:'DM Serif Display',Georgia,serif;
+  --font-body:'DM Sans','Helvetica Neue',sans-serif;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);color:var(--text-900);background:var(--white);line-height:1.7;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,0,0,0.06);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.06)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px}
+.nav-logo{font-family:var(--font-display);font-size:1.1rem;color:var(--green-900);text-decoration:none}
+.nav-links{display:flex;gap:0.25rem;flex-wrap:wrap}
+.nav-links a{font-size:0.75rem;color:var(--text-500);text-decoration:none;padding:0.35rem 0.65rem;border-radius:4px;transition:all .2s;letter-spacing:0.02em;text-transform:uppercase;font-weight:500}
+.nav-links a:hover,.nav-links a.active{color:var(--green-800);background:var(--green-50)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--green-900);color:var(--white);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(82,183,136,0.15) 0%,transparent 70%)}
+.hero-content{text-align:center;padding:2rem;position:relative;z-index:1}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.5rem,6vw,4.5rem);font-weight:400;margin-bottom:1rem;letter-spacing:-0.01em;line-height:1.15}
+.hero .subtitle{font-size:clamp(1rem,2vw,1.35rem);opacity:1;color:var(--green-300);font-weight:300;max-width:600px;margin:0 auto 2.5rem}
+.hero .meta{font-size:0.85rem;opacity:0.4;letter-spacing:0.1em;text-transform:uppercase}
+.hero .meta span{margin:0 0.75rem}
+
+/* SECTIONS */
+section{padding:6rem 2rem}
+.container{max-width:900px;margin:0 auto}
+.section-num{font-size:0.75rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--green-700);font-weight:600;margin-bottom:0.5rem}
+section h2{font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.5rem);color:var(--green-900);margin-bottom:1.5rem;line-height:1.25}
+section h3{font-family:var(--font-display);font-size:1.35rem;color:var(--green-800);margin:2.5rem 0 1rem}
+section p{margin-bottom:1.25rem;color:var(--text-700);font-size:1.02rem}
+section p strong{color:var(--text-900);font-weight:600}
+
+.alt-bg{background:var(--sand-100)}
+.dark-bg{background:var(--green-900);color:var(--white)}
+.dark-bg h2,.dark-bg h3{color:var(--green-300)}
+.dark-bg p{color:rgba(255,255,255,0.75)}
+.dark-bg .section-num{color:var(--green-500)}
+.dark-bg strong{color:var(--white)}
+
+/* BULLETS */
+ul.clean{list-style:none;padding:0}
+ul.clean li{padding:0.6rem 0 0.6rem 1.5rem;position:relative;color:var(--text-700);font-size:1.02rem}
+ul.clean li::before{content:'';position:absolute;left:0;top:1.05rem;width:6px;height:6px;border-radius:50%;background:var(--green-500)}
+.dark-bg ul.clean li{color:rgba(255,255,255,0.75)}
+.dark-bg ul.clean li::before{background:var(--green-500)}
+
+/* TABLES */
+.table-wrap{overflow-x:auto;margin:2rem 0;border-radius:8px;border:1px solid var(--sand-300)}
+table{width:100%;border-collapse:collapse;font-size:0.92rem}
+thead{background:var(--green-900)}
+th{color:var(--white);font-weight:600;text-align:left;padding:0.85rem 1.1rem;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em}
+td{padding:0.85rem 1.1rem;border-top:1px solid var(--sand-200);color:var(--text-700);vertical-align:top}
+tr:nth-child(even){background:var(--sand-100)}
+.layer-name{font-weight:700;color:var(--green-900);white-space:nowrap}
+
+.dark-bg .table-wrap{border-color:rgba(255,255,255,0.1)}
+.dark-bg td{border-top-color:rgba(255,255,255,0.08);color:rgba(255,255,255,0.75)}
+.dark-bg tr:nth-child(even){background:rgba(255,255,255,0.03)}
+
+/* CALLOUT */
+.callout{background:var(--green-50);border-left:4px solid var(--green-500);padding:1.5rem 1.75rem;border-radius:0 8px 8px 0;margin:2rem 0}
+.callout p{margin-bottom:0.5rem;font-size:0.95rem}
+.callout p:last-child{margin-bottom:0}
+.dark-bg .callout{background:rgba(82,183,136,0.1);border-left-color:var(--green-500)}
+
+/* PROBLEM CARDS */
+.problem-cards{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin:2rem 0}
+@media(max-width:700px){.problem-cards{grid-template-columns:1fr}}
+.problem-card{background:var(--white);border:1px solid var(--sand-300);border-radius:12px;padding:2rem;position:relative;overflow:hidden}
+.problem-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--red-soft)}
+.problem-card.solved::before{background:var(--green-500)}
+.problem-card h4{font-family:var(--font-display);font-size:1.15rem;margin-bottom:0.75rem;color:var(--text-900)}
+.problem-card p{font-size:0.92rem;color:var(--text-500);margin-bottom:0}
+
+/* LAYER CARDS */
+.layer-cards{display:grid;gap:1.25rem;margin:2rem 0}
+.layer-card{background:var(--white);border:1px solid var(--sand-300);border-radius:10px;padding:1.75rem 2rem;display:grid;grid-template-columns:180px 1fr;gap:1.5rem;align-items:start;transition:border-color .2s}
+.layer-card:hover{border-color:var(--green-500)}
+@media(max-width:600px){.layer-card{grid-template-columns:1fr}}
+.layer-card h4{font-family:var(--font-display);font-size:1.2rem;color:var(--green-900);margin-bottom:0.25rem}
+.layer-card .sub{font-size:0.82rem;color:var(--text-300);font-style:italic}
+.layer-card p{font-size:0.92rem;color:var(--text-500);margin:0}
+
+/* WIREFRAMES */
+.wireframe-container{margin:2.5rem 0}
+.wireframe{background:var(--sand-100);border:2px solid var(--sand-300);border-radius:12px;overflow:hidden;font-size:0.78rem;color:var(--text-500)}
+.wf-browser{background:var(--sand-200);padding:0.5rem 1rem;display:flex;align-items:center;gap:0.5rem;border-bottom:1px solid var(--sand-300)}
+.wf-dots{display:flex;gap:4px}
+.wf-dots span{width:8px;height:8px;border-radius:50%;background:var(--sand-300)}
+.wf-url{background:var(--white);padding:0.25rem 0.75rem;border-radius:4px;flex:1;color:var(--text-300);font-size:0.72rem}
+.wf-body{padding:1.5rem}
+
+/* wireframe nav */
+.wf-nav{display:flex;align-items:center;justify-content:space-between;padding-bottom:1rem;border-bottom:1px solid var(--sand-300);margin-bottom:1.5rem}
+.wf-nav-logo{font-family:var(--font-display);font-size:0.95rem;color:var(--green-900)}
+.wf-nav-links{display:flex;gap:1rem;font-size:0.7rem;color:var(--text-300);text-transform:uppercase;letter-spacing:0.05em}
+.wf-nav-links span.active{color:var(--green-700);font-weight:600}
+
+/* wireframe hero block */
+.wf-hero{background:var(--green-900);border-radius:8px;padding:2rem;color:var(--white);text-align:center;margin-bottom:1.5rem}
+.wf-hero h3{font-family:var(--font-display);font-size:1.3rem;color:var(--green-300);margin:0 0 0.5rem}
+.wf-hero p{font-size:0.78rem;opacity:0.6;margin:0}
+
+/* wireframe sections */
+.wf-section-title{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--green-700);font-weight:600;margin-bottom:0.75rem}
+/* removed old layer grid tiles */
+
+.wf-directory{background:var(--white);border:1px solid var(--sand-300);border-radius:8px;padding:1rem;margin-bottom:1.5rem}
+.wf-search{background:var(--sand-100);border:1px solid var(--sand-300);border-radius:4px;padding:0.4rem 0.75rem;color:var(--text-300);font-size:0.72rem;margin-bottom:0.75rem;width:100%}
+.wf-dir-cats{display:flex;gap:0.5rem;flex-wrap:wrap}
+.wf-dir-cat{background:var(--green-50);padding:0.25rem 0.6rem;border-radius:3px;font-size:0.65rem;color:var(--green-800)}
+
+/* rich layer cards in wireframe */
+.wf-layers-rich{display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem}
+.wf-layer-rich-card{background:var(--white);border:1px solid var(--sand-300);border-radius:8px;overflow:hidden;transition:border-color .2s}
+.wf-layer-rich-card.expanded{border-color:var(--green-500);border-width:2px}
+.wf-lr-header{display:flex;align-items:center;gap:0.65rem;padding:0.7rem 0.85rem}
+.wf-lr-icon{font-size:1.1rem;width:28px;text-align:center}
+.wf-lr-name{font-size:0.78rem;font-weight:700;color:var(--green-900)}
+.wf-lr-sub-count{font-size:0.62rem;color:var(--text-300)}
+.wf-lr-expand{margin-left:auto;font-size:0.85rem;color:var(--text-300);width:20px;height:20px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--sand-100)}
+.wf-lr-expanded{border-top:1px solid var(--sand-200);padding:0.75rem 0.85rem;background:var(--sand-100)}
+.wf-sublayer-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem}
+@media(max-width:600px){.wf-sublayer-grid{grid-template-columns:1fr}}
+.wf-sublayer{background:var(--white);border:1px solid var(--sand-200);border-radius:6px;padding:0.6rem 0.7rem}
+.wf-sl-title{font-size:0.7rem;font-weight:600;color:var(--green-900);margin-bottom:0.15rem}
+.wf-sl-meta{font-size:0.6rem;color:var(--text-300);margin-bottom:0.4rem}
+.wf-sl-preview{display:flex;gap:3px;align-items:center}
+.wf-sl-thumb{width:24px;height:24px;border-radius:3px;background:var(--sand-200)}
+.wf-sl-more{font-size:0.55rem;color:var(--text-300);margin-left:2px}
+
+/* communities strip */
+.wf-communities-strip{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.wf-comm{background:var(--white);border:1px solid var(--sand-300);border-radius:5px;padding:0.35rem 0.55rem;text-align:center;min-width:58px}
+.wf-comm-year{font-size:0.55rem;color:var(--text-300)}
+.wf-comm-name{font-size:0.6rem;font-weight:600;color:var(--green-900)}
+.wf-comm-wip{border-style:dashed;opacity:0.6}
+.wf-comm-wip .wf-comm-name{font-weight:400;font-style:italic}
+
+/* bottom grid: directory + voices */
+.wf-bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.5rem}
+@media(max-width:600px){.wf-bottom-grid{grid-template-columns:1fr}}
+
+/* directory listings */
+.wf-dir-listings{margin-top:0.5rem;display:flex;flex-direction:column;gap:0.35rem}
+.wf-dir-listing{padding:0.35rem 0;border-bottom:1px solid var(--sand-200)}
+.wf-dl-name{font-size:0.68rem;font-weight:600;color:var(--text-900)}
+.wf-dl-meta{font-size:0.58rem;color:var(--text-300)}
+
+/* voices section */
+.wf-voices{display:flex;flex-direction:column;gap:0.35rem}
+.wf-voice-card{background:var(--white);border:1px solid var(--sand-300);border-radius:5px;padding:0.55rem 0.7rem}
+.wf-voice-title{font-size:0.68rem;font-weight:600;color:var(--text-900);margin-bottom:0.1rem}
+.wf-voice-author{font-size:0.58rem;color:var(--text-300)}
+
+/* events mini */
+.wf-events-mini{display:flex;gap:0.5rem}
+.wf-event-mini{display:flex;align-items:center;gap:0.5rem;background:var(--white);border:1px solid var(--sand-300);border-radius:5px;padding:0.4rem 0.6rem;flex:1}
+.wf-em-date{text-align:center;line-height:1.1}
+.wf-em-date span{display:block;font-size:0.85rem;font-weight:700;color:var(--green-800)}
+.wf-em-date{font-size:0.55rem;color:var(--text-300)}
+.wf-em-name{font-size:0.65rem;font-weight:600;color:var(--text-900)}
+
+/* wireframe: whatsapp */
+.wf-whatsapp{background:#E8F5E9;border-radius:12px;padding:1.5rem;max-width:320px;margin:1.5rem auto}
+.wf-wa-header{display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid rgba(0,0,0,0.08)}
+.wf-wa-avatar{width:28px;height:28px;border-radius:50%;background:#43A047;display:flex;align-items:center;justify-content:center;color:white;font-size:0.65rem;font-weight:700}
+.wf-wa-name{font-size:0.8rem;font-weight:600;color:var(--text-900)}
+.wf-wa-msg{margin-bottom:0.5rem;padding:0.5rem 0.75rem;border-radius:8px;font-size:0.75rem;max-width:85%;line-height:1.5}
+.wf-wa-msg.user{background:var(--white);color:var(--text-700);margin-left:auto;border-bottom-right-radius:2px}
+.wf-wa-msg.bot{background:#DCF8C6;color:var(--text-900);border-bottom-left-radius:2px}
+
+/* TIMELINE */
+.timeline{margin:2rem 0;position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:5px;top:0;bottom:0;width:2px;background:var(--green-300)}
+.tl-item{position:relative;margin-bottom:2rem;padding-left:1.5rem}
+.tl-item::before{content:'';position:absolute;left:-2rem;top:0.45rem;width:12px;height:12px;border-radius:50%;background:var(--green-500);border:3px solid var(--green-100);z-index:1}
+.tl-phase{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--green-700);font-weight:600}
+.tl-title{font-family:var(--font-display);font-size:1.1rem;color:var(--green-900);margin:0.25rem 0 0.35rem}
+.tl-desc{font-size:0.9rem;color:var(--text-500)}
+.tl-output{font-size:0.82rem;color:var(--green-800);margin-top:0.5rem;font-weight:500}
+
+.dark-bg .timeline::before{background:rgba(255,255,255,0.15)}
+.dark-bg .tl-item::before{background:var(--green-500);border-color:var(--green-900)}
+.dark-bg .tl-phase{color:var(--green-500)}
+.dark-bg .tl-title{color:var(--green-300)}
+.dark-bg .tl-desc{color:rgba(255,255,255,0.6)}
+.dark-bg .tl-output{color:var(--green-300)}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin:2rem 0}
+@media(max-width:600px){.stats-row{grid-template-columns:1fr}}
+.stat{text-align:center;padding:1.5rem}
+.stat .num{font-family:var(--font-display);font-size:2.5rem;color:var(--green-500)}
+.stat .label{font-size:0.82rem;color:var(--text-300);text-transform:uppercase;letter-spacing:0.05em;margin-top:0.25rem}
+.dark-bg .stat .label{color:rgba(255,255,255,0.4)}
+
+/* FOOTER */
+footer{background:var(--green-900);color:rgba(255,255,255,0.4);padding:3rem 2rem;text-align:center;font-size:0.85rem}
+footer strong{color:var(--green-300)}
+
+/* SCROLL ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">The Archival Project</a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#problems">Problems</a>
+      <a href="#layers">Layers</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#directory">Directory</a>
+      <a href="#editorial">Editorial</a>
+      <a href="#plan">Plan</a>
+      <a href="#effort">Effort</a>
+      <a href="#roles">Roles</a>
+      <a href="#begin">Begin</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <h1>The Archival Project</h1>
+    <p class="subtitle">Telling the story of Malhar through its living layers</p>
+    <p class="meta"><span>writeclick</span><span>&middot;</span><span>April 2026</span></p>
+  </div>
+</section>
+
+<!-- 1. OVERVIEW -->
+<section id="overview">
+  <div class="container fade-up">
+    <div class="section-num">01</div>
+    <h2>What This Project Is</h2>
+    <p>Malhar has been lived in for fourteen years. Seven communities are occupied. Three are under construction. Over that time, residents have built something that goes well beyond the physical infrastructure: a culture of composting, wildlife coexistence, art, enterprise, and shared responsibility.</p>
+    <p>The Archival Project documents that culture. It rethinks <strong>malhar.community</strong> as the platform that tells this story, supported by a redesigned directory and a WhatsApp chatbot that meets residents where they already communicate.</p>
+    <p>The project delivers three things:</p>
+    <ul class="clean">
+      <li><strong>A revamped malhar.community,</strong> structured around the narrative layers that define life at Malhar, not around individual communities.</li>
+      <li><strong>A redesigned directory with a WhatsApp chatbot,</strong> so residents can find services and information without leaving the app they already use.</li>
+      <li><strong>A path to community editorial,</strong> where a small team of resident editors handles day-to-day content under writeclick's ongoing mentorship.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 2. PROBLEMS -->
+<section class="alt-bg" id="problems">
+  <div class="container fade-up">
+    <div class="section-num">02</div>
+    <h2>Two Problems to Solve First</h2>
+    <div class="problem-cards">
+      <div class="problem-card">
+        <h4>The Trust Problem</h4>
+        <p>Some residents see malhar.community as a GoodEarth marketing initiative. That perception, whether fully accurate or not, is a real barrier to adoption and contribution.</p>
+      </div>
+      <div class="problem-card">
+        <h4>The Adoption Problem</h4>
+        <p>The website has a directory. Nobody uses it. Residents rely on an Excel file pinned in a WhatsApp group. The directory's content isn't the problem. Its location is.</p>
+      </div>
+    </div>
+
+    <h3>Addressing Trust</h3>
+    <ul class="clean">
+      <li><strong>GoodEarth's branding recedes.</strong> The site becomes "Malhar Community." GoodEarth is acknowledged as builder and facilitator, not positioned as editorial voice or protagonist.</li>
+      <li><strong>All content is resident-voiced.</strong> writeclick documents and edits, but the voice belongs to the people who live here.</li>
+      <li><strong>writeclick holds editorial independence.</strong> GoodEarth reviews for accuracy and sensitivity, not brand alignment.</li>
+      <li><strong>Contributors are credited by name.</strong> The platform visibly belongs to the people who contribute to it.</li>
+      <li><strong>A community editorial team is established,</strong> ideally young adults from Malhar, who handle day-to-day content under writeclick's continued mentorship. When residents are the visible face of the platform's content, the trust question is addressed structurally.</li>
+    </ul>
+
+    <h3>Addressing Adoption</h3>
+    <ul class="clean">
+      <li><strong>The WhatsApp chatbot is the primary interface.</strong> Residents message the bot with a query and get an immediate response. Zero behaviour change required.</li>
+      <li><strong>The website directory is the backend, not the front door.</strong> Same data feeds both. The bot is for speed. The website is for browsing.</li>
+      <li><strong>The directory redesign is driven by actual usage patterns.</strong> writeclick audits WhatsApp groups to understand what residents actually ask for and how they phrase it. Categories and priority are shaped by real queries.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 3. LAYERS -->
+<section id="layers">
+  <div class="container fade-up">
+    <div class="section-num">03</div>
+    <h2>The Narrative Layers</h2>
+    <p>The core of the revamped site is a set of narrative layers. Each documents one broad dimension of life at Malhar. Each holds multiple sub-layers that grow over time.</p>
+    <p>The individual communities (Footprints, Mosaic, Resonance, Terraces, Medley) appear naturally within the layers, not as separate features. They are the geography of the stories, not the stories themselves.</p>
+
+    <div class="layer-cards">
+      <div class="layer-card">
+        <div>
+          <h4>Flora</h4>
+          <div class="sub">Trees, gardens, landscape</div>
+        </div>
+        <p>The plant life of Malhar. Trees planted and trees that arrived on their own. Gardens, green corridors, flowering seasons. How the landscape has matured over fourteen years. Sub-layers: tree inventory, garden stories, seasonal records, native vs. planted species.</p>
+      </div>
+      <div class="layer-card">
+        <div>
+          <h4>Fauna</h4>
+          <div class="sub">Birds, snakes, dogs, insects</div>
+        </div>
+        <p>The animal life that shares Malhar with its residents. The programmes residents have built around coexistence and welfare. Sub-layers: bird inventory, snake rescue log, stray dog welfare, insect documentation, coexistence protocols.</p>
+      </div>
+      <div class="layer-card">
+        <div>
+          <h4>The Commons</h4>
+          <div class="sub">Systems, protocols, governance</div>
+        </div>
+        <p>What residents have built and maintained together. The collective infrastructure. Sub-layers: wet waste composting, water management, sustainability initiatives, community governance, shared protocols.</p>
+      </div>
+      <div class="layer-card">
+        <div>
+          <h4>The Culture</h4>
+          <div class="sub">Art, performance, celebration</div>
+        </div>
+        <p>The creative and social life that residents have invented for themselves. Sub-layers: Art at Adda, Courtyard Koota, Spirit of Malhar, book clubs, comedy, music, festivals.</p>
+      </div>
+      <div class="layer-card">
+        <div>
+          <h4>Made at Malhar</h4>
+          <div class="sub">Businesses, ventures, craft</div>
+        </div>
+        <p>Businesses, creative ventures, professional practices, and passion projects built from within Malhar. Sub-layers: individual maker profiles, origin stories, home-grown brands, resident services.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. ARCHITECTURE + WIREFRAMES -->
+<section class="alt-bg" id="architecture">
+  <div class="container fade-up">
+    <div class="section-num">04</div>
+    <h2>The Revamped malhar.community</h2>
+    <p>The current site is structured around functional categories: Directory, Discover, Inspire, Grow, Games, Climate. The revamped site is structured around stories, with functional elements integrated rather than siloed.</p>
+
+    <div class="wireframe-container">
+      <p style="font-size:0.82rem;color:var(--text-300);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;font-weight:600">Wireframe: Revamped malhar.community</p>
+      <div class="wireframe">
+        <div class="wf-browser">
+          <div class="wf-dots"><span></span><span></span><span></span></div>
+          <div class="wf-url">malhar.community</div>
+        </div>
+        <div class="wf-body">
+          <!-- Nav -->
+          <div class="wf-nav">
+            <div class="wf-nav-logo">Malhar Community</div>
+            <div class="wf-nav-links">
+              <span class="active">Home</span>
+              <span>Layers</span>
+              <span>Communities</span>
+              <span>Directory</span>
+              <span>Events</span>
+              <span>Voices</span>
+            </div>
+          </div>
+
+          <!-- Hero -->
+          <div class="wf-hero">
+            <h3>Malhar</h3>
+            <p>Fourteen years. Ten communities. One living story.</p>
+          </div>
+
+          <!-- Layers Section - rich visual -->
+          <div class="wf-section-title">The Living Layers</div>
+          <div class="wf-layers-rich">
+            <!-- Flora layer expanded -->
+            <div class="wf-layer-rich-card expanded">
+              <div class="wf-lr-header">
+                <div class="wf-lr-icon">🌳</div>
+                <div>
+                  <div class="wf-lr-name">Flora</div>
+                  <div class="wf-lr-sub-count">4 sub-layers &middot; 23 entries &middot; last updated 3 days ago</div>
+                </div>
+              </div>
+              <div class="wf-lr-expanded">
+                <div class="wf-sublayer-grid">
+                  <div class="wf-sublayer">
+                    <div class="wf-sl-title">Tree Inventory</div>
+                    <div class="wf-sl-meta">47 species catalogued</div>
+                    <div class="wf-sl-preview">
+                      <div class="wf-sl-thumb"></div>
+                      <div class="wf-sl-thumb"></div>
+                      <div class="wf-sl-thumb"></div>
+                      <div class="wf-sl-more">+12</div>
+                    </div>
+                  </div>
+                  <div class="wf-sublayer">
+                    <div class="wf-sl-title">Garden Stories</div>
+                    <div class="wf-sl-meta">8 resident gardens profiled</div>
+                    <div class="wf-sl-preview">
+                      <div class="wf-sl-thumb"></div>
+                      <div class="wf-sl-thumb"></div>
+                      <div class="wf-sl-thumb"></div>
+                      <div class="wf-sl-more">+5</div>
+                    </div>
+                  </div>
+                  <div class="wf-sublayer">
+                    <div class="wf-sl-title">Seasonal Records</div>
+                    <div class="wf-sl-meta">Flowering calendar, monsoon changes</div>
+                    <div class="wf-sl-preview">
+                      <div class="wf-sl-thumb"></div>
+                      <div class="wf-sl-thumb"></div>
+                    </div>
+                  </div>
+                  <div class="wf-sublayer">
+                    <div class="wf-sl-title">Native vs. Planted</div>
+                    <div class="wf-sl-meta">The landscape that grew itself</div>
+                    <div class="wf-sl-preview">
+                      <div class="wf-sl-thumb"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fauna collapsed -->
+            <div class="wf-layer-rich-card">
+              <div class="wf-lr-header">
+                <div class="wf-lr-icon">🐦</div>
+                <div>
+                  <div class="wf-lr-name">Fauna</div>
+                  <div class="wf-lr-sub-count">5 sub-layers &middot; Birds, snakes, dogs, insects, protocols</div>
+                </div>
+                <div class="wf-lr-expand">+</div>
+              </div>
+            </div>
+
+            <!-- Commons collapsed -->
+            <div class="wf-layer-rich-card">
+              <div class="wf-lr-header">
+                <div class="wf-lr-icon">♻️</div>
+                <div>
+                  <div class="wf-lr-name">The Commons</div>
+                  <div class="wf-lr-sub-count">4 sub-layers &middot; Composting, water, governance, protocols</div>
+                </div>
+                <div class="wf-lr-expand">+</div>
+              </div>
+            </div>
+
+            <!-- Culture collapsed -->
+            <div class="wf-layer-rich-card">
+              <div class="wf-lr-header">
+                <div class="wf-lr-icon">🎭</div>
+                <div>
+                  <div class="wf-lr-name">The Culture</div>
+                  <div class="wf-lr-sub-count">6 sub-layers &middot; Adda, Koota, Spirit of Malhar, music, comedy, books</div>
+                </div>
+                <div class="wf-lr-expand">+</div>
+              </div>
+            </div>
+
+            <!-- Made at Malhar collapsed -->
+            <div class="wf-layer-rich-card">
+              <div class="wf-lr-header">
+                <div class="wf-lr-icon">🏠</div>
+                <div>
+                  <div class="wf-lr-name">Made at Malhar</div>
+                  <div class="wf-lr-sub-count">12 profiles &middot; Businesses, ventures, creative practices</div>
+                </div>
+                <div class="wf-lr-expand">+</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Communities strip -->
+          <div class="wf-section-title" style="margin-top:1.5rem">Communities</div>
+          <div class="wf-communities-strip">
+            <div class="wf-comm"><div class="wf-comm-year">2011</div><div class="wf-comm-name">Footprints</div></div>
+            <div class="wf-comm"><div class="wf-comm-year">2013</div><div class="wf-comm-name">Mosaic</div></div>
+            <div class="wf-comm"><div class="wf-comm-year">2014</div><div class="wf-comm-name">Resonance</div></div>
+            <div class="wf-comm"><div class="wf-comm-year">2016</div><div class="wf-comm-name">Terraces</div></div>
+            <div class="wf-comm"><div class="wf-comm-year">2018</div><div class="wf-comm-name">Medley</div></div>
+            <div class="wf-comm"><div class="wf-comm-year">2019</div><div class="wf-comm-name">Harmony</div></div>
+            <div class="wf-comm"><div class="wf-comm-year">2021</div><div class="wf-comm-name">Canvas</div></div>
+            <div class="wf-comm wf-comm-wip"><div class="wf-comm-year">2025</div><div class="wf-comm-name">In progress</div></div>
+            <div class="wf-comm wf-comm-wip"><div class="wf-comm-year">2025</div><div class="wf-comm-name">In progress</div></div>
+            <div class="wf-comm wf-comm-wip"><div class="wf-comm-year">2026</div><div class="wf-comm-name">In progress</div></div>
+          </div>
+
+          <!-- Directory + Voices side by side -->
+          <div class="wf-bottom-grid">
+            <div>
+              <div class="wf-section-title">Directory</div>
+              <div class="wf-directory">
+                <div class="wf-search">Search services, doctors, schools...</div>
+                <div class="wf-dir-cats">
+                  <span class="wf-dir-cat">Services</span>
+                  <span class="wf-dir-cat">Doctors</span>
+                  <span class="wf-dir-cat">Schools</span>
+                  <span class="wf-dir-cat">Emergency</span>
+                </div>
+                <div class="wf-dir-listings">
+                  <div class="wf-dir-listing">
+                    <div class="wf-dl-name">QuickFix Plumbing</div>
+                    <div class="wf-dl-meta">Service &middot; 24/7 available</div>
+                  </div>
+                  <div class="wf-dir-listing">
+                    <div class="wf-dl-name">Dr. Sharma Dental</div>
+                    <div class="wf-dl-meta">Dentist &middot; Mon-Sat</div>
+                  </div>
+                  <div class="wf-dir-listing">
+                    <div class="wf-dl-name">Green Cab</div>
+                    <div class="wf-dl-meta">Taxi &middot; Airport runs</div>
+                  </div>
+                </div>
+                <div style="font-size:0.65rem;color:var(--text-300);text-align:center;margin-top:0.5rem">Also available via WhatsApp bot →</div>
+              </div>
+            </div>
+            <div>
+              <div class="wf-section-title">Voices</div>
+              <div class="wf-voices">
+                <div class="wf-voice-card">
+                  <div class="wf-voice-title">Why I stayed for fourteen years</div>
+                  <div class="wf-voice-author">Gowri R. &middot; Footprints</div>
+                </div>
+                <div class="wf-voice-card">
+                  <div class="wf-voice-title">The morning bird walk that changed everything</div>
+                  <div class="wf-voice-author">Arun K. &middot; Mosaic</div>
+                </div>
+                <div class="wf-voice-card">
+                  <div class="wf-voice-title">Starting a business from my living room</div>
+                  <div class="wf-voice-author">Smitha K. &middot; Resonance</div>
+                </div>
+              </div>
+              <div class="wf-section-title" style="margin-top:1rem">Events</div>
+              <div class="wf-events-mini">
+                <div class="wf-event-mini">
+                  <div class="wf-em-date"><span>23</span>Aug</div>
+                  <div class="wf-em-name">Spirit of Malhar</div>
+                </div>
+                <div class="wf-event-mini">
+                  <div class="wf-em-date"><span>10</span>May</div>
+                  <div class="wf-em-name">Art at Adda meetup</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Section</th><th>What It Contains</th></tr></thead>
+        <tbody>
+          <tr><td class="layer-name">Home</td><td>A visual, scrollable introduction to what Malhar is, leading into the narrative layers. A story with entry points, not a portal with links.</td></tr>
+          <tr><td class="layer-name">Layers</td><td>The five narrative layers: Flora, Fauna, The Commons, The Culture, Made at Malhar. Each with growing sub-layers.</td></tr>
+          <tr><td class="layer-name">Communities</td><td>A lightweight index of all ten communities. Basic facts, location, founding year. Links outward to the layers where each community appears.</td></tr>
+          <tr><td class="layer-name">Directory</td><td>Redesigned for findability. Fewer clicks, clearer categories, driven by actual WhatsApp query patterns. Connected to the chatbot.</td></tr>
+          <tr><td class="layer-name">Events</td><td>Upcoming and past events. Richer archival depth for recurring events like Spirit of Malhar.</td></tr>
+          <tr><td class="layer-name">Voices</td><td>Replaces the current Inspire/Blogs section. Resident writing, credited, managed by the community editorial team.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 5. DIRECTORY + WHATSAPP -->
+<section id="directory">
+  <div class="container fade-up">
+    <div class="section-num">05</div>
+    <h2>Directory and WhatsApp Chatbot</h2>
+
+    <h3>Directory Redesign</h3>
+    <ul class="clean">
+      <li><strong>Findability.</strong> Fewer categories. Clearer labels. A search bar that works. Most-used categories, identified from actual WhatsApp group queries, surfaced first.</li>
+      <li><strong>Maintainability.</strong> Simple enough for the community editorial team to add, update, or remove listings without developer involvement.</li>
+      <li><strong>Bot compatibility.</strong> Structured data that feeds both the website and the WhatsApp chatbot from a single source.</li>
+    </ul>
+
+    <h3>WhatsApp Chatbot</h3>
+    <p>The chatbot is the primary access layer. It meets residents where they already are.</p>
+
+    <div class="wireframe-container">
+      <p style="font-size:0.82rem;color:var(--text-300);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;font-weight:600">Wireframe: WhatsApp Chatbot</p>
+      <div class="wf-whatsapp">
+        <div class="wf-wa-header">
+          <div class="wf-wa-avatar">MC</div>
+          <div class="wf-wa-name">Malhar Community</div>
+        </div>
+        <div class="wf-wa-msg user">plumber</div>
+        <div class="wf-wa-msg bot">🔧 <strong>Plumbing Services</strong><br><br>1. Raju Plumbing &ndash; 98450 XXXXX<br>&nbsp;&nbsp;&nbsp;Available Mon&ndash;Sat, 8am&ndash;6pm<br><br>2. QuickFix Services &ndash; 98861 XXXXX<br>&nbsp;&nbsp;&nbsp;Emergency available 24/7<br><br>Reply with a number for details.</div>
+        <div class="wf-wa-msg user">upcoming events</div>
+        <div class="wf-wa-msg bot">📅 <strong>Coming Up</strong><br><br>&bull; Spirit of Malhar &ndash; Aug 23<br>&bull; Art at Adda meetup &ndash; May 10<br>&bull; Composting workshop &ndash; May 17<br><br>Visit malhar.community/events for details.</div>
+      </div>
+    </div>
+
+    <p>The bot does not replace the website directory. Both draw from the same data. The bot is for speed. The website is for browsing.</p>
+  </div>
+</section>
+
+<!-- 6. EDITORIAL TEAM -->
+<section class="alt-bg" id="editorial">
+  <div class="container fade-up">
+    <div class="section-num">06</div>
+    <h2>Community Editorial Team</h2>
+    <p>The long-term success of malhar.community depends on regular, resident-driven content. The project builds toward this by establishing a small community editorial team during the engagement.</p>
+    <p>During the ten-month engagement, writeclick holds full editorial ownership. In the final months, writeclick identifies, recruits, and mentors a small team of resident editors, ideally young adults from Malhar who are digitally fluent and interested in storytelling or community work.</p>
+    <p><strong>After the engagement, writeclick continues as editorial mentor and oversight.</strong> The community editors handle day-to-day content. writeclick provides guidance, quality checks, and periodic reviews. The relationship shifts from writeclick producing everything to writeclick overseeing while the editorial team manages ongoing content.</p>
+
+    <h3>What the editorial team handles</h3>
+    <ul class="clean">
+      <li>Publishing new content to the narrative layers.</li>
+      <li>Maintaining the directory and responding to listing requests.</li>
+      <li>Monitoring the WhatsApp chatbot and updating its data.</li>
+      <li>Managing the Voices section.</li>
+      <li>Updating the Events section.</li>
+    </ul>
+
+    <h3>What they do not handle</h3>
+    <p>Site architecture, design decisions, editorial standards, or strategic direction. writeclick retains that role.</p>
+
+    <div class="callout">
+      <p><strong>Why this matters:</strong> When residents are the visible face of the platform's content, and editorial oversight comes from an independent party rather than the builder, the trust question is addressed structurally. It also creates a meaningful role for young people in the community.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. TEN MONTH PLAN -->
+<section class="dark-bg" id="plan">
+  <div class="container fade-up">
+    <div class="section-num">07</div>
+    <h2>The Ten-Month Plan</h2>
+
+    <div class="stats-row">
+      <div class="stat"><div class="num">10</div><div class="label">Months</div></div>
+      <div class="stat"><div class="num">500</div><div class="label">Total Hours</div></div>
+      <div class="stat"><div class="num">5</div><div class="label">Narrative Layers</div></div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-phase">Phase 1: Foundation</div>
+        <div class="tl-title">Month 1: Audit and Architecture</div>
+        <div class="tl-desc">Content audit across all existing sources. WhatsApp query pattern analysis. Finalise narrative layers. Define new site architecture. Directory data audit.</div>
+        <div class="tl-output">→ Content audit, site architecture document, agreed layer sequence</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">Month 2: Site Revamp and Directory</div>
+        <div class="tl-desc">Implement new site structure and navigation. Migrate existing content. Directory redesign with priority categories from WhatsApp data. Begin chatbot development. GoodEarth branding adjusted.</div>
+        <div class="tl-output">→ Revamped malhar.community live, redesigned directory live</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">Month 3: Chatbot Launch and First Layer</div>
+        <div class="tl-desc">Chatbot testing and launch. Begin research and interviews for the first narrative layer.</div>
+        <div class="tl-output">→ WhatsApp chatbot live, first layer in production</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-phase">Phase 2: Narrative Production</div>
+        <div class="tl-title">Months 4 to 8: Five Layers</div>
+        <div class="tl-desc">One narrative layer per month, following a consistent four-week rhythm: research, fieldwork, production, review and publish. Month 9 deepens earlier layers with accumulated submissions and begins editorial team identification.</div>
+        <div class="tl-output">→ Five published layers, all growing with resident contributions</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-title">Month 9: Deepen and Prepare</div>
+        <div class="tl-desc">Revisit and enrich earlier layers. Add sub-layers that emerged during production. Begin identifying potential community editors.</div>
+        <div class="tl-output">→ Enriched layers, editorial team candidates identified</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-phase">Phase 3: Synthesis</div>
+        <div class="tl-title">Month 10: Completion and Editorial Team Onboarding</div>
+        <div class="tl-desc">Final site polish. Onboard community editors with hands-on training. Write the Documentation Playbook. Define ongoing writeclick mentorship structure. Chatbot usage review. Project closure.</div>
+        <div class="tl-output">→ Complete platform, onboarded editorial team, playbook, handover</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Monthly rhythm (Months 4 to 8):</strong> Week 1, research and audit. Week 2, interviews and fieldwork. Week 3, writing and design. Week 4, GoodEarth review (five working days) and publish.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8. EFFORT -->
+<section id="effort">
+  <div class="container fade-up">
+    <div class="section-num">08</div>
+    <h2>Effort</h2>
+    <p>writeclick commits approximately <strong>fifty person-hours per month</strong>. Total engagement: approximately 500 hours across ten months.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Activity</th><th>Phase 1</th><th>Phase 2</th><th>Phase 3</th></tr></thead>
+        <tbody>
+          <tr><td>Content and WhatsApp query audit</td><td>15</td><td>5</td><td>3</td></tr>
+          <tr><td>Site architecture, design, and build</td><td>18</td><td>3</td><td>5</td></tr>
+          <tr><td>Directory redesign and chatbot</td><td>12</td><td>2</td><td>3</td></tr>
+          <tr><td>Interviews, photography, fieldwork</td><td>0</td><td>14</td><td>5</td></tr>
+          <tr><td>Writing, editing, publishing</td><td>0</td><td>14</td><td>10</td></tr>
+          <tr><td>Updates to published content</td><td>0</td><td>4</td><td>6</td></tr>
+          <tr><td>Community editorial team and playbook</td><td>0</td><td>3</td><td>13</td></tr>
+          <tr><td>Coordination, reviews, meetings</td><td>5</td><td>5</td><td>5</td></tr>
+          <tr style="font-weight:700;color:var(--green-900)"><td><strong>Total per month</strong></td><td><strong>≈ 50 hrs</strong></td><td><strong>≈ 50 hrs</strong></td><td><strong>≈ 50 hrs</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 9. ROLES -->
+<section class="alt-bg" id="roles">
+  <div class="container fade-up">
+    <div class="section-num">09</div>
+    <h2>Roles and Responsibilities</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Task</th><th>writeclick</th><th>GoodEarth</th></tr></thead>
+        <tbody>
+          <tr><td>Content and query audit</td><td>Conduct and deliver</td><td>Provide access to archives, WhatsApp groups, and contacts</td></tr>
+          <tr><td>Site architecture and design</td><td>Design, propose, implement</td><td>Review, approve, coordinate with web team</td></tr>
+          <tr><td>Directory redesign</td><td>Redesign structure, categories, and UX</td><td>Verify listing accuracy, provide updates</td></tr>
+          <tr><td>WhatsApp chatbot</td><td>Develop, test, deploy, maintain</td><td>Promote to residents, provide feedback</td></tr>
+          <tr><td>Narrative layer production</td><td>Research, interview, write, photograph, design, publish</td><td>Resident introductions, institutional context, review for accuracy within five working days</td></tr>
+          <tr><td>Editorial control</td><td>writeclick holds editorial independence. GoodEarth reviews for accuracy and sensitivity, not brand alignment.</td><td>Route resident submissions to writeclick. Do not exercise editorial direction over content.</td></tr>
+          <tr><td>Community editorial team</td><td>Identify, onboard, train. Continue as editorial mentor post-engagement.</td><td>Support recruitment. Designate internal liaison for ongoing coordination.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 10. BEGIN -->
+<section id="begin">
+  <div class="container fade-up">
+    <div class="section-num">10</div>
+    <h2>What GoodEarth Needs to Provide</h2>
+    <ul class="clean">
+      <li><strong>Single point of contact.</strong> One person to coordinate across all deliverables.</li>
+      <li><strong>Access to existing content.</strong> goodearth.org.in admin, malhar.community (Webflow), and the GoodEarth YouTube channel.</li>
+      <li><strong>Access to WhatsApp community groups.</strong> For the query audit. writeclick observes query patterns, not private conversations.</li>
+      <li><strong>Institutional knowledge.</strong> Founding stories, design decisions, early history for each narrative layer.</li>
+      <li><strong>Resident introductions.</strong> Two to three per narrative layer.</li>
+      <li><strong>Directory data validation.</strong> Review audit for accuracy. Flag outdated listings.</li>
+      <li><strong>Approval turnaround.</strong> Five working days. Reviews are for accuracy and sensitivity only.</li>
+      <li><strong>Web team availability.</strong> Webflow support during Months 1 to 3. Publishing support Months 4 to 10.</li>
+      <li><strong>Support for editorial team recruitment.</strong> Help identify young adults. Designate internal liaison for ongoing coordination.</li>
+    </ul>
+
+    <h3>Next Steps</h3>
+    <p>A single kickoff conversation between writeclick and GoodEarth's point of contact is sufficient to begin:</p>
+    <ul class="clean">
+      <li>Review and agree on the revised scope.</li>
+      <li>Confirm the point of contact.</li>
+      <li>Confirm access to Webflow, YouTube, goodearth.org.in, and relevant WhatsApp groups.</li>
+      <li>Review the five narrative layers together.</li>
+      <li>Agree on the approval workflow and review cadence.</li>
+      <li>Set the start date for Month 1.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <strong>writeclick</strong><br>
+  Sandeep Nanu &nbsp;|&nbsp; writeclick.in
+</footer>
+
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Active nav link
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+
+// Fade-up on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
