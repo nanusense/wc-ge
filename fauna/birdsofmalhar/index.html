@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birds of Malhar · malhar.community</title>
+<meta name="description" content="The birds of Malhar, a living, collective record of 154 species seen across the community, kept on eBird. Residents, winter migrants, and rare visitors.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#F7F5EF; --paper:#FDFCFA; --surface:#FBFAF5; --card:#FDFCFA;
+ --ink:#1C1A16; --inkMid:#5A554C; --inkLt:#8E887D;
+ --rule:#C4BDAC; --hairline:#E5DFCF; --border:#D8D1C1;
+ --fauna:#8A5F2E; --faunaLt:#EBDDC2; --faunaDk:#5A3D1C;
+ --commons:#2F4C5C; --commonsLt:#D8E0E4;
+ --culture:#9C3F2A; --flora:#3F5C3A;
+ --serif:'Cormorant Garamond',Georgia,serif;
+ --sans:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+ --mono:'JetBrains Mono','Courier New',monospace;
+ --hand:'Caveat',cursive;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding:0 56px}
+.col-narrow{max-width:1000px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:400;letter-spacing:-0.01em;line-height:1.08}
+.eyebrow{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--fauna)}
+.hand{font-family:var(--hand);color:var(--inkMid)}
+.mono{font-family:var(--mono)}
+.serif{font-family:var(--serif)}
+.tick{display:inline-flex;align-items:center;gap:8px}
+.tick::before{content:'';width:30px;height:2px;background:var(--fauna)}
+
+/* ── TOP BAR ── */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 56px;border-bottom:1px solid var(--rule);background:var(--bg);position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.1) blur(2px)}
+.logo{display:flex;align-items:baseline;gap:1px}
+.logo b{font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:-0.01em}
+.logo i{font-family:var(--serif);font-size:24px;font-weight:400;font-style:italic;color:var(--inkMid)}
+.nav{display:flex;gap:38px;font-size:13px;color:var(--inkMid)}
+.nav a{padding-bottom:3px;transition:color .2s}
+.nav a:hover{color:var(--ink)}
+.nav a.active{color:var(--ink);font-weight:500;border-bottom:1.5px solid var(--fauna)}
+.est{font-family:var(--hand);font-size:16px;color:var(--inkMid)}
+@media(max-width:760px){.nav{display:none}.est{display:none}}
+
+/* ── BREADCRUMB ── */
+.crumb{display:flex;gap:10px;align-items:center;padding:13px 56px;border-bottom:1px solid var(--hairline);font-size:12px;color:var(--inkLt)}
+.crumb a:hover{color:var(--fauna)}
+.crumb .here{color:var(--ink)}
+.crumb .tag{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--inkLt)}
+@media(max-width:680px){.crumb .tag{display:none}}
+
+/* ── HERO ── */
+.hero{padding:74px 0 16px}
+.hero h1{font-size:clamp(58px,9vw,118px);line-height:0.94;letter-spacing:-0.03em;color:var(--ink);margin:18px 0 0 -2px}
+.hero .sub{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(24px,3.6vw,42px);color:var(--fauna);line-height:1.15;margin-top:16px;max-width:900px}
+.hero .lead{font-family:var(--serif);font-size:clamp(19px,2.2vw,24px);line-height:1.5;color:var(--inkMid);max-width:820px;margin-top:30px}
+.statstrip{display:flex;flex-wrap:wrap;gap:0;margin-top:46px;border-top:2px solid var(--ink);border-bottom:1px solid var(--hairline)}
+.stat{flex:1;min-width:140px;padding:20px 26px 20px 0;margin-right:26px;border-right:1px solid var(--hairline)}
+.stat:last-child{border-right:none}
+.stat .v{font-family:var(--serif);font-size:42px;line-height:1;color:var(--faunaDk)}
+.stat .v small{font-size:18px;color:var(--inkLt)}
+.stat .l{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--inkLt);margin-top:8px}
+.stat a{color:var(--fauna);border-bottom:1px solid var(--fauna)}
+@media(max-width:680px){.stat{min-width:45%;margin-right:0;padding-right:16px}}
+
+/* placeholder image */
+.ph{position:relative;background:var(--faunaLt);overflow:hidden;border:1px solid var(--border)}
+.ph::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 13px,rgba(90,61,28,0.05) 13px,rgba(90,61,28,0.05) 14px)}
+.ph .pl{position:absolute;left:16px;bottom:14px;right:16px;font-size:11px;color:var(--faunaDk);font-family:var(--mono);letter-spacing:0.02em;opacity:0.7}
+.figrow{display:flex;justify-content:space-between;align-items:flex-start;margin-top:12px;font-size:11px;color:var(--inkLt);gap:16px}
+.figrow .cap{font-family:var(--hand);font-size:16px;color:var(--inkMid)}
+.figrow .fig{font-family:var(--mono);letter-spacing:0.06em;white-space:nowrap}
+
+/* ── SECTION SCAFFOLD ── */
+section{padding:64px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:34px}
+.sec-head h2{font-size:clamp(30px,4.4vw,46px);letter-spacing:-0.015em;margin-top:12px}
+.sec-head h2 em{font-style:italic;color:var(--fauna)}
+.sec-intro{font-family:var(--serif);font-size:21px;line-height:1.55;color:var(--inkMid);max-width:760px}
+.linkmore{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fauna);border-bottom:1.5px solid var(--fauna);padding-bottom:3px;white-space:nowrap;transition:opacity .2s}
+.linkmore:hover{opacity:0.65}
+
+/* ── AT A GLANCE / tier bar ── */
+.glance{background:var(--surface);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.tierbar{display:flex;height:54px;border:1px solid var(--border);border-radius:3px;overflow:hidden;margin-top:8px}
+.tierbar .seg{display:flex;align-items:center;justify-content:center;color:#FAF6EC;font-size:12px;font-weight:500;letter-spacing:0.02em;position:relative;min-width:0}
+.tierseg-resident{background:var(--faunaDk)}
+.tierseg-regular{background:var(--fauna)}
+.tierseg-seasonal{background:#B07D3E}
+.tierseg-scarce{background:#A99B82}
+.tierseg-rare{background:var(--culture)}
+.tierlegend{display:flex;flex-wrap:wrap;gap:22px;margin-top:18px;font-size:12px;color:var(--inkMid)}
+.tierlegend .k{display:inline-flex;align-items:center;gap:8px}
+.tierlegend .sw{width:13px;height:13px;border-radius:2px;display:inline-block}
+.glance-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:start}
+@media(max-width:820px){.glance-grid{grid-template-columns:1fr;gap:32px}}
+
+/* ── RARE CARDS ── */
+.rare-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:1000px){.rare-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.rare-grid{grid-template-columns:1fr}}
+.rare-card{background:var(--card);border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+.rare-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(90,61,28,0.10)}
+.rare-card .ph{height:150px;border:none;border-bottom:1px solid var(--border)}
+.rare-card .body{padding:18px 20px 20px;display:flex;flex-direction:column;flex:1}
+.rare-card .badge{align-self:flex-start;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#FAF6EC;background:var(--culture);padding:3px 8px;border-radius:2px;margin-bottom:12px}
+.rare-card h3{font-size:24px;line-height:1.05;letter-spacing:-0.01em}
+.rare-card .sci{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--inkLt);margin-top:3px}
+.rare-card .note{font-size:13px;color:var(--inkMid);line-height:1.5;margin-top:12px;flex:1}
+.rare-card .meta{display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;padding-top:12px;border-top:1px solid var(--hairline);font-size:11px;color:var(--inkLt)}
+.rare-card .meta .pk{font-family:var(--mono);color:var(--faunaDk)}
+
+/* ── RESIDENT CAST ── */
+.cast{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media(max-width:1000px){.cast{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.cast{grid-template-columns:repeat(2,1fr)}}
+.cast-item{background:var(--card);border:1px solid var(--hairline);padding:0;overflow:hidden}
+.cast-item .ph{height:96px;border:none;border-bottom:1px solid var(--hairline)}
+.cast-item .ci-b{padding:11px 13px}
+.cast-item .nm{font-family:var(--serif);font-size:18px;line-height:1.1;letter-spacing:-0.01em}
+.cast-item .fq{font-family:var(--mono);font-size:10px;color:var(--inkLt);margin-top:5px}
+
+/* ── LEDGER ── */
+.ledger-controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:18px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.fbtn{font-family:var(--sans);font-size:12px;padding:7px 14px;border:1px solid var(--rule);background:transparent;color:var(--inkMid);border-radius:999px;cursor:pointer;transition:all .15s}
+.fbtn:hover{border-color:var(--fauna);color:var(--fauna)}
+.fbtn.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.fbtn.winter.on{background:var(--commons);border-color:var(--commons)}
+.search{font-family:var(--sans);font-size:13px;padding:8px 14px;border:1px solid var(--rule);background:var(--card);color:var(--ink);border-radius:999px;min-width:200px;outline:none}
+.search:focus{border-color:var(--fauna)}
+.lwrap{border-top:2px solid var(--ink);overflow-x:auto}
+.lhead,.lrow{display:grid;grid-template-columns:42px 2.2fr 1fr 188px 64px;gap:16px;align-items:center}
+.lhead{padding:12px 0;border-bottom:1px solid var(--ink);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--inkLt);min-width:720px}
+.lhead .sortable{cursor:pointer;display:inline-flex;gap:5px;align-items:center;user-select:none}
+.lhead .sortable:hover{color:var(--fauna)}
+.lhead .ar{font-size:8px;opacity:0}
+.lhead .sortable.act .ar{opacity:1;color:var(--fauna)}
+.lrow{padding:12px 0;border-bottom:1px solid var(--hairline);min-width:720px}
+.lrow:hover{background:rgba(138,95,46,0.035)}
+.lrow .idx{font-family:var(--mono);font-size:11px;color:var(--inkLt)}
+.lrow .nm{font-family:var(--serif);font-size:20px;letter-spacing:-0.01em;line-height:1.1}
+.lrow .nm .sci{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--inkLt);display:block;letter-spacing:0;line-height:1.2;margin-top:1px}
+.tbadge{display:inline-block;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:2px;color:#FAF6EC}
+.tb-resident{background:var(--faunaDk)} .tb-regular{background:var(--fauna)}
+.tb-seasonal{background:#B07D3E} .tb-scarce{background:#A99B82} .tb-rare{background:var(--culture)}
+.lrow .fq{font-family:var(--mono);font-size:13px;color:var(--faunaDk);text-align:right}
+/* sparkline */
+.spark{display:flex;align-items:flex-end;gap:2px;height:30px}
+.spark .b{flex:1;background:var(--fauna);min-height:0;border-radius:1px 1px 0 0;opacity:0.9}
+.spark .b.win{background:var(--commons)}
+.spark .b.z{background:var(--hairline);opacity:1;height:1px!important}
+.monlabels{display:grid;grid-template-columns:42px 2.2fr 1fr 188px 64px;gap:16px;min-width:720px}
+.monlabels .ml{grid-column:4;display:flex;gap:2px;font-family:var(--mono);font-size:8px;color:var(--inkLt);margin-top:5px}
+.monlabels .ml span{flex:1;text-align:center}
+.lcount{font-size:12px;color:var(--inkLt);margin-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+
+/* ── YEAR IN BIRDS ── */
+.year-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:56px;align-items:center}
+@media(max-width:880px){.year-grid{grid-template-columns:1fr;gap:34px}}
+.yearchart{display:flex;align-items:flex-end;gap:9px;height:220px;border-bottom:2px solid var(--ink);padding-bottom:0}
+.yearchart .yc{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px}
+.yearchart .bar{width:100%;background:var(--fauna);border-radius:2px 2px 0 0;position:relative;transition:height .6s cubic-bezier(.2,.8,.2,1)}
+.yearchart .bar.win{background:var(--commons)}
+.yearchart .bar .n{position:absolute;top:-19px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:10px;color:var(--inkMid)}
+.yearchart .mo{font-family:var(--mono);font-size:10px;color:var(--inkLt)}
+.season-notes{display:flex;flex-direction:column;gap:20px}
+.season-notes .sn{display:grid;grid-template-columns:74px 1fr;gap:16px;align-items:baseline;padding-bottom:18px;border-bottom:1px solid var(--hairline)}
+.season-notes .sn:last-child{border-bottom:none}
+.season-notes .mo{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;color:var(--faunaDk);text-transform:uppercase}
+.season-notes h4{font-family:var(--serif);font-size:22px;letter-spacing:-0.01em}
+.season-notes p{font-size:13.5px;color:var(--inkMid);line-height:1.55;margin-top:4px}
+
+/* ── WHERE TO LOOK ── */
+.places{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:980px){.places{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.places{grid-template-columns:1fr}}
+.place{background:var(--card);border:1px solid var(--border)}
+.place .ph{height:128px;border:none;border-bottom:1px solid var(--border)}
+.place .pb{padding:20px 22px 22px}
+.place .num{font-family:var(--mono);font-size:11px;color:var(--inkLt)}
+.place h3{font-size:25px;margin-top:6px;letter-spacing:-0.01em}
+.place h3 .x{font-family:var(--hand);font-size:15px;color:var(--fauna);display:block;margin-top:2px}
+.place .sp{font-size:13px;color:var(--inkMid);line-height:1.55;margin-top:12px}
+.place .sp b{color:var(--ink);font-weight:500}
+
+/* ── FIELD NOTES ── */
+.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:980px){.notes-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.notes-grid{grid-template-columns:1fr}}
+.note-card{background:var(--card);border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,box-shadow .25s}
+.note-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(90,61,28,0.10)}
+.note-card .ph{height:160px;border:none;border-bottom:1px solid var(--border)}
+.note-card .nb{padding:20px 22px 22px;display:flex;flex-direction:column;flex:1}
+.note-card .tag{align-self:flex-start;font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fauna);border:1px solid var(--rule);padding:3px 9px;border-radius:2px;margin-bottom:13px}
+.note-card h3{font-size:25px;line-height:1.08;letter-spacing:-0.01em}
+.note-card h3 em{font-style:italic}
+.note-card p{font-size:13.5px;color:var(--inkMid);line-height:1.55;margin-top:10px;flex:1}
+.note-card .rd{margin-top:16px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--fauna);display:flex;justify-content:space-between;align-items:center}
+.note-card .rd .src{font-family:var(--mono);color:var(--inkLt);letter-spacing:0.02em;text-transform:none}
+
+/* ── COMMUNITY (pull) ── */
+.community{background:var(--faunaLt);border-top:2px solid var(--fauna);border-bottom:2px solid var(--fauna)}
+.comm-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:60px;align-items:center}
+@media(max-width:880px){.comm-grid{grid-template-columns:1fr;gap:30px}}
+.comm-grid .quote{font-family:var(--serif);font-style:italic;font-size:clamp(26px,3.4vw,38px);line-height:1.22;color:var(--faunaDk);letter-spacing:-0.01em}
+.comm-grid .by{margin-top:20px;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--inkMid)}
+.comm-grid p{font-size:15px;color:var(--inkMid);line-height:1.65}
+.comm-grid p+p{margin-top:14px}
+.comm-grid .hand{font-size:19px;margin-bottom:8px;display:block;color:var(--fauna)}
+
+/* ── CONTRIBUTE ── */
+.contrib-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+@media(max-width:820px){.contrib-grid{grid-template-columns:1fr;gap:34px}}
+.contrib h2{font-size:clamp(30px,4.4vw,46px);letter-spacing:-0.015em;margin-top:10px}
+.contrib p{font-size:16px;color:var(--inkMid);line-height:1.65;margin-top:16px;max-width:460px}
+.clinks{border:1px solid var(--rule);background:var(--card)}
+.clinks a{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid var(--hairline);transition:background .15s}
+.clinks a:last-child{border-bottom:none}
+.clinks a:hover{background:var(--surface)}
+.clinks .ct{font-size:15px;color:var(--ink);font-weight:500}
+.clinks .cd{font-size:12.5px;color:var(--inkLt);margin-top:3px}
+.clinks .ar{font-size:18px;color:var(--fauna)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);color:#C8C0B2;padding:56px 0 40px;border-top:3px solid var(--fauna)}
+footer .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+@media(max-width:760px){footer .fgrid{grid-template-columns:1fr;gap:28px}}
+footer .logo b{color:#FAF6EC}footer .logo i{color:#9a9486}
+footer .fdesc{font-size:13px;line-height:1.65;margin-top:14px;max-width:380px;color:#a39c8e}
+footer h5{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#7d7668;margin-bottom:14px;font-weight:600}
+footer a.fl{display:block;font-size:13.5px;color:#C8C0B2;padding:5px 0;transition:color .15s}
+footer a.fl:hover{color:#FAF6EC}
+footer .credit{margin-top:42px;padding-top:22px;border-top:1px solid #38332b;font-size:12px;color:#7d7668;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;line-height:1.6}
+footer .credit a{color:#a39c8e;border-bottom:1px solid #4a443a}
+footer .credit a:hover{color:#FAF6EC}
+
+@media(max-width:680px){.wrap{padding:0 22px}.topbar,.crumb{padding-left:22px;padding-right:22px}section{padding:48px 0}}
+</style>
+
+<style>
+/* ════════════ ENHANCEMENT LAYER, colour · depth · media · motion ════════════ */
+:root{
+ --teal:#2C6E7F; --teal-dk:#1E4E5A; --gold:#C08A2D; --rust:#A8432B; --leaf:#4A6741;
+ --t-resident:#5A3D1C; --t-regular:#8A5F2E; --t-seasonal:#C08A2D; --t-scarce:#6E8270; --t-rare:#A8432B;
+ --shadow-sm:0 2px 10px rgba(60,40,18,.06); --shadow-md:0 16px 42px rgba(60,40,18,.14);
+ --ease:cubic-bezier(.2,.8,.2,1);
+}
+/* clean, flat warm-white background + very faint paper grain */
+body{background:var(--bg)}
+body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.025;mix-blend-mode:multiply;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+.topbar,.crumb,section,footer{position:relative;z-index:2}
+.topbar{background:rgba(247,245,239,.85)}
+
+/* ── richer media / placeholders (image-ready, colourful empty states) ── */
+.ph{--tone:var(--fauna);border-radius:7px;border:1px solid var(--border);box-shadow:var(--shadow-sm);
+ background:linear-gradient(135deg, color-mix(in srgb,var(--tone) 16%,var(--paper)), color-mix(in srgb,var(--tone) 40%,var(--paper)));}
+.ph::before{opacity:.5;background:repeating-linear-gradient(45deg,transparent,transparent 16px,color-mix(in srgb,var(--tone) 30%,transparent) 16px,color-mix(in srgb,var(--tone) 30%,transparent) 17px)}
+.ph::after{content:attr(data-ghost);position:absolute;right:14px;bottom:-6px;font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(60px,12vw,128px);line-height:.8;color:color-mix(in srgb,var(--tone) 26%,transparent);pointer-events:none;user-select:none;z-index:0}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform .6s var(--ease)}
+.ph:has(img)::before,.ph:has(img)::after{opacity:0}
+.ph .pl{z-index:3;left:12px;right:auto;bottom:12px;max-width:88%;background:rgba(250,246,236,.86);color:var(--faunaDk);padding:6px 11px;border-radius:5px;backdrop-filter:blur(3px);font-size:10px;line-height:1.35;box-shadow:0 1px 4px rgba(60,40,18,.1)}
+.rare-card:hover .ph img,.note-card:hover .ph img,.cast-item:hover .ph img,.place:hover .ph img{transform:scale(1.06)}
+
+/* ── plumage tier palette (badges, bars, segments) ── */
+.tierseg-seasonal{background:var(--t-seasonal)} .tierseg-scarce{background:var(--t-scarce)} .tierseg-rare{background:var(--t-rare)}
+.tb-seasonal{background:var(--t-seasonal)} .tb-scarce{background:var(--t-scarce)} .tb-rare{background:var(--t-rare)}
+.rare-card .badge{background:var(--t-rare)}
+.fbtn.winter.on{background:var(--teal);border-color:var(--teal)}
+.spark .b{background:var(--sp,var(--fauna));border-radius:2px 2px 0 0}
+.spark .b.win{background:var(--teal)}
+.yearchart .bar{background:linear-gradient(var(--fauna),color-mix(in srgb,var(--fauna) 75%,#000));transition:height .9s var(--ease)}
+.yearchart .bar.win{background:linear-gradient(var(--teal),var(--teal-dk))}
+
+/* ── card refinement ── */
+.rare-card,.note-card,.place,.cast-item{border-radius:9px;box-shadow:var(--shadow-sm);transition:transform .28s var(--ease),box-shadow .28s var(--ease)}
+.rare-card .ph,.note-card .ph,.place .ph,.cast-item .ph{border-radius:0;box-shadow:none;border-left:none;border-right:none;border-top:none}
+.rare-card:hover,.note-card:hover,.place:hover{box-shadow:var(--shadow-md)}
+.rare-card .ph,.cast-item .ph,.note-card .ph,.place .ph{--tone:var(--fauna)}
+.places .place:nth-child(1) .ph{--tone:var(--leaf)} .places .place:nth-child(2) .ph{--tone:var(--gold)}
+.places .place:nth-child(3) .ph{--tone:var(--rust)} .places .place:nth-child(4) .ph{--tone:var(--teal)}
+.places .place:nth-child(5) .ph{--tone:var(--faunaDk)} .places .place:nth-child(6) .ph{--tone:var(--commons)}
+
+/* ── section header flourish ── */
+.sec-head h2 em{font-style:italic;background:linear-gradient(120deg,var(--fauna),var(--rust));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+
+/* ── CONTRIBUTOR NOTE, reusable across all dimension pages ── */
+.contributor{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;margin-top:34px;
+ padding:18px 24px;background:linear-gradient(120deg,color-mix(in srgb,var(--faunaLt) 60%,var(--paper)),var(--card));
+ border:1px solid var(--border);border-left:3px solid var(--fauna);border-radius:10px;box-shadow:var(--shadow-sm)}
+.ctr-ava{position:relative;width:54px;height:54px;border-radius:999px;overflow:hidden;display:grid;place-items:center;
+ background:radial-gradient(circle at 30% 30%,var(--faunaLt),color-mix(in srgb,var(--fauna) 35%,var(--paper)));border:1px solid var(--border);flex:none}
+.ctr-ava img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ctr-ava span{font-family:var(--serif);font-weight:600;font-size:19px;color:var(--faunaDk);letter-spacing:.02em}
+.ctr-kicker{display:inline-block;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--fauna);margin-right:9px}
+.ctr-lead{font-family:var(--serif);font-size:18.5px;line-height:1.42;color:var(--ink)}
+.ctr-lead strong{font-weight:600}
+.ctr-sub{font-size:12.5px;color:var(--inkMid);margin-top:5px;line-height:1.5}
+.ctr-sub a{color:var(--fauna);border-bottom:1px solid var(--fauna)}
+.ctr-sub em{font-family:var(--serif);font-size:14px;font-style:italic;color:var(--faunaDk)}
+.ctr-cta{white-space:nowrap;font-size:12px;font-weight:500;padding:10px 17px;border:1px solid var(--fauna);border-radius:999px;color:var(--fauna);transition:all .2s var(--ease)}
+.ctr-cta:hover{background:var(--fauna);color:var(--paper)}
+@media(max-width:720px){.contributor{grid-template-columns:auto 1fr;row-gap:16px}.ctr-cta{grid-column:1/3;justify-self:start}}
+
+/* ── hero decorative watermark ── */
+.hero{position:relative;overflow:hidden}
+.hero .wrap{position:relative;z-index:1}
+.hero-deco{position:absolute;top:-30px;right:-10px;z-index:0;font-family:var(--serif);font-style:italic;font-weight:500;
+ font-size:clamp(180px,32vw,440px);line-height:.9;color:rgba(138,95,46,.055);pointer-events:none;user-select:none;letter-spacing:-.03em}
+.stat .v{background:linear-gradient(120deg,var(--faunaDk),var(--fauna));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.stat .v a{-webkit-text-fill-color:var(--fauna)}
+
+/* ── entrance motion ── */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.ph img,.yearchart .bar{transition:none}}
+
+/* ── iNaturalist · second record ── */
+.inat .tick2{display:inline-flex;align-items:center;gap:8px}
+.inat .tick2::before{content:"";width:30px;height:2px;background:var(--teal)}
+.inat .tick2 .eyebrow{color:var(--teal)}
+.inat .sec-head h2 em{background:none;-webkit-text-fill-color:var(--teal-dk);color:var(--teal-dk)}
+.inat .linkmore{color:var(--teal);border-color:var(--teal)}
+.inat-stats{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 32px}
+.inat-pill{display:flex;align-items:baseline;gap:10px;padding:13px 22px;border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:9px;background:var(--card);box-shadow:var(--shadow-sm)}
+.inat-pill .v{font-family:var(--serif);font-size:32px;line-height:1;color:var(--teal-dk)}
+.inat-pill .l{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--inkLt)}
+.inat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+@media(max-width:980px){.inat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.inat-grid{grid-template-columns:repeat(2,1fr)}}
+.inat-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);border-radius:9px;overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.inat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.inat-card .im{position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--faunaLt)}
+.inat-card .im img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.inat-card:hover .im img{transform:scale(1.06)}
+.inat-card .im .src{position:absolute;top:8px;left:8px;font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:rgba(30,78,90,.78);padding:3px 7px;border-radius:3px;backdrop-filter:blur(2px)}
+.inat-card .ib{padding:11px 13px 13px}
+.inat-card .nm{font-family:var(--serif);font-size:16px;line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
+.inat-card .sci{font-family:var(--serif);font-style:italic;font-size:11px;color:var(--inkLt);margin-top:2px}
+.inat-card .attr{margin-top:9px;font-size:10.5px;color:var(--inkMid);line-height:1.45}
+.inat-card .attr b{color:var(--teal-dk);font-weight:600}
+.inat-card .attr .cc{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.03em;color:var(--inkLt);margin-top:2px}
+
+/* ── community leaderboard ── */
+.leaders{display:grid;grid-template-columns:1fr 1fr;gap:52px}
+@media(max-width:820px){.leaders{grid-template-columns:1fr;gap:34px}}
+.lc-h{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--inkMid);padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:2px}
+.lead-row{display:grid;grid-template-columns:22px minmax(92px,32%) 1fr 40px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--hairline)}
+.lead-row .rk{font-family:var(--mono);font-size:11px;color:var(--inkLt)}
+.lead-row .nm{font-size:14px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lead-row .track{height:9px;background:var(--hairline);border-radius:5px;overflow:hidden}
+.lead-row .fill{display:block;height:100%;background:var(--fauna);border-radius:5px;transition:width .8s var(--ease)}
+.lead-row .ct{font-family:var(--mono);font-size:12px;color:var(--inkMid);text-align:right}
+.lead-row.me{background:linear-gradient(90deg,color-mix(in srgb,var(--leaf) 12%,transparent),transparent);border-radius:6px}
+.lead-row.me .nm{font-weight:600;color:#33502c}
+.lead-row.me .fill{background:var(--leaf)}
+.lead-row.me .ct{color:#33502c;font-weight:600}
+
+/* ── ledger pagination ── */
+.pager{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;align-items:center;margin-top:24px}
+.pg{font-family:var(--sans);font-size:13px;padding:7px 13px;border:1px solid var(--rule);background:var(--card);color:var(--inkMid);border-radius:7px;cursor:pointer;transition:all .15s var(--ease)}
+.pg:hover:not(:disabled){border-color:var(--fauna);color:var(--fauna)}
+.pg.num{min-width:36px;text-align:center;font-family:var(--mono);font-size:12px}
+.pg.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.pg:disabled{opacity:.38;cursor:default}
+
+/* ── watch / video embed ── */
+.watch-grid{display:grid;grid-template-columns:1.55fr 1fr;gap:44px;align-items:center}
+@media(max-width:820px){.watch-grid{grid-template-columns:1fr;gap:26px}}
+.video{position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-md);background:var(--ink)}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.watch-text p{font-size:15px;color:var(--inkMid);line-height:1.65}
+.watch-text p+p{margin-top:14px}
+.watch-text .vcredit{margin-top:18px;font-size:14px;color:var(--ink)}
+.watch-text .vcredit b{font-weight:600}
+.watch-text .vseries{display:block;font-size:12.5px;color:var(--inkLt);margin-top:4px;line-height:1.5}
+
+/* rare cards are static info cards (no link) — drop the interactive hover */
+.rare-card{cursor:default}
+.rare-card:hover{transform:none;box-shadow:var(--shadow-sm)}
+.rare-card:hover .ph img{transform:none}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+ <a class="logo" href="https://malhar.community"><b>malhar</b><i>.community</i></a>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="crumb">
+ <a href="https://wc-ge.vercel.app">Dimensions</a><span>/</span>
+ <a href="https://wc-ge.vercel.app">Fauna</a><span>/</span>
+ <span class="here">Birds</span>
+ <span class="tag">fauna · birds · hotspot L4022249</span>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="overview">
+ <div class="hero-deco" aria-hidden="true">Aves</div>
+ <div class="wrap">
+  <div class="col-narrow">
+   <span class="tick eyebrow reveal">Fauna · Birds · the collective record</span>
+   <h1 class="reveal">Birds of Malhar</h1>
+   <div class="sub reveal">One hundred and fifty-four species share this patch of Bangalore, and we are still counting.</div>
+   <p class="lead reveal">This is not one birder's list. It is what sixty pairs of eyes have seen and logged at Malhar over the years, the kites that never leave, the warblers that arrive each winter, and the rare wanderer that turns up once and is gone. Kept together, on eBird, by everyone who looks up.</p>
+
+   <!-- CONTRIBUTOR NOTE · reusable pattern for every dimension page -->
+   <aside class="contributor reveal" aria-label="Page contributor">
+    <div class="ctr-ava"><img src="/fauna/birdsofmalhar/images/contributor.jpg" alt="Sandeep Nanu" loading="lazy" onerror="this.remove()"><span>SN</span></div>
+    <div class="ctr-body">
+     <p class="ctr-lead"><span class="ctr-kicker">An entry by a resident</span>Compiled &amp; written by <strong>Sandeep Nanu</strong>, a birder who lives at Malhar, drawn from the shared record of <strong>60 eBirders</strong>.</p>
+     <p class="ctr-sub"><em>The data is everyone's; the telling is one of ours.</em> &nbsp;Photographs &amp; field notes from <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener">shiftingradius.com</a>.</p>
+    </div>
+    <a class="ctr-cta" href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener">More by Sandeep ↗</a>
+   </aside>
+
+   <div class="statstrip reveal">
+    <div class="stat"><div class="v">154</div><div class="l">Species recorded</div></div>
+    <div class="stat"><div class="v">965</div><div class="l">Checklists</div></div>
+    <div class="stat"><div class="v">60</div><div class="l">eBirders contributing</div></div>
+    <div class="stat"><div class="v" style="font-size:22px;padding-top:10px"><a href="https://ebird.org/hotspot/L4022249" target="_blank" rel="noopener">L4022249 ↗</a></div><div class="l">eBird hotspot</div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- HERO IMAGE -->
+<section style="padding:8px 0 0">
+ <div class="wrap">
+  <div class="ph" data-ghost="M. migrans" style="--tone:var(--t-resident);height:clamp(300px,46vw,520px)"><img src="/fauna/birdsofmalhar/images/hero.jpg" alt="A black kite over the Malhar terraces" loading="lazy" onerror="this.remove()"><div class="pl">a black kite rides the morning thermals over Malhar, the most-logged bird here, on 57% of all checklists</div></div>
+  <div class="figrow">
+   <span class="cap">↑ the black kite, resident, daily, and never out of the sky for long.</span>
+   <span class="fig">fig. 01, Milvus migrans</span>
+  </div>
+ </div>
+</section>
+
+<!-- AT A GLANCE -->
+<section class="glance">
+ <div class="wrap">
+  <div class="glance-grid">
+   <div>
+    <span class="tick eyebrow">The record at a glance</span>
+    <h2 class="serif" style="font-size:34px;margin-top:14px;letter-spacing:-0.015em;line-height:1.12">What 965 checklists tell us about who lives here.</h2>
+    <p class="sec-intro" style="font-size:18px;margin-top:16px">Every bird on the list falls somewhere on a spectrum, from the thirty residents you'll meet on any morning, to the thirty-four rarities glimpsed once and never again. The bar below is the whole community of birds, sized by how often each tier is seen.</p>
+   </div>
+   <div>
+    <div class="eyebrow" style="color:var(--inkLt);margin-bottom:6px">154 species, by how often they're seen</div>
+    <div class="tierbar" id="tierbar"></div>
+    <div class="tierlegend">
+     <span class="k"><span class="sw" style="background:var(--faunaDk)"></span> Resident · 30</span>
+     <span class="k"><span class="sw" style="background:var(--fauna)"></span> Regular · 20</span>
+     <span class="k"><span class="sw" style="background:#B07D3E"></span> Seasonal · 19</span>
+     <span class="k"><span class="sw" style="background:#A99B82"></span> Scarce · 51</span>
+     <span class="k"><span class="sw" style="background:var(--culture)"></span> Rare · 34</span>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- RARE & NOTABLE VISITORS -->
+<section>
+ <div class="wrap">
+  <div class="sec-head">
+   <div>
+    <span class="tick eyebrow">The highlight</span>
+    <h2>Rare &amp; notable <em>visitors</em>.</h2>
+   </div>
+   <a class="linkmore" href="#ledger">See all 34 rarities ↓</a>
+  </div>
+  <p class="sec-intro" style="margin-bottom:30px">These are the birds that make a checklist memorable, long-distance migrants blown off course, shy forest species that wander in, a falcon over the scrub for one February morning. Each has been logged only a handful of times in 965 visits.</p>
+  <div class="rare-grid" id="rareGrid"></div>
+ </div>
+</section>
+
+<!-- RESIDENT CAST -->
+<section style="background:var(--surface);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
+ <div class="wrap">
+  <div class="sec-head">
+   <div>
+    <span class="tick eyebrow">The everyday</span>
+    <h2>The <em>resident</em> cast.</h2>
+   </div>
+   <span class="hand" style="font-size:18px">seen on almost every visit →</span>
+  </div>
+  <p class="sec-intro" style="margin-bottom:30px">The birds of any Malhar morning. Learn these fifteen and you'll know the soundtrack of the place, the barbet's metronome, the koel's rising call, the kite's whistle overhead.</p>
+  <div class="cast" id="castGrid"></div>
+ </div>
+</section>
+
+<!-- LEDGER -->
+<section id="ledger">
+ <div class="wrap">
+  <div class="sec-head">
+   <div>
+    <span class="tick eyebrow">The living ledger</span>
+    <h2>All <em>154</em>, with the shape of their year.</h2>
+   </div>
+   <a class="linkmore" href="https://ebird.org/hotspot/L4022249" target="_blank" rel="noopener">Open on eBird ↗</a>
+  </div>
+  <p class="sec-intro" style="margin-bottom:26px">The full record. Each bar-strip is the bird's real year, how often it's seen, month by month, across all checklists. Filter, search, or sort to read the place however you like. <span style="color:var(--commons)">Blue marks the winter months</span>, when the migrants are in.</p>
+
+  <div class="ledger-controls">
+   <div class="filters" id="filters">
+    <button class="fbtn on" data-tier="all">All <span class="mono">154</span></button>
+    <button class="fbtn" data-tier="resident">Resident</button>
+    <button class="fbtn" data-tier="regular">Regular</button>
+    <button class="fbtn" data-tier="seasonal">Seasonal</button>
+    <button class="fbtn" data-tier="scarce">Scarce</button>
+    <button class="fbtn" data-tier="rare">Rare</button>
+    <button class="fbtn winter" data-winter="1">❄ Winter visitors</button>
+   </div>
+   <input class="search" id="search" type="search" placeholder="Search a bird…" aria-label="Search species">
+  </div>
+
+  <div class="monlabels"><div class="ml"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></div></div>
+  <div class="lwrap">
+   <div class="lhead">
+    <div>nº</div>
+    <div class="sortable" data-sort="n">Species <span class="ar">▲</span></div>
+    <div class="sortable" data-sort="t">Status <span class="ar">▲</span></div>
+    <div>Through the year</div>
+    <div class="sortable act" data-sort="f" style="text-align:right;justify-content:flex-end">Freq <span class="ar">▼</span></div>
+   </div>
+   <div id="ledgerBody"></div>
+  </div>
+  <div class="pager" id="ledgerPager"></div>
+  <div class="lcount"><span id="lcount"></span><span style="color:var(--inkLt);font-family:var(--mono);font-size:11px">kept collectively · eBird hotspot L4022249</span></div>
+ </div>
+</section>
+
+<!-- YEAR IN BIRDS -->
+<section style="background:var(--surface);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
+ <div class="wrap">
+  <div class="sec-head"><div>
+   <span class="tick eyebrow">A year in birds</span>
+   <h2>The calendar <em>turns</em>, and the list with it.</h2>
+  </div></div>
+  <div class="year-grid">
+   <div>
+    <div class="eyebrow" style="color:var(--inkLt);margin-bottom:26px">Species recorded per month &nbsp;·&nbsp; <span style="color:var(--commons)">winter</span> / <span style="color:var(--fauna)">rest of year</span></div>
+    <div class="yearchart" id="yearchart"></div>
+    <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:11px;color:var(--inkLt)" class="mono"><span>richness peaks as the migrants arrive</span><span>monsoon nesting →</span></div>
+   </div>
+   <div class="season-notes">
+    <div class="sn"><div class="mo">Nov – Feb</div><div><h4>The migrant season</h4><p>The list swells. Warblers (Greenish, Tickell's Leaf, Booted), a cast of flycatchers, Gray Wagtails, Rosy and Chestnut-tailed Starlings, even Booted Eagle, all here from the north, gone by April.</p></div></div>
+    <div class="sn"><div class="mo">Mar – May</div><div><h4>Song &amp; passage</h4><p>The koel takes over the mornings and the hawk-cuckoo won't stop. The Indian Pitta passes through the leaf litter in April, two records, both fleeting.</p></div></div>
+    <div class="sn"><div class="mo">Jun – Sep</div><div><h4>The monsoon nests</h4><p>Baya Weavers build over the water and the munias move in, Scaly-breasted, White-rumped, Tricolored. Whistling-ducks and grebes appear on the wet edges.</p></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- A SECOND RECORD · iNATURALIST -->
+<section class="inat" id="inat">
+ <div class="wrap">
+  <div class="sec-head">
+   <div>
+    <span class="tick2"><span class="eyebrow">A second record</span></span>
+    <h2>Also watched on <em>iNaturalist</em>.</h2>
+   </div>
+   <a class="linkmore" href="https://www.inaturalist.org/observations?nelat=12.8859397302915&nelng=77.46631773029151&swlat=12.8832417697085&swlng=77.4636197697085&iconic_taxa=Aves&subview=map" target="_blank" rel="noopener">Open on iNaturalist ↗</a>
+  </div>
+  <p class="sec-intro" style="margin-bottom:8px">eBird tells us what is most <em>seen</em>; iNaturalist shows what gets <em>photographed</em>by a different set of people, every record backed by an image. A second, independent read on the same patch of ground.</p>
+
+  <div class="inat-stats">
+   <div class="inat-pill"><span class="v">141</span><span class="l">Observations</span></div>
+   <div class="inat-pill"><span class="v">56</span><span class="l">Species</span></div>
+   <div class="inat-pill"><span class="v">12</span><span class="l">Naturalists</span></div>
+  </div>
+
+  <div class="inat-grid">
+   <a class="inat-card" href="https://www.inaturalist.org/observations/233656391" target="_blank" rel="noopener">
+    <div class="im"><span class="src">iNaturalist</span><img src="/fauna/birdsofmalhar/images/inat/233656391.jpg" alt="Greater Coucal at Malhar" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="ib"><div class="nm">Greater Coucal</div><div class="sci">Centropus sinensis</div>
+     <div class="attr">© <b>Chayant Gonsalves</b> · Aug 2024<span class="cc">CC BY-NC · iNaturalist ↗</span></div></div>
+   </a>
+   <a class="inat-card" href="https://www.inaturalist.org/observations/145897824" target="_blank" rel="noopener">
+    <div class="im"><span class="src">iNaturalist</span><img src="/fauna/birdsofmalhar/images/inat/145897824.jpg" alt="Purple-rumped Sunbird at Malhar" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="ib"><div class="nm">Purple-rumped Sunbird</div><div class="sci">Leptocoma zeylonica</div>
+     <div class="attr">© <b>Avigat Pandey</b> · Dec 2022<span class="cc">CC BY-NC · iNaturalist ↗</span></div></div>
+   </a>
+   <a class="inat-card" href="https://www.inaturalist.org/observations/339433791" target="_blank" rel="noopener">
+    <div class="im"><span class="src">iNaturalist</span><img src="/fauna/birdsofmalhar/images/inat/339433791.jpg" alt="Chestnut-tailed Starling at Malhar" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="ib"><div class="nm">Chestnut-tailed Starling</div><div class="sci">Sturnia malabarica</div>
+     <div class="attr">© <b>@veenas</b> · Feb 2026<span class="cc">CC BY-NC · iNaturalist ↗</span></div></div>
+   </a>
+   <a class="inat-card" href="https://www.inaturalist.org/observations/196813800" target="_blank" rel="noopener">
+    <div class="im"><span class="src">iNaturalist</span><img src="/fauna/birdsofmalhar/images/inat/196813800.jpg" alt="Indian Golden Oriole at Malhar" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="ib"><div class="nm">Indian Golden Oriole</div><div class="sci">Oriolus kundoo</div>
+     <div class="attr">© <b>Naga</b> · Resonance<span class="cc">CC BY-NC · iNaturalist ↗</span></div></div>
+   </a>
+   <a class="inat-card" href="https://www.inaturalist.org/observations/158779035" target="_blank" rel="noopener">
+    <div class="im"><span class="src">iNaturalist</span><img src="/fauna/birdsofmalhar/images/inat/158779035.jpg" alt="Ashy Prinia at Malhar" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="ib"><div class="nm">Ashy Prinia</div><div class="sci">Prinia socialis</div>
+     <div class="attr">© <b>Stalin</b> · May 2023<span class="cc">CC BY-NC-ND · iNaturalist ↗</span></div></div>
+   </a>
+   <a class="inat-card" href="https://www.inaturalist.org/observations/222002078" target="_blank" rel="noopener">
+    <div class="im"><span class="src">iNaturalist</span><img src="/fauna/birdsofmalhar/images/inat/222002078.jpg" alt="Black-rumped Flameback at Malhar" loading="lazy" onerror="this.style.display='none'"></div>
+    <div class="ib"><div class="nm">Black-rumped Flameback</div><div class="sci">Dinopium benghalense</div>
+     <div class="attr">© <b>Sandeep Nanu</b> · Jun 2024<span class="cc">CC BY-NC · iNaturalist ↗</span></div></div>
+   </a>
+  </div>
+  <div class="lcount" style="margin-top:20px"><span style="color:var(--inkLt)">Recently photographed here · 6 of 141 observations</span><span style="color:var(--inkLt);font-family:var(--mono);font-size:11px">community science · iNaturalist</span></div>
+ </div>
+</section>
+
+<!-- WHERE TO LOOK -->
+<section>
+ <div class="wrap">
+  <div class="sec-head"><div>
+   <span class="tick eyebrow">A resident's map</span>
+   <h2>Where to look in <em>Malhar</em>.</h2>
+  </div></div>
+  <p class="sec-intro" style="margin-bottom:30px">The same list reads differently depending on where you stand. Six corners of the community, and what each one gives up if you wait.</p>
+  <div class="places">
+   <div class="place"><div class="ph"><div class="pl">the greens &amp; scrub</div></div><div class="pb"><div class="num">01</div><h3>The greens &amp; scrub<span class="x">peafowl country</span></h3><p class="sp">Open ground and edges. <b>Indian Peafowl</b>, Gray Francolin, Ashy Prinia, Pied Bushchat, Indian Robin, Jerdon's Bushlark, and the lark-flat where a Siberian Stonechat once perched.</p></div></div>
+   <div class="place"><div class="ph"><div class="pl">the flowering canopy</div></div><div class="pb"><div class="num">02</div><h3>The canopy &amp; trees<span class="x">listen for the barbet</span></h3><p class="sp">Rain trees and figs. Both barbets, three sunbirds, <b>Indian White-eye</b>, Pale-billed Flowerpecker, Common Iora, Indian Golden Oriole, the relentless Asian Koel.</p></div></div>
+   <div class="place"><div class="ph"><div class="pl">the amphitheatre &amp; reeds</div></div><div class="pb"><div class="num">03</div><h3>The Amphitheatre<span class="x">weaver season, Aug</span></h3><p class="sp">Reed edges and damp grass. <b>Baya Weaver</b> colonies in the monsoon, plus the munia crowd, Scaly-breasted, White-rumped, Tricolored and the jewel-like Red Avadavat.</p></div></div>
+   <div class="place"><div class="ph"><div class="pl">balconies &amp; rooftops</div></div><div class="pb"><div class="num">04</div><h3>Balconies &amp; rooftops<span class="x">the surprises arrive here</span></h3><p class="sp">You needn't step out. <b>Indian Paradise-Flycatcher</b>, Tickell's Blue Flycatcher, Brown Shrike, and, twice, the electric-blue Black-naped Monarch, all logged from home.</p></div></div>
+   <div class="place"><div class="ph"><div class="pl">the raptor lanes overhead</div></div><div class="pb"><div class="num">05</div><h3>Overhead<span class="x">three kites at once</span></h3><p class="sp">Look up. <b>Black</b>, <b>Brahminy</b> and <b>Black-winged Kite</b> share the air with Shikra; in winter, Booted Eagle and Oriental Honey-buzzard ride through. Once, a Red-necked Falcon.</p></div></div>
+   <div class="place"><div class="ph"><div class="pl">the wetland edge, Kommaghatta</div></div><div class="pb"><div class="num">06</div><h3>The wetland edge<span class="x">ten minutes away</span></h3><p class="sp">When water gathers. Pond-Heron, egrets, ibises, Little Grebe, cormorants, Eurasian Coot and the kingfishers, the lake-edge birds that round out the Malhar list.</p></div></div>
+  </div>
+ </div>
+</section>
+
+<!-- FIELD NOTES -->
+<section style="background:var(--surface);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
+ <div class="wrap">
+  <div class="sec-head">
+   <div>
+    <span class="tick eyebrow">Field notes</span>
+    <h2>Stories from the <em>list</em>.</h2>
+   </div>
+   <span class="hand" style="font-size:18px">live from the journal →</span>
+  </div>
+  <p class="sec-intro" style="margin-bottom:30px">A fresh handful of field notes from Malhar, pulled live from the journal, nine at random each visit, from the growing archive at <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener" style="color:var(--fauna);border-bottom:1px solid var(--fauna)">shiftingradius.com/category/malhar</a>.</p>
+  <div class="notes-grid" id="notesGrid">
+   <a class="note-card" href="https://shiftingradius.com/2020/06/the-dead-living-tree/" target="_blank" rel="noopener"><div class="ph" data-ghost="W" style="--tone:var(--faunaDk)"><img src="/fauna/birdsofmalhar/images/birds/black-rumped-flameback.jpg" alt="Black-rumped Flameback, the dead-tree woodpecker" loading="lazy" onerror="this.remove()"><div class="pl">the dead-living tree</div></div><div class="nb"><span class="tag">Coexistence</span><h3>The <em>dead-living</em> tree</h3><p>A "dead" coconut by the basketball court turned out to house owlets, mynas and a woodpecker family, three nests in one trunk, until it was felled. A lesson in what looks worthless.</p><div class="rd"><span>Read the story →</span><span class="src">2020</span></div></div></a>
+   <a class="note-card" href="https://shiftingradius.com/2021/03/a-flurry-of-activity-in-my-balcony/" target="_blank" rel="noopener"><div class="ph" data-ghost="M" style="--tone:var(--teal)"><img src="/fauna/birdsofmalhar/images/birds/black-naped-monarch.jpg" alt="Black-naped Monarch at the balcony" loading="lazy" onerror="this.remove()"><div class="pl">a flurry at the balcony</div></div><div class="nb"><span class="tag">Balcony</span><h3>Twelve species, <em>no shoes</em></h3><p>One afternoon a Black-naped Monarch appeared on a balcony the same day it was first named, and eleven other species followed within the hour. The home patch at its best.</p><div class="rd"><span>Read the story →</span><span class="src">2021</span></div></div></a>
+   <a class="note-card" href="https://shiftingradius.com/2020/06/baya-weaving-their-stories/" target="_blank" rel="noopener"><div class="ph" data-ghost="B" style="--tone:var(--gold)"><img src="/fauna/birdsofmalhar/images/birds/baya-weaver.jpg" alt="Baya Weaver at the Amphitheatre" loading="lazy" onerror="this.remove()"><div class="pl">baya weavers, amphitheatre</div></div><div class="nb"><span class="tag">Nesting</span><h3>The <em>weavers'</em> theatre</h3><p>Each monsoon, male Baya Weavers hang their flasks above the Amphitheatre water and work all morning to impress the females who come to inspect. Architecture as courtship.</p><div class="rd"><span>Read the story →</span><span class="src">2020</span></div></div></a>
+   <a class="note-card" href="https://shiftingradius.com/2022/05/tailor-bird-vs-rat-snake/" target="_blank" rel="noopener"><div class="ph" data-ghost="T" style="--tone:var(--leaf)"><img src="/fauna/birdsofmalhar/images/birds/common-tailorbird.jpg" alt="Common Tailorbird" loading="lazy" onerror="this.remove()"><div class="pl">tailorbird vs rat snake</div></div><div class="nb"><span class="tag">Drama</span><h3>Bird <em>1</em>, snake <em>0</em></h3><p>Distress calls outside a window: a rat snake working branch to branch toward two tailorbird chicks, the parents throwing themselves at it. This time, the parents won.</p><div class="rd"><span>Read the story →</span><span class="src">2022</span></div></div></a>
+   <a class="note-card" href="https://shiftingradius.com/2021/02/spot-a-story-spotted-owlets/" target="_blank" rel="noopener"><div class="ph" data-ghost="O" style="--tone:var(--faunaDk)"><img src="/fauna/birdsofmalhar/images/birds/spotted-owlet.jpg" alt="Spotted Owlets" loading="lazy" onerror="this.remove()"><div class="pl">the spotted owlets</div></div><div class="nb"><span class="tag">Residents</span><h3>The <em>owlets</em> next door</h3><p>The pair of Spotted Owlets that watch the lanes from a tree-fork, indignant, side-eyeing, endlessly photogenic. Among the most reliable characters on the whole list.</p><div class="rd"><span>Read the story →</span><span class="src">2021</span></div></div></a>
+   <a class="note-card" href="https://shiftingradius.com/2024/03/backyard-king/" target="_blank" rel="noopener"><div class="ph" data-ghost="K" style="--tone:var(--teal)"><img src="/fauna/birdsofmalhar/images/birds/white-throated-kingfisher.jpg" alt="White-throated Kingfisher" loading="lazy" onerror="this.remove()"><div class="pl">white-throated kingfisher</div></div><div class="nb"><span class="tag">Backyard</span><h3>The backyard <em>king</em></h3><p>A White-throated Kingfisher hunting far from any water, lizards, insects, the odd frog, and a courtship catch passed from male to female, all from a backyard perch.</p><div class="rd"><span>Read the story →</span><span class="src">2024</span></div></div></a>
+  </div>
+ </div>
+</section>
+
+<!-- WATCH · Savvy in Five -->
+<section id="watch">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="tick eyebrow">Savvy in Five · watch</span>
+        <h2>How to photograph the birds <em>here</em>.</h2>
+      </div>
+      <a class="linkmore" href="https://www.youtube.com/watch?v=vzOM-wfpeFA" target="_blank" rel="noopener">Watch on YouTube ↗</a>
+    </div>
+    <div class="watch-grid">
+      <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/vzOM-wfpeFA" title="How to photograph birds, with Girin" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <div class="watch-text">
+        <p>Ever noticed a bird perched outside your window and wished you could see it better? Girin, a resident bird photographer, walks through it all: picking the right spot and time of day, and the camera settings that catch a bird in its element.</p>
+        <p>No expert knowledge needed. Just curiosity, and a little patience.</p>
+        <p class="vcredit"><b>Girin</b>, resident bird photographer<span class="vseries">From <b>Savvy in Five</b>, where residents of Malhar Eco-Village share a handy skill. On the Good Earth channel.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="community">
+ <div class="wrap">
+  <div class="ph" style="--tone:var(--faunaDk);height:clamp(280px,42vw,520px);margin-bottom:40px"><img src="/fauna/birdsofmalhar/images/exhibition.jpg" alt="Residents viewing the bird-photography exhibition at the Courtyard Koota, Malhar" loading="lazy" onerror="this.remove()"><div class="pl">residents at the bird-photography exhibition · Courtyard Koota, Malhar</div></div>
+  <div class="comm-grid">
+   <div>
+    <span class="hand">when the community looked up</span>
+    <div class="quote">"The more we pay attention to nature, the better humans we become."</div>
+    <div class="by">from two exhibitions of Malhar's birds, at Courtyard Koota &amp; Samagata</div>
+   </div>
+   <div>
+    <p>The list has never just been data. It became a teaching object when a child learned the koel's call from the cuckoo's; it became a gathering when the photographs went up on the walls of the Courtyard Koota.</p>
+    <p>People came with their own sightings. Children quizzed the adults. Everyone leaned in to find the white polka-dots on a Red Avadavat no one had noticed with the naked eye. The birds, it turned out, were a reason to stand together and pay attention.</p>
+    <p style="margin-top:18px"><a href="https://shiftingradius.com/2025/07/when-birds-brought-people-together/" target="_blank" rel="noopener" style="color:var(--faunaDk);border-bottom:1px solid var(--faunaDk);font-weight:500">Read how birds brought Malhar together ↗</a></p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- THE COMMUNITY · eBirder leaderboard -->
+<section style="background:var(--surface);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)" id="people">
+ <div class="wrap">
+  <div class="sec-head">
+   <div>
+    <span class="tick eyebrow">The community</span>
+    <h2>The hands behind the <em>list</em>.</h2>
+   </div>
+   <a class="linkmore" href="https://ebird.org/hotspot/L4022249/activity?yr=all" target="_blank" rel="noopener">All eBirders ↗</a>
+  </div>
+  <p class="sec-intro" style="margin-bottom:30px">Sixty people have logged a bird at Malhar. A handful keep the record steady, the most active of all, all-time, from eBird's own tally.</p>
+  <div class="leaders">
+   <div class="lead-col"><div class="lc-h">Checklist leaders</div><div id="leadChecklist"></div></div>
+   <div class="lead-col"><div class="lc-h">Species leaders</div><div id="leadSpecies"></div></div>
+  </div>
+  <p class="hand" style="font-size:18px;margin-top:24px;color:var(--inkMid)">The list is bigger than any one of us, sixty pairs of eyes, one shared record.</p>
+ </div>
+</section>
+
+<!-- CONTRIBUTE -->
+<section class="contrib">
+ <div class="wrap">
+  <div class="contrib-grid">
+   <div>
+    <span class="tick eyebrow">Add to the record</span>
+    <h2>The list belongs to <em>everyone</em>.</h2>
+    <p>One hundred and fifty-four is not the end of it, it is wherever we've counted to. Every checklist you submit at the Malhar hotspot adds to the shared record, sharpens the seasons, and might just be the 155th.</p>
+    <p class="hand" style="font-size:20px;color:var(--fauna);max-width:none">seen something? it counts. log it.</p>
+   </div>
+   <div class="clinks">
+    <a href="https://ebird.org/hotspot/L4022249" target="_blank" rel="noopener"><div><div class="ct">Submit a checklist on eBird</div><div class="cd">The Malhar hotspot, L4022249. Counts toward the shared list.</div></div><span class="ar">↗</span></a>
+    <a href="https://ebird.org/hotspot/L4022249/bird-list" target="_blank" rel="noopener"><div><div class="ct">Browse the full eBird list</div><div class="cd">Every species, with photos, audio and recent sightings.</div></div><span class="ar">↗</span></a>
+    <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener"><div><div class="ct">Read the field notes</div><div class="cd">Malhar bird stories &amp; photographs at shiftingradius.com.</div></div><span class="ar">↗</span></a>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+ <div class="wrap">
+  <div class="fgrid">
+   <div>
+    <span class="logo"><b>malhar</b><i>.community</i></span>
+    <p class="fdesc">A living archive of the place we share, its flora, fauna, commons, culture and the things made here. Birds of Malhar is one entry in the Fauna dimension.</p>
+   </div>
+   <div>
+    <h5>This entry</h5>
+    <a class="fl" href="https://ebird.org/hotspot/L4022249" target="_blank" rel="noopener">eBird hotspot L4022249 ↗</a>
+    <a class="fl" href="#ledger">The full ledger (154)</a>
+    <a class="fl" href="#ledger">Rare visitors (34)</a>
+   </div>
+   <div>
+    <h5>Sources &amp; credit</h5>
+    <a class="fl" href="https://ebird.org/hotspot/L4022249" target="_blank" rel="noopener">eBird hotspot ↗</a>
+    <a class="fl" href="https://www.inaturalist.org/observations?nelat=12.8859397302915&nelng=77.46631773029151&swlat=12.8832417697085&swlng=77.4636197697085&iconic_taxa=Aves" target="_blank" rel="noopener">iNaturalist observations ↗</a>
+    <a class="fl" href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener">shiftingradius.com ↗</a>
+   </div>
+  </div>
+  <div class="credit">
+   <span>Records from the 60 eBirders at hotspot L4022249 (Good Earth Malhar, Bengaluru) and the iNaturalist community. iNat photographs © their observers, CC BY-NC. Field notes &amp; bird photographs by Sandeep Nanu, <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener">shiftingradius.com</a>.</span>
+   <span>malhar.community · Fauna · Birds</span>
+  </div>
+ </div>
+</footer>
+
+<script>
+// ── REAL DATA: 154 species from eBird hotspot L4022249 (bar-chart export) ──
+// {n:name, t:tier, f:freq%, pk:peak month, m:[12 monthly freq], w:winter visitor}
+const SPECIES = [{"n":"Black Kite","t":"resident","f":57.4,"pk":"Mar","m":[0.6,0.618,0.705,0.675,0.483,0.413,0.553,0.567,0.509,0.412,0.705,0.63],"w":0},{"n":"Red-whiskered Bulbul","t":"resident","f":55.8,"pk":"Mar","m":[0.6,0.603,0.77,0.715,0.534,0.427,0.489,0.583,0.382,0.235,0.545,0.522],"w":0},{"n":"Rose-ringed Parakeet","t":"resident","f":54.9,"pk":"Apr","m":[0.52,0.632,0.607,0.748,0.483,0.4,0.532,0.55,0.418,0.382,0.568,0.543],"w":0},{"n":"Large-billed Crow","t":"resident","f":52.2,"pk":"Apr","m":[0.4,0.588,0.672,0.715,0.526,0.453,0.447,0.45,0.327,0.412,0.545,0.413],"w":0},{"n":"Common Myna","t":"resident","f":51.5,"pk":"Mar","m":[0.5,0.529,0.639,0.602,0.457,0.44,0.34,0.517,0.527,0.412,0.636,0.5],"w":0},{"n":"Ashy Prinia","t":"resident","f":47.9,"pk":"Apr","m":[0.36,0.441,0.557,0.61,0.457,0.453,0.532,0.55,0.436,0.265,0.432,0.413],"w":0},{"n":"Purple-rumped Sunbird","t":"resident","f":46.9,"pk":"Apr","m":[0.42,0.574,0.574,0.634,0.405,0.467,0.255,0.45,0.327,0.265,0.455,0.522],"w":0},{"n":"White-cheeked Barbet","t":"resident","f":43.9,"pk":"Apr","m":[0.38,0.559,0.59,0.618,0.431,0.36,0.383,0.383,0.218,0.265,0.364,0.391],"w":0},{"n":"Asian Koel","t":"resident","f":42.1,"pk":"Apr","m":[0.26,0.382,0.557,0.61,0.526,0.44,0.553,0.333,0.182,0.088,0.341,0.261],"w":0},{"n":"Pale-billed Flowerpecker","t":"resident","f":39.9,"pk":"Apr","m":[0.36,0.588,0.459,0.667,0.328,0.293,0.213,0.333,0.2,0.206,0.341,0.435],"w":0},{"n":"Oriental Magpie-Robin","t":"resident","f":38.6,"pk":"Apr","m":[0.42,0.441,0.459,0.488,0.405,0.373,0.255,0.267,0.309,0.206,0.364,0.413],"w":0},{"n":"Rock Pigeon","t":"resident","f":38.3,"pk":"Nov","m":[0.4,0.471,0.344,0.545,0.328,0.32,0.234,0.383,0.236,0.235,0.568,0.348],"w":0},{"n":"Brahminy Kite","t":"resident","f":35.8,"pk":"Nov","m":[0.42,0.456,0.443,0.382,0.25,0.227,0.234,0.35,0.291,0.382,0.523,0.5],"w":0},{"n":"Common Tailorbird","t":"resident","f":35.4,"pk":"Mar","m":[0.3,0.397,0.557,0.472,0.353,0.32,0.191,0.267,0.2,0.088,0.386,0.457],"w":0},{"n":"Greater Coucal","t":"resident","f":35.3,"pk":"Mar","m":[0.32,0.338,0.525,0.398,0.362,0.307,0.255,0.383,0.273,0.118,0.341,0.457],"w":0},{"n":"White-throated Kingfisher","t":"resident","f":32.3,"pk":"Nov","m":[0.3,0.382,0.377,0.244,0.293,0.28,0.277,0.367,0.291,0.235,0.545,0.435],"w":0},{"n":"Spotted Dove","t":"resident","f":32.1,"pk":"Aug","m":[0.44,0.397,0.426,0.293,0.216,0.24,0.106,0.45,0.327,0.235,0.409,0.435],"w":0},{"n":"Purple Sunbird","t":"resident","f":30.7,"pk":"Mar","m":[0.42,0.441,0.541,0.333,0.207,0.213,0.34,0.3,0.164,0.088,0.273,0.348],"w":0},{"n":"Asian Green Bee-eater","t":"resident","f":30.6,"pk":"Nov","m":[0.44,0.485,0.328,0.244,0.172,0.213,0.085,0.45,0.309,0.206,0.5,0.435],"w":0},{"n":"Indian White-eye","t":"resident","f":30.0,"pk":"Mar","m":[0.28,0.324,0.557,0.431,0.328,0.227,0.298,0.283,0.127,0.059,0.159,0.196],"w":0},{"n":"Indian Peafowl","t":"resident","f":27.6,"pk":"May","m":[0.12,0.265,0.41,0.252,0.457,0.333,0.319,0.233,0.2,0.059,0.159,0.174],"w":0},{"n":"Red-vented Bulbul","t":"resident","f":27.5,"pk":"Nov","m":[0.42,0.368,0.426,0.138,0.224,0.227,0.085,0.383,0.255,0.147,0.455,0.348],"w":0},{"n":"Yellow-billed Babbler","t":"resident","f":25.8,"pk":"Nov","m":[0.3,0.294,0.443,0.204,0.233,0.173,0.128,0.233,0.291,0.176,0.455,0.261],"w":0},{"n":"Red-wattled Lapwing","t":"resident","f":24.6,"pk":"May","m":[0.28,0.235,0.246,0.146,0.362,0.293,0.234,0.25,0.273,0.235,0.205,0.152],"w":0},{"n":"Black Drongo","t":"resident","f":22.5,"pk":"Nov","m":[0.26,0.338,0.361,0.057,0.13,0.107,0.128,0.35,0.255,0.147,0.5,0.413],"w":0},{"n":"Pied Bushchat","t":"resident","f":21.6,"pk":"Nov","m":[0.3,0.338,0.295,0.089,0.172,0.147,0.064,0.3,0.273,0.176,0.341,0.283],"w":0},{"n":"Indian Robin","t":"resident","f":20.8,"pk":"Mar","m":[0.24,0.324,0.328,0.089,0.198,0.213,0.043,0.3,0.182,0.147,0.25,0.261],"w":0},{"n":"Scaly-breasted Munia","t":"resident","f":20.8,"pk":"Aug","m":[0.12,0.103,0.082,0.089,0.129,0.253,0.34,0.5,0.309,0.235,0.409,0.217],"w":0},{"n":"White-browed Wagtail","t":"resident","f":20.7,"pk":"Nov","m":[0.22,0.162,0.262,0.171,0.138,0.093,0.277,0.333,0.2,0.206,0.341,0.283],"w":0},{"n":"Coppersmith Barbet","t":"resident","f":20.0,"pk":"Jan","m":[0.32,0.309,0.279,0.244,0.25,0.147,0.064,0.1,0.036,0.088,0.227,0.174],"w":0},{"n":"Laughing Dove","t":"regular","f":18.8,"pk":"Aug","m":[0.18,0.265,0.361,0.098,0.078,0.04,0.043,0.417,0.364,0.176,0.25,0.196],"w":0},{"n":"Eastern Red-rumped Swallow","t":"regular","f":18.2,"pk":"Aug","m":[0.12,0.191,0.18,0.114,0.172,0.16,0.106,0.317,0.273,0.118,0.25,0.261],"w":0},{"n":"Spotted Owlet","t":"regular","f":15.3,"pk":"Jan","m":[0.28,0.25,0.279,0.13,0.147,0.133,0.043,0.117,0.091,0.118,0.091,0.13],"w":0},{"n":"Eastern Cattle-Egret","t":"regular","f":14.5,"pk":"Nov","m":[0.16,0.294,0.131,0.13,0.147,0.053,0.0,0.017,0.0,0.147,0.523,0.239],"w":0},{"n":"Tickell's Blue Flycatcher","t":"regular","f":12.1,"pk":"Dec","m":[0.18,0.206,0.099,0.065,0.198,0.093,0.022,0.05,0.073,0.059,0.068,0.304],"w":0},{"n":"Indian Pond-Heron","t":"regular","f":11.9,"pk":"Nov","m":[0.16,0.162,0.082,0.081,0.043,0.027,0.149,0.2,0.127,0.118,0.295,0.196],"w":0},{"n":"Common Iora","t":"regular","f":11.8,"pk":"Dec","m":[0.18,0.176,0.098,0.089,0.086,0.093,0.021,0.183,0.145,0.118,0.068,0.217],"w":0},{"n":"Asian Tit","t":"regular","f":11.3,"pk":"Feb","m":[0.16,0.221,0.115,0.106,0.069,0.093,0.085,0.117,0.073,0.088,0.182,0.087],"w":0},{"n":"Gray Francolin","t":"regular","f":10.9,"pk":"Aug","m":[0.12,0.176,0.213,0.073,0.052,0.067,0.021,0.233,0.109,0.118,0.136,0.065],"w":0},{"n":"Blyth's Reed Warbler","t":"seasonal","f":10.9,"pk":"Jan","m":[0.28,0.206,0.279,0.22,0.0,0.0,0.0,0.0,0.0,0.0,0.159,0.13],"w":0},{"n":"Jungle Myna","t":"regular","f":10.8,"pk":"Aug","m":[0.1,0.132,0.115,0.057,0.078,0.014,0.064,0.233,0.145,0.088,0.205,0.196],"w":0},{"n":"Baya Weaver","t":"regular","f":10.7,"pk":"Aug","m":[0.0,0.029,0.0,0.024,0.078,0.227,0.128,0.417,0.345,0.059,0.0,0.0],"w":0},{"n":"Black-rumped Flameback","t":"regular","f":10.3,"pk":"Nov","m":[0.1,0.059,0.131,0.154,0.043,0.067,0.021,0.1,0.127,0.088,0.25,0.13],"w":0},{"n":"Common Hawk-Cuckoo","t":"regular","f":10.1,"pk":"Apr","m":[0.06,0.132,0.066,0.187,0.172,0.067,0.106,0.033,0.019,0.0,0.045,0.109],"w":0},{"n":"White-browed Bulbul","t":"regular","f":9.9,"pk":"Mar","m":[0.14,0.176,0.23,0.033,0.052,0.093,0.021,0.167,0.127,0.059,0.091,0.065],"w":0},{"n":"Red-naped Ibis","t":"regular","f":9.5,"pk":"Oct","m":[0.1,0.162,0.082,0.033,0.078,0.053,0.021,0.117,0.128,0.206,0.159,0.153],"w":0},{"n":"Spot-breasted Fantail","t":"regular","f":9.0,"pk":"Jan","m":[0.22,0.191,0.049,0.041,0.052,0.027,0.0,0.1,0.109,0.088,0.182,0.152],"w":0},{"n":"Shikra","t":"regular","f":8.7,"pk":"Mar","m":[0.14,0.162,0.23,0.033,0.052,0.054,0.0,0.117,0.018,0.029,0.182,0.109],"w":0},{"n":"Indian Golden Oriole","t":"seasonal","f":8.4,"pk":"Feb","m":[0.24,0.324,0.262,0.008,0.0,0.0,0.0,0.0,0.0,0.0,0.182,0.13],"w":0},{"n":"Little Swift","t":"regular","f":8.0,"pk":"Nov","m":[0.08,0.044,0.049,0.081,0.095,0.053,0.106,0.083,0.055,0.059,0.136,0.13],"w":0},{"n":"White-breasted Waterhen","t":"regular","f":7.6,"pk":"Jun","m":[0.06,0.059,0.033,0.024,0.06,0.173,0.085,0.167,0.091,0.059,0.045,0.087],"w":0},{"n":"Indian Silverbill","t":"regular","f":7.3,"pk":"Nov","m":[0.1,0.088,0.066,0.049,0.009,0.013,0.0,0.1,0.109,0.118,0.295,0.109],"w":0},{"n":"Little Grebe","t":"seasonal","f":6.9,"pk":"Aug","m":[0.04,0.044,0.033,0.008,0.009,0.027,0.149,0.333,0.109,0.029,0.114,0.087],"w":0},{"n":"Indian Gray Hornbill","t":"seasonal","f":6.9,"pk":"Feb","m":[0.08,0.118,0.082,0.049,0.078,0.053,0.043,0.1,0.036,0.059,0.068,0.065],"w":0},{"n":"House Crow","t":"seasonal","f":6.9,"pk":"Nov","m":[0.12,0.162,0.131,0.016,0.017,0.067,0.0,0.067,0.0,0.059,0.182,0.13],"w":0},{"n":"Jerdon's Bushlark","t":"seasonal","f":6.7,"pk":"Mar","m":[0.08,0.074,0.246,0.041,0.078,0.08,0.0,0.05,0.036,0.0,0.0,0.065],"w":0},{"n":"Mottled Wood-Owl","t":"seasonal","f":6.2,"pk":"Sep","m":[0.06,0.015,0.016,0.033,0.061,0.053,0.064,0.05,0.164,0.147,0.114,0.065],"w":0},{"n":"Barn Swallow","t":"seasonal","f":6.0,"pk":"Nov","m":[0.14,0.103,0.082,0.041,0.0,0.0,0.0,0.067,0.036,0.029,0.182,0.174],"w":0},{"n":"Black-winged Kite","t":"seasonal","f":5.8,"pk":"Oct","m":[0.06,0.03,0.016,0.008,0.061,0.027,0.021,0.183,0.073,0.206,0.068,0.065],"w":0},{"n":"Indian Scops-Owl","t":"seasonal","f":5.8,"pk":"May","m":[0.02,0.0,0.033,0.041,0.129,0.053,0.0,0.067,0.091,0.118,0.045,0.065],"w":0},{"n":"White-rumped Munia","t":"seasonal","f":5.8,"pk":"Sep","m":[0.06,0.029,0.016,0.025,0.034,0.093,0.043,0.133,0.145,0.029,0.091,0.043],"w":0},{"n":"Eurasian Coot","t":"seasonal","f":5.3,"pk":"Aug","m":[0.04,0.015,0.0,0.0,0.009,0.013,0.085,0.2,0.127,0.147,0.114,0.065],"w":0},{"n":"Eastern Barn Owl","t":"seasonal","f":5.3,"pk":"Jan","m":[0.14,0.015,0.016,0.001,0.06,0.027,0.128,0.083,0.073,0.088,0.046,0.065],"w":0},{"n":"Indian Roller","t":"seasonal","f":4.8,"pk":"Dec","m":[0.06,0.088,0.066,0.065,0.035,0.027,0.0,0.0,0.0,0.029,0.068,0.13],"w":0},{"n":"Blue-faced Malkoha","t":"seasonal","f":4.5,"pk":"Jan","m":[0.101,0.044,0.049,0.033,0.035,0.014,0.021,0.084,0.073,0.029,0.045,0.043],"w":0},{"n":"Brown Shrike","t":"seasonal","f":4.5,"pk":"Oct","m":[0.06,0.103,0.099,0.024,0.0,0.0,0.0,0.0,0.036,0.118,0.114,0.109],"w":0},{"n":"Eurasian Moorhen","t":"seasonal","f":4.2,"pk":"Aug","m":[0.04,0.015,0.0,0.008,0.034,0.0,0.043,0.117,0.091,0.088,0.114,0.065],"w":0},{"n":"Little Egret","t":"seasonal","f":4.2,"pk":"Nov","m":[0.06,0.044,0.0,0.024,0.026,0.0,0.064,0.033,0.055,0.118,0.136,0.065],"w":0},{"n":"Loten's Sunbird","t":"seasonal","f":4.2,"pk":"Jan","m":[0.12,0.044,0.066,0.024,0.052,0.014,0.0,0.017,0.109,0.0,0.046,0.022],"w":0},{"n":"Gray Wagtail","t":"scarce","f":4.0,"pk":"Nov","m":[0.06,0.074,0.082,0.025,0.0,0.0,0.0,0.0,0.018,0.029,0.182,0.109],"w":1},{"n":"Lesser Whistling-Duck","t":"scarce","f":3.7,"pk":"Aug","m":[0.02,0.0,0.0,0.0,0.009,0.0,0.043,0.25,0.109,0.059,0.023,0.022],"w":0},{"n":"Small Minivet","t":"scarce","f":3.7,"pk":"Jan","m":[0.1,0.059,0.066,0.008,0.009,0.0,0.0,0.083,0.036,0.029,0.045,0.087],"w":0},{"n":"Dusky Crag-Martin","t":"scarce","f":3.7,"pk":"Jan","m":[0.08,0.029,0.033,0.024,0.052,0.04,0.0,0.033,0.055,0.029,0.023,0.043],"w":0},{"n":"Rufous Treepie","t":"scarce","f":3.5,"pk":"Dec","m":[0.06,0.074,0.033,0.016,0.017,0.027,0.0,0.033,0.001,0.03,0.068,0.109],"w":0},{"n":"Yellow-eyed Babbler","t":"scarce","f":3.5,"pk":"Mar","m":[0.06,0.044,0.098,0.008,0.052,0.013,0.021,0.034,0.036,0.0,0.023,0.022],"w":0},{"n":"White-naped Woodpecker","t":"scarce","f":3.1,"pk":"Dec","m":[0.02,0.044,0.033,0.041,0.043,0.027,0.021,0.0,0.0,0.0,0.045,0.065],"w":0},{"n":"Chestnut-tailed Starling","t":"scarce","f":3.1,"pk":"Feb","m":[0.08,0.118,0.033,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.114,0.109],"w":1},{"n":"Tricolored Munia","t":"scarce","f":3.0,"pk":"Sep","m":[0.0,0.0,0.0,0.0,0.0,0.013,0.043,0.067,0.2,0.088,0.045,0.0],"w":0},{"n":"House Sparrow","t":"scarce","f":3.0,"pk":"Dec","m":[0.02,0.015,0.049,0.009,0.017,0.053,0.0,0.017,0.055,0.0,0.045,0.109],"w":0},{"n":"Common Hoopoe","t":"scarce","f":2.8,"pk":"Feb","m":[0.06,0.103,0.049,0.016,0.0,0.013,0.0,0.0,0.0,0.0,0.068,0.065],"w":0},{"n":"Red Avadavat","t":"scarce","f":2.8,"pk":"Sep","m":[0.02,0.044,0.016,0.017,0.0,0.027,0.0,0.084,0.091,0.059,0.0,0.022],"w":0},{"n":"Asian Palm Swift","t":"scarce","f":2.7,"pk":"Jan","m":[0.06,0.0,0.0,0.033,0.034,0.027,0.043,0.05,0.018,0.0,0.023,0.022],"w":0},{"n":"Gray Junglefowl","t":"scarce","f":2.6,"pk":"Mar","m":[0.02,0.074,0.115,0.009,0.009,0.04,0.0,0.033,0.0,0.0,0.0,0.0],"w":0},{"n":"Indian Spot-billed Duck","t":"scarce","f":2.4,"pk":"Sep","m":[0.0,0.029,0.0,0.008,0.009,0.027,0.085,0.033,0.091,0.029,0.023,0.0],"w":0},{"n":"Ashy Woodswallow","t":"scarce","f":2.4,"pk":"Jul","m":[0.0,0.015,0.016,0.008,0.017,0.053,0.064,0.05,0.018,0.029,0.023,0.022],"w":0},{"n":"Little Cormorant","t":"scarce","f":2.3,"pk":"Sep","m":[0.0,0.044,0.033,0.008,0.009,0.0,0.043,0.05,0.073,0.0,0.045,0.0],"w":0},{"n":"Ashy Drongo","t":"scarce","f":2.3,"pk":"Nov","m":[0.0,0.059,0.049,0.008,0.0,0.0,0.0,0.0,0.018,0.0,0.136,0.065],"w":1},{"n":"Plain Prinia","t":"scarce","f":2.3,"pk":"Sep","m":[0.0,0.029,0.016,0.0,0.017,0.0,0.0,0.05,0.127,0.0,0.045,0.022],"w":0},{"n":"Booted Eagle","t":"scarce","f":2.1,"pk":"Feb","m":[0.08,0.088,0.016,0.0,0.0,0.0,0.0,0.0,0.0,0.03,0.045,0.043],"w":1},{"n":"Indian Paradise-Flycatcher","t":"scarce","f":2.1,"pk":"Jan","m":[0.081,0.03,0.033,0.017,0.009,0.027,0.0,0.0,0.0,0.0,0.046,0.022],"w":0},{"n":"Oriental Honey-buzzard","t":"scarce","f":1.8,"pk":"Dec","m":[0.06,0.015,0.0,0.0,0.001,0.0,0.0,0.017,0.019,0.0,0.068,0.109],"w":0},{"n":"Pied Cuckoo","t":"scarce","f":1.7,"pk":"Oct","m":[0.0,0.0,0.0,0.008,0.043,0.013,0.0,0.05,0.018,0.059,0.0,0.0],"w":0},{"n":"Black-headed Ibis","t":"scarce","f":1.7,"pk":"Dec","m":[0.02,0.044,0.016,0.008,0.0,0.0,0.0,0.0,0.036,0.0,0.045,0.065],"w":1},{"n":"Medium Egret","t":"scarce","f":1.7,"pk":"Dec","m":[0.06,0.029,0.0,0.016,0.0,0.0,0.0,0.0,0.0,0.029,0.0,0.109],"w":1},{"n":"Jungle Prinia","t":"scarce","f":1.5,"pk":"Aug","m":[0.0,0.015,0.049,0.0,0.009,0.027,0.0,0.067,0.0,0.0,0.0,0.022],"w":0},{"n":"Tawny-bellied Babbler","t":"scarce","f":1.5,"pk":"Dec","m":[0.04,0.015,0.0,0.008,0.009,0.013,0.0,0.033,0.018,0.0,0.023,0.043],"w":0},{"n":"Great Cormorant","t":"scarce","f":1.4,"pk":"Jun","m":[0.0,0.0,0.016,0.008,0.009,0.053,0.021,0.017,0.018,0.0,0.0,0.022],"w":0},{"n":"Puff-throated Babbler","t":"scarce","f":1.4,"pk":"Nov","m":[0.02,0.015,0.0,0.0,0.009,0.0,0.021,0.033,0.018,0.0,0.045,0.043],"w":0},{"n":"Gray-breasted Prinia","t":"scarce","f":1.3,"pk":"Mar","m":[0.0,0.0,0.115,0.0,0.009,0.0,0.0,0.017,0.0,0.0,0.023,0.0],"w":0},{"n":"Zitting Cisticola","t":"scarce","f":1.3,"pk":"Aug","m":[0.0,0.0,0.016,0.0,0.009,0.0,0.0,0.067,0.055,0.0,0.023,0.0],"w":0},{"n":"Gray-bellied Cuckoo","t":"scarce","f":1.0,"pk":"Jun","m":[0.0,0.0,0.016,0.025,0.0,0.053,0.0,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Long-tailed Shrike","t":"scarce","f":1.0,"pk":"Feb","m":[0.02,0.029,0.016,0.0,0.026,0.013,0.0,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Yellow-wattled Lapwing","t":"scarce","f":0.9,"pk":"Jan","m":[0.04,0.015,0.016,0.001,0.0,0.027,0.0,0.0,0.0,0.0,0.0,0.022],"w":0},{"n":"Black-crowned Night Heron","t":"scarce","f":0.9,"pk":"Jun","m":[0.0,0.0,0.0,0.0,0.009,0.053,0.043,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Brahminy Starling","t":"scarce","f":0.9,"pk":"Mar","m":[0.0,0.0,0.049,0.016,0.0,0.027,0.0,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Green Sandpiper","t":"scarce","f":0.8,"pk":"Dec","m":[0.02,0.0,0.0,0.016,0.0,0.0,0.0,0.0,0.0,0.0,0.023,0.043],"w":1},{"n":"Oriental Darter","t":"scarce","f":0.8,"pk":"Sep","m":[0.0,0.015,0.0,0.0,0.0,0.0,0.0,0.017,0.036,0.029,0.023,0.0],"w":0},{"n":"Common Kingfisher","t":"scarce","f":0.8,"pk":"Sep","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.021,0.017,0.055,0.0,0.023,0.0],"w":0},{"n":"Alexandrine Parakeet","t":"scarce","f":0.8,"pk":"Dec","m":[0.0,0.0,0.0,0.008,0.0,0.0,0.0,0.0,0.0,0.0,0.023,0.087],"w":1},{"n":"Paddyfield Pipit","t":"scarce","f":0.8,"pk":"Dec","m":[0.0,0.0,0.0,0.033,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.043],"w":1},{"n":"Glossy Ibis","t":"scarce","f":0.6,"pk":"Oct","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.059,0.045,0.022],"w":1},{"n":"Greenish Warbler","t":"scarce","f":0.6,"pk":"Nov","m":[0.0,0.0,0.033,0.0,0.0,0.0,0.0,0.0,0.0,0.029,0.045,0.0],"w":1},{"n":"Rosy Starling","t":"scarce","f":0.6,"pk":"Feb","m":[0.0,0.044,0.0,0.008,0.0,0.0,0.0,0.0,0.0,0.0,0.023,0.0],"w":1},{"n":"Jerdon's Leafbird","t":"scarce","f":0.6,"pk":"Jun","m":[0.02,0.0,0.0,0.008,0.0,0.027,0.0,0.0,0.0,0.0,0.023,0.001],"w":0},{"n":"Common Sandpiper","t":"scarce","f":0.5,"pk":"Nov","m":[0.02,0.0,0.016,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.023,0.022],"w":1},{"n":"Indian Cormorant","t":"scarce","f":0.5,"pk":"Dec","m":[0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.017,0.0,0.0,0.0,0.043],"w":0},{"n":"Black-headed Cuckooshrike","t":"rare","f":0.5,"pk":"Nov","m":[0.02,0.015,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.045,0.0],"w":1},{"n":"Common Woodshrike","t":"rare","f":0.5,"pk":"Jan","m":[0.04,0.015,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.022],"w":1},{"n":"Green Warbler","t":"scarce","f":0.5,"pk":"Dec","m":[0.0,0.015,0.016,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.043],"w":1},{"n":"Large Gray Babbler","t":"scarce","f":0.5,"pk":"Jun","m":[0.0,0.0,0.016,0.0,0.0,0.027,0.021,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Asian Brown Flycatcher","t":"scarce","f":0.5,"pk":"Mar","m":[0.0,0.0,0.033,0.0,0.0,0.0,0.0,0.0,0.0,0.029,0.023,0.0],"w":1},{"n":"Wood Sandpiper","t":"rare","f":0.4,"pk":"Nov","m":[0.0,0.0,0.0,0.016,0.0,0.0,0.0,0.0,0.0,0.0,0.023,0.0],"w":1},{"n":"Purple Heron","t":"scarce","f":0.4,"pk":"Jun","m":[0.0,0.0,0.0,0.0,0.0,0.027,0.0,0.0,0.001,0.0,0.023,0.0],"w":0},{"n":"Indian Pitta","t":"rare","f":0.4,"pk":"Apr","m":[0.0,0.0,0.0,0.024,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Booted Warbler","t":"rare","f":0.4,"pk":"Jan","m":[0.02,0.015,0.016,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":1},{"n":"Wire-tailed Swallow","t":"rare","f":0.4,"pk":"Aug","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.033,0.0,0.0,0.023,0.0],"w":0},{"n":"Painted Stork","t":"rare","f":0.3,"pk":"Jan","m":[0.02,0.0,0.016,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Great Egret","t":"rare","f":0.3,"pk":"Feb","m":[0.0,0.029,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":1},{"n":"Gray Heron","t":"rare","f":0.3,"pk":"Aug","m":[0.0,0.0,0.016,0.0,0.0,0.0,0.0,0.017,0.0,0.0,0.0,0.0],"w":0},{"n":"Plum-headed Parakeet","t":"rare","f":0.3,"pk":"Nov","m":[0.0,0.0,0.0,0.001,0.0,0.0,0.021,0.0,0.0,0.0,0.023,0.0],"w":0},{"n":"Tickell's Leaf Warbler","t":"rare","f":0.3,"pk":"Dec","m":[0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.022],"w":1},{"n":"Verditer Flycatcher","t":"rare","f":0.3,"pk":"Nov","m":[0.0,0.0,0.016,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.023,0.0],"w":1},{"n":"Jungle Bush-Quail","t":"rare","f":0.1,"pk":"Dec","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.022],"w":0},{"n":"Common Cuckoo","t":"rare","f":0.1,"pk":"Nov","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.023,0.0],"w":1},{"n":"Indian Nightjar","t":"rare","f":0.1,"pk":"May","m":[0.0,0.0,0.0,0.0,0.009,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Gray-headed Swamphen","t":"rare","f":0.1,"pk":"Feb","m":[0.0,0.015,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":1},{"n":"Asian Woolly-necked Stork","t":"rare","f":0.1,"pk":"Apr","m":[0.0,0.0,0.0,0.008,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Yellow Bittern","t":"rare","f":0.1,"pk":"Nov","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.023,0.0],"w":1},{"n":"Brown Boobook","t":"rare","f":0.1,"pk":"Sep","m":[0.0,0.0,0.0,0.001,0.0,0.0,0.0,0.0,0.018,0.0,0.0,0.0],"w":0},{"n":"Blue-bearded Bee-eater","t":"rare","f":0.1,"pk":"Apr","m":[0.0,0.0,0.0,0.008,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Blue-tailed Bee-eater","t":"rare","f":0.1,"pk":"Aug","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.017,0.0,0.0,0.0,0.0],"w":0},{"n":"Red-necked Falcon","t":"rare","f":0.1,"pk":"Feb","m":[0.0,0.015,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":1},{"n":"Black-naped Monarch","t":"rare","f":0.1,"pk":"Nov","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.023,0.0],"w":1},{"n":"Bay-backed Shrike","t":"rare","f":0.1,"pk":"Mar","m":[0.0,0.0,0.016,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Clamorous Reed Warbler","t":"rare","f":0.1,"pk":"Apr","m":[0.0,0.0,0.0,0.008,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Brown-breasted Flycatcher","t":"rare","f":0.1,"pk":"Nov","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.023,0.0],"w":1},{"n":"Taiga Flycatcher","t":"rare","f":0.1,"pk":"Dec","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.022],"w":1},{"n":"Blue Rock-Thrush","t":"rare","f":0.1,"pk":"Nov","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.023,0.0],"w":1},{"n":"Siberian Stonechat","t":"rare","f":0.1,"pk":"Sep","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.018,0.0,0.0,0.0],"w":0},{"n":"Western Yellow Wagtail","t":"rare","f":0.1,"pk":"Dec","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.022],"w":1},{"n":"Asian Openbill","t":"rare","f":0.0,"pk":"Nov","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":1},{"n":"Indian Cuckooshrike","t":"rare","f":0.0,"pk":"Feb","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":1},{"n":"Rufous-tailed Lark","t":"rare","f":0.0,"pk":"Apr","m":[0.0,0.0,0.0,0.001,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":0},{"n":"Orange-headed Thrush","t":"rare","f":0.0,"pk":"May","m":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"w":0}];
+
+// ── scientific names (featured species) ──
+const SCI = {
+"Black Kite":"Milvus migrans","Red-whiskered Bulbul":"Pycnonotus jocosus","Rose-ringed Parakeet":"Psittacula krameri","Large-billed Crow":"Corvus macrorhynchos","Common Myna":"Acridotheres tristis","Ashy Prinia":"Prinia socialis","Purple-rumped Sunbird":"Leptocoma zeylonica","White-cheeked Barbet":"Psilopogon viridis","Asian Koel":"Eudynamys scolopaceus","Pale-billed Flowerpecker":"Dicaeum erythrorhynchos","Oriental Magpie-Robin":"Copsychus saularis","Rock Pigeon":"Columba livia","Brahminy Kite":"Haliastur indus","Common Tailorbird":"Orthotomus sutorius","Greater Coucal":"Centropus sinensis","White-throated Kingfisher":"Halcyon smyrnensis","Spotted Dove":"Spilopelia chinensis","Purple Sunbird":"Cinnyris asiaticus","Asian Green Bee-eater":"Merops orientalis","Indian White-eye":"Zosterops palpebrosus","Indian Peafowl":"Pavo cristatus","Red-vented Bulbul":"Pycnonotus cafer","Black Drongo":"Dicrurus macrocercus","Pied Bushchat":"Saxicola caprata","Indian Robin":"Copsychus fulicatus","Coppersmith Barbet":"Psilopogon haemacephalus","Spotted Owlet":"Athene brama","Baya Weaver":"Ploceus philippinus","Black-rumped Flameback":"Dinopium benghalense","Indian Paradise-Flycatcher":"Terpsiphone paradisi","Red Avadavat":"Amandava amandava","Siberian Stonechat":"Saxicola maurus","Black-naped Monarch":"Hypothymis azurea","Indian Pitta":"Pitta brachyura","Blue Rock-Thrush":"Monticola solitarius","Taiga Flycatcher":"Ficedula albicilla","Verditer Flycatcher":"Eumyias thalassinus","Brown-breasted Flycatcher":"Muscicapa muttui","Red-necked Falcon":"Falco chicquera","Orange-headed Thrush":"Geokichla citrina","Indian Cuckooshrike":"Coracina macei","Black-headed Cuckooshrike":"Lalage melanoptera","Plum-headed Parakeet":"Psittacula cyanocephala","Yellow Bittern":"Ixobrychus sinensis","Asian Openbill":"Anastomus oscitans","Painted Stork":"Mycteria leucocephala","Common Cuckoo":"Cuculus canorus","Indian Roller":"Coracias benghalensis","Shikra":"Accipiter badius","Booted Eagle":"Hieraaetus pennatus"
+};
+
+// ── featured rarities (curated order + notes) ──
+const RARE_FEATURE = [
+ ["Siberian Stonechat","A long-distance migrant from the steppes of Central Asia. Logged once, in September, on a fence over the open scrub."],
+ ["Black-naped Monarch","An azure jewel of shaded canopy, restless and fly-catching. Recorded twice, both November, both unforgettable."],
+ ["Indian Pitta","The jewel-thrush of the leaf litter, calling at dusk. Two April records as it passed through on migration."],
+ ["Blue Rock-Thrush","A solitary winter visitor to rooftops and stone. A single November sighting, perched and watchful."],
+ ["Taiga Flycatcher","A tiny Siberian breeder wintering in the canopy, flicking its tail. One December record."],
+ ["Verditer Flycatcher","Turquoise from bill to tail, hunting from a high perch. A November passer-through."],
+ ["Red-necked Falcon","A fierce, fast falcon of open country. Once over the Malhar scrub, on a February morning."],
+ ["Orange-headed Thrush","A shy bird of deep shade and damp ground. A single, unrepeated record on the list."]
+];
+
+const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const WINTER_IDX=[10,11,0,1]; // Nov Dec Jan Feb
+const TIER_LABEL={resident:"Resident",regular:"Regular",seasonal:"Seasonal",scarce:"Scarce",rare:"Rare"};
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const TIER_COLOR={resident:'var(--t-resident)',regular:'var(--t-regular)',seasonal:'var(--t-seasonal)',scarce:'var(--t-scarce)',rare:'var(--t-rare)'};
+const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+// image-with-fallback: drop a file at images/birds/<slug>.jpg and it appears; until then, a coloured plate shows.
+const birdMedia=(name,tone,capSize)=>`<div class="ph" data-ghost="${esc(name[0])}" style="--tone:${tone}"><img src="/fauna/birdsofmalhar/images/birds/${slug(name)}.jpg" alt="${esc(name)}" loading="lazy" onerror="this.remove()"><div class="pl"${capSize?` style="font-size:${capSize}"`:''}>${esc(name.toLowerCase())}</div></div>`;
+
+// sparkline html (normalized per-species)
+function spark(m,sp){
+ const mx=Math.max(...m)||1;
+ return `<div class="spark" style="--sp:${sp||'var(--fauna)'}">`+m.map((v,i)=>{
+  if(v<=0) return '<div class="b z"></div>';
+  const h=Math.max(12,Math.round(v/mx*100));
+  const win=WINTER_IDX.includes(i)?' win':'';
+  return `<div class="b${win}" style="height:${h}%"></div>`;
+ }).join('')+'</div>';
+}
+
+// ── AT A GLANCE tier bar ──
+(function(){
+ const counts={resident:30,regular:20,seasonal:19,scarce:51,rare:34};
+ const order=["resident","regular","seasonal","scarce","rare"];
+ const tot=154;
+ document.getElementById('tierbar').innerHTML=order.map(t=>{
+  const w=counts[t]/tot*100;
+  return `<div class="seg tierseg-${t}" style="flex:0 0 ${w}%" title="${TIER_LABEL[t]}: ${counts[t]}">${counts[t]}</div>`;
+ }).join('');
+})();
+
+// ── RARE CARDS ──
+(function(){
+ const html=RARE_FEATURE.map(([name,note])=>{
+  const sp=SPECIES.find(s=>s.n===name)||{};
+  const sci=SCI[name]||"";
+  return `<div class="rare-card">
+   ${birdMedia(name,'var(--t-rare)')}
+   <div class="body">
+    <span class="badge">Rare · ${sp.w?'winter':'passage'}</span>
+    <h3>${esc(name)}</h3>
+    <div class="sci">${esc(sci)}</div>
+    <div class="note">${esc(note)}</div>
+    <div class="meta"><span>seen in <strong>${sp.f}%</strong> of lists</span><span class="pk">peak ${sp.pk}</span></div>
+   </div></div>`;
+ }).join('');
+ document.getElementById('rareGrid').innerHTML=html;
+})();
+
+// ── RESIDENT CAST (top 15 by freq) ──
+(function(){
+ const top=SPECIES.filter(s=>s.t==='resident').slice(0,15);
+ document.getElementById('castGrid').innerHTML=top.map(s=>`
+  <div class="cast-item">
+   ${birdMedia(s.n,TIER_COLOR[s.t],'9px')}
+   <div class="ci-b"><div class="nm">${esc(s.n)}</div><div class="fq">${s.f}% of visits · peak ${s.pk}</div></div>
+  </div>`).join('');
+})();
+
+// ── YEAR IN BIRDS (species count per month) ──
+(function(){
+ const counts=MONTHS.map((_,i)=>SPECIES.filter(s=>s.m[i]>0).length);
+ const mx=Math.max(...counts);
+ document.getElementById('yearchart').innerHTML=MONTHS.map((mo,i)=>{
+  const h=Math.round(counts[i]/mx*100);
+  const win=WINTER_IDX.includes(i)?' win':'';
+  return `<div class="yc"><div class="bar${win}" data-h="${h}" style="height:0%"><span class="n">${counts[i]}</span></div><div class="mo">${mo[0]}</div></div>`;
+ }).join('');
+})();
+
+// ── LEDGER ──
+const state={tier:'all',winter:false,q:'',sort:'f',dir:-1,page:1};
+const PAGE_SIZE=25;
+const body=document.getElementById('ledgerBody');
+const lcount=document.getElementById('lcount');
+const pager=document.getElementById('ledgerPager');
+
+function renderLedger(){
+ let list=SPECIES.filter(s=>{
+  if(state.tier!=='all' && s.t!==state.tier) return false;
+  if(state.winter && !s.w) return false;
+  if(state.q && !(s.n.toLowerCase().includes(state.q) || (SCI[s.n]||'').toLowerCase().includes(state.q))) return false;
+  return true;
+ });
+ const dir=state.dir;
+ list.sort((a,b)=>{
+  if(state.sort==='n') return a.n.localeCompare(b.n)*dir;
+  if(state.sort==='t'){const o=["resident","regular","seasonal","scarce","rare"];return (o.indexOf(a.t)-o.indexOf(b.t))*dir || b.f-a.f;}
+  return (a.f-b.f)*dir;
+ });
+ const total=list.length;
+ const pages=Math.max(1,Math.ceil(total/PAGE_SIZE));
+ if(state.page>pages) state.page=pages;
+ const start=(state.page-1)*PAGE_SIZE;
+ const slice=list.slice(start,start+PAGE_SIZE);
+ body.innerHTML=slice.map((s,i)=>{
+  const gi=start+i+1;
+  const sci=SCI[s.n]?`<span class="sci">${esc(SCI[s.n])}</span>`:'';
+  return `<div class="lrow">
+   <div class="idx">${String(gi).padStart(2,'0')}</div>
+   <div class="nm">${esc(s.n)}${sci}</div>
+   <div><span class="tbadge tb-${s.t}">${TIER_LABEL[s.t]}</span>${s.w?' <span class="mono" style="color:var(--teal);font-size:10px">❄</span>':''}</div>
+   <div>${spark(s.m,TIER_COLOR[s.t])}</div>
+   <div class="fq">${s.f}%</div>
+  </div>`;
+ }).join('') || `<div style="padding:34px 0;color:var(--inkLt)">No species match, try a different filter.</div>`;
+ lcount.textContent = total ? `Showing ${start+1}–${start+slice.length} of ${total} species` : 'No species match';
+ if(pages<=1){ pager.innerHTML=''; }
+ else{
+  let h=`<button class="pg" data-pg="prev"${state.page===1?' disabled':''}>← Prev</button>`;
+  for(let i=1;i<=pages;i++) h+=`<button class="pg num${i===state.page?' on':''}" data-pg="${i}">${i}</button>`;
+  h+=`<button class="pg" data-pg="next"${state.page===pages?' disabled':''}>Next →</button>`;
+  pager.innerHTML=h;
+ }
+}
+pager.addEventListener('click',e=>{
+ const b=e.target.closest('.pg'); if(!b||b.disabled) return;
+ const v=b.dataset.pg;
+ if(v==='prev') state.page--; else if(v==='next') state.page++; else state.page=+v;
+ renderLedger();
+ const y=document.querySelector('.ledger-controls').getBoundingClientRect().top+scrollY-78;
+ window.scrollTo({top:y,behavior:'smooth'});
+});
+
+// filter buttons
+document.getElementById('filters').addEventListener('click',e=>{
+ const b=e.target.closest('.fbtn'); if(!b) return;
+ if(b.dataset.winter){
+  state.winter=!state.winter; b.classList.toggle('on',state.winter);
+ } else {
+  state.tier=b.dataset.tier;
+  document.querySelectorAll('#filters .fbtn[data-tier]').forEach(x=>x.classList.toggle('on',x===b));
+ }
+ state.page=1;
+ renderLedger();
+});
+// search
+document.getElementById('search').addEventListener('input',e=>{state.q=e.target.value.trim().toLowerCase();state.page=1;renderLedger();});
+// sort
+document.querySelectorAll('.lhead .sortable').forEach(h=>{
+ h.addEventListener('click',()=>{
+  const k=h.dataset.sort;
+  if(state.sort===k){state.dir*=-1;}else{state.sort=k;state.dir=(k==='n')?1:-1;}
+  document.querySelectorAll('.lhead .sortable').forEach(x=>{
+   x.classList.toggle('act',x===h);
+   const ar=x.querySelector('.ar'); if(ar) ar.textContent=(x===h)?(state.dir>0?'▲':'▼'):'▲';
+  });
+  state.page=1;
+  renderLedger();
+ });
+});
+renderLedger();
+
+// ── community leaderboard (eBird hotspot, all-time) ──
+const LEADERS={
+ checklist:[['Chayant Gonsalves',465],['Steven Suting',97],['Sangeetha Kadur',63],['Veena Sridharan',57],['Sandeep Nanu',45],['Tati Sberg',37],['Vivekananda K',21],['Akshay Sharma',18],['Vedika Sanchi',16],['Vidya Sridharan',15]],
+ species:[['Chayant Gonsalves',127],['Steven Suting',117],['Sangeetha Kadur',109],['Veena Sridharan',109],['Sandeep Nanu',103],['Tati Sberg',96],['Vedika Sanchi',89],['Akshay Sharma',86],['Vidya Sridharan',80],['Dipitha D',75]]
+};
+function leaderRows(arr){
+ const mx=arr[0][1]; let pv=null,pr=0;
+ return arr.map(([n,v],i)=>{
+  const r=(v===pv)?pr:i+1; pv=v;pr=r;
+  return `<div class="lead-row"><span class="rk">${r}</span><span class="nm">${esc(n)}</span><span class="track"><span class="fill" style="width:${(v/mx*100).toFixed(1)}%"></span></span><span class="ct">${v}</span></div>`;
+ }).join('');
+}
+document.getElementById('leadChecklist').innerHTML=leaderRows(LEADERS.checklist);
+document.getElementById('leadSpecies').innerHTML=leaderRows(LEADERS.species);
+
+// ── live field notes from the Malhar journal (WordPress REST, category 40) ──
+// Curated cards show instantly; replaced by the live feed if it loads.
+(function(){
+  const grid=document.getElementById('notesGrid'); if(!grid) return;
+  fetch('https://shiftingradius.com/wp-json/wp/v2/posts?categories=40&_embed&per_page=100')
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(posts=>{
+      if(!Array.isArray(posts)||!posts.length) return;
+      for(let i=posts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[posts[i],posts[j]]=[posts[j],posts[i]];}
+      posts=posts.slice(0,9);
+      grid.innerHTML=posts.map(p=>{
+        const dt=new Date(p.date).toLocaleDateString('en-GB',{month:'short',year:'numeric'});
+        let img='';
+        try{const m=p._embedded['wp:featuredmedia'][0], s=(m.media_details||{}).sizes||{};
+            img=((s.large||s.medium_large||s.medium||{}).source_url)||m.source_url;}catch(e){}
+        const media=img
+          ? `<div class="ph"><img src="${img}" alt="" loading="lazy" onerror="this.remove()"></div>`
+          : `<div class="ph" data-ghost="✦" style="--tone:var(--fauna)"></div>`;
+        return `<a class="note-card" href="${p.link}" target="_blank" rel="noopener">${media}<div class="nb"><span class="tag">Field note</span><h3>${p.title.rendered}</h3><div style="flex:1"></div><div class="rd"><span>Read the story →</span><span class="src">${dt}</span></div></div></a>`;
+      }).join('');
+    })
+    .catch(()=>{/* offline / blocked: keep the curated fallback cards */});
+})();
+
+// ── entrance motion ──
+(function(){
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const yc=document.getElementById('yearchart');
+ const setYear=()=>{ if(yc) yc.querySelectorAll('.bar').forEach(b=>b.style.height=b.dataset.h+'%'); };
+ // stagger grid children
+ ['.rare-grid','.cast','.notes-grid','.places','.inat-grid'].forEach(sel=>{
+  const g=document.querySelector(sel); if(!g) return;
+  [...g.children].forEach((c,i)=>{c.classList.add('reveal');c.style.transitionDelay=((i%4)*0.07)+'s';});
+ });
+ document.querySelectorAll('.sec-head,.year-grid,.contrib-grid,.comm-grid,.glance-grid,.statstrip').forEach(e=>e.classList.add('reveal'));
+ if(reduce){document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'));setYear();return;}
+ const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+ document.querySelectorAll('.reveal').forEach(e=>{ if(!e.closest('.hero')) io.observe(e); });
+ if(yc){const yio=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){setYear();yio.disconnect();}}),{threshold:.25});yio.observe(yc);}
+ // hero reveals fire on load, gently staggered
+ requestAnimationFrame(()=>document.querySelectorAll('.hero .reveal').forEach((e,i)=>{e.style.transitionDelay=(i*0.09)+'s';e.classList.add('in');}));
+})();
+</script>
+</body>
+</html>
