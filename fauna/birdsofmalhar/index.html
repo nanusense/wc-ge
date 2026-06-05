@@ -5,6 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Birds of Malhar · malhar.community</title>
 <meta name="description" content="The birds of Malhar, a living, collective record of 154 species seen across the community. Residents, winter migrants, and rare visitors.">
+<link rel="canonical" href="https://wc-ge.vercel.app/fauna/birdsofmalhar">
+<!-- Open Graph / social share -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="malhar.community">
+<meta property="og:title" content="Birds of Malhar">
+<meta property="og:description" content="154 bird species share one patch of Bangalore. A living, collective record from eBird, iNaturalist, and the community's own field notes.">
+<meta property="og:url" content="https://wc-ge.vercel.app/fauna/birdsofmalhar">
+<meta property="og:image" content="https://wc-ge.vercel.app/fauna/birdsofmalhar/images/hero.jpg">
+<meta property="og:image:width" content="1400">
+<meta property="og:image:height" content="933">
+<meta property="og:image:alt" content="A black kite over Malhar">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Birds of Malhar">
+<meta name="twitter:description" content="154 bird species share one patch of Bangalore. A living, collective record from eBird, iNaturalist, and the community's own field notes.">
+<meta name="twitter:image" content="https://wc-ge.vercel.app/fauna/birdsofmalhar/images/hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
@@ -67,6 +82,7 @@ h1,h2,h3,h4{font-family:var(--serif);font-weight:400;letter-spacing:-0.01em;line
 .stat .v small{font-size:18px;color:var(--inkLt)}
 .stat .l{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--inkLt);margin-top:8px}
 .stat a{color:var(--fauna);border-bottom:1px solid var(--fauna)}
+.statnote{font-family:var(--mono);font-size:11px;line-height:1.65;color:var(--inkLt);margin-top:18px;max-width:680px;letter-spacing:0.01em}
 @media(max-width:680px){.stat{min-width:45%;margin-right:0;padding-right:16px}}
 
 /* placeholder image */
@@ -395,6 +411,40 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
 .maplegend{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:18px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--inkLt);font-family:var(--mono)}
 .maplegend .bar{width:130px;height:8px;border-radius:4px;background:linear-gradient(90deg,#FDFDFC,#C8923A,#A8432B);border:1px solid var(--hairline)}
 .mapcap{text-align:center;font-size:11px;color:var(--inkLt);font-family:var(--mono);margin-top:14px;line-height:1.6;max-width:620px;margin-left:auto;margin-right:auto}
+
+/* ── heard, not seen (audio) ── */
+.sounds{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:860px){.sounds{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.sounds{grid-template-columns:1fr}}
+.sound-card{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px 15px;box-shadow:var(--shadow-sm)}
+.sound-thumb{position:relative;flex:none;width:62px;height:62px;border-radius:9px;overflow:hidden;background:var(--faunaLt)}
+.sound-thumb img{width:100%;height:100%;object-fit:cover}
+.playbtn{position:absolute;inset:0;width:100%;height:100%;border:none;cursor:pointer;background:rgba(28,26,22,.30);color:#fff;font-size:16px;display:grid;place-items:center;line-height:1;padding-left:2px;transition:background .2s}
+.playbtn:hover{background:rgba(28,26,22,.5)}
+.playbtn.on{background:rgba(90,61,28,.62);padding-left:0}
+.sound-card .sb{min-width:0}
+.snm{font-family:var(--serif);font-size:20px;line-height:1.1;letter-spacing:-0.01em}
+.sdesc{font-size:12.5px;color:var(--inkMid);line-height:1.45;margin-top:4px}
+.soundnote{font-family:var(--mono);font-size:10.5px;color:var(--inkLt);line-height:1.7;margin-top:22px;letter-spacing:0.01em}
+.soundnote a{color:var(--inkMid);border-bottom:1px solid var(--hairline)}
+
+/* ── year-in-birds, interactive ── */
+.yc{cursor:pointer;outline:none}
+.yearchart .bar{transition:height .9s var(--ease),opacity .25s var(--ease)}
+.yearchart.has-active .yc:not(.active) .bar{opacity:.36}
+.yc:focus-visible .bar{outline:2px solid var(--fauna);outline-offset:2px}
+.yc .mo{transition:color .2s}
+.yc.active .mo{color:var(--ink);font-weight:600}
+.monthpanel{align-self:start}
+.mp-month{font-family:var(--serif);font-size:36px;line-height:1;letter-spacing:-0.015em;color:var(--faunaDk)}
+.mp-stat{font-size:13.5px;color:var(--inkMid);margin-top:9px}
+.mp-stat b{font-family:var(--serif);font-size:19px;color:var(--ink)}
+.mp-season{color:var(--fauna)}
+.mp-label{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--inkLt);margin-top:20px;margin-bottom:11px}
+.mp-chips{display:flex;flex-wrap:wrap;gap:7px}
+.mp-chip{font-size:11.5px;padding:4px 11px;border-radius:999px;background:var(--card);border:1px solid var(--border);color:var(--ink);line-height:1.25;white-space:nowrap}
+.mp-chip i{display:inline-block;width:7px;height:7px;border-radius:999px;margin-right:6px}
+.mp-empty{font-style:italic;color:var(--inkLt);font-family:var(--serif);font-size:15px}
 </style>
 </head>
 <body>
@@ -424,7 +474,7 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
 
    <!-- CONTRIBUTOR NOTE · reusable pattern for every dimension page -->
    <aside class="contributor reveal" aria-label="Page contributor">
-    <div class="ctr-ava"><img src="/fauna/birdsofmalhar/images/contributor.jpg" alt="Sandeep Nanu" loading="lazy" onerror="this.remove()"><span>SN</span></div>
+    <div class="ctr-ava"><img src="/fauna/birdsofmalhar/images/contributor.jpg" alt="Sandeep Nanu" loading="lazy" style="object-position:72% 38%" onerror="this.remove()"><span>SN</span></div>
     <div class="ctr-body">
      <p class="ctr-lead">Compiled &amp; written by <strong>Sandeep Nanu</strong>, a birder who lives at Malhar, drawn from the shared record of <strong>60 eBirders</strong>.</p>
      <p class="ctr-sub"><em>The data is everyone's; the telling is one of ours.</em> &nbsp;Photographs &amp; field notes from <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener">shiftingradius.com</a>.</p>
@@ -437,6 +487,7 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
     <div class="stat"><div class="v">60</div><div class="l">Contributors</div></div>
     <div class="stat"><div class="v" style="font-size:22px;padding-top:10px"><a href="https://ebird.org/hotspot/L4022249" target="_blank" rel="noopener">L4022249 ↗</a></div><div class="l">Hotspot</div></div>
    </div>
+   <p class="statnote reveal">Records as of June 2026, compiled from the eBird hotspot L4022249, iNaturalist, and field notes from shiftingradius.com. The counts grow as the community keeps watching.</p>
   </div>
  </div>
 </section>
@@ -505,6 +556,50 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
  </div>
 </section>
 
+<!-- HEARD, NOT SEEN -->
+<section id="heard" style="border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)">
+ <div class="wrap">
+  <div class="sec-head"><div>
+   <span class="tick eyebrow">Heard, not seen</span>
+   <h2>The soundtrack of the <em>place</em>.</h2>
+  </div><span class="hand" style="font-size:18px">press play →</span></div>
+  <p class="sec-intro" style="margin-bottom:30px">Most of Malhar's birds you will hear long before you ever spot them. The barbet's hammer, the koel's rising call, the coucal deep in the hedge. Tap a bird to listen.</p>
+  <div class="sounds">
+   <div class="sound-card">
+    <div class="sound-thumb"><img src="/fauna/birdsofmalhar/images/birds/asian-koel.jpg" alt="Asian Koel" loading="lazy" onerror="this.remove()"><button class="playbtn" data-aud="asian-koel" aria-label="Play the Asian Koel call">▶</button></div>
+    <div class="sb"><div class="snm">Asian Koel</div><div class="sdesc">a rising, insistent ko-EL through the summer mornings</div></div>
+    <audio id="aud-asian-koel" preload="none" src="/fauna/birdsofmalhar/images/audio/asian-koel.mp3"></audio>
+   </div>
+   <div class="sound-card">
+    <div class="sound-thumb"><img src="/fauna/birdsofmalhar/images/birds/coppersmith-barbet.jpg" alt="Coppersmith Barbet" loading="lazy" onerror="this.remove()"><button class="playbtn" data-aud="coppersmith-barbet" aria-label="Play the Coppersmith Barbet call">▶</button></div>
+    <div class="sb"><div class="snm">Coppersmith Barbet</div><div class="sdesc">a metronomic tonk… tonk… tonk, like a far-off hammer</div></div>
+    <audio id="aud-coppersmith-barbet" preload="none" src="/fauna/birdsofmalhar/images/audio/coppersmith-barbet.mp3"></audio>
+   </div>
+   <div class="sound-card">
+    <div class="sound-thumb"><img src="/fauna/birdsofmalhar/images/birds/greater-coucal.jpg" alt="Greater Coucal" loading="lazy" onerror="this.remove()"><button class="playbtn" data-aud="greater-coucal" aria-label="Play the Greater Coucal call">▶</button></div>
+    <div class="sb"><div class="snm">Greater Coucal</div><div class="sdesc">a deep, hollow whoop-whoop-whoop from the undergrowth</div></div>
+    <audio id="aud-greater-coucal" preload="none" src="/fauna/birdsofmalhar/images/audio/greater-coucal.wav"></audio>
+   </div>
+   <div class="sound-card">
+    <div class="sound-thumb"><img src="/fauna/birdsofmalhar/images/birds/red-whiskered-bulbul.jpg" alt="Red-whiskered Bulbul" loading="lazy" onerror="this.remove()"><button class="playbtn" data-aud="red-whiskered-bulbul" aria-label="Play the Red-whiskered Bulbul call">▶</button></div>
+    <div class="sb"><div class="snm">Red-whiskered Bulbul</div><div class="sdesc">a cheerful, tumbling whistle from the hedge-tops</div></div>
+    <audio id="aud-red-whiskered-bulbul" preload="none" src="/fauna/birdsofmalhar/images/audio/red-whiskered-bulbul.mp3"></audio>
+   </div>
+   <div class="sound-card">
+    <div class="sound-thumb"><img src="/fauna/birdsofmalhar/images/birds/white-throated-kingfisher.jpg" alt="White-throated Kingfisher" loading="lazy" onerror="this.remove()"><button class="playbtn" data-aud="white-throated-kingfisher" aria-label="Play the White-throated Kingfisher call">▶</button></div>
+    <div class="sb"><div class="snm">White-throated Kingfisher</div><div class="sdesc">a loud, rattling laugh that carries across the gardens</div></div>
+    <audio id="aud-white-throated-kingfisher" preload="none" src="/fauna/birdsofmalhar/images/audio/white-throated-kingfisher.wav"></audio>
+   </div>
+   <div class="sound-card">
+    <div class="sound-thumb"><img src="/fauna/birdsofmalhar/images/birds/indian-peafowl.jpg" alt="Indian Peafowl" loading="lazy" onerror="this.remove()"><button class="playbtn" data-aud="indian-peafowl" aria-label="Play the Indian Peafowl call">▶</button></div>
+    <div class="sb"><div class="snm">Indian Peafowl</div><div class="sdesc">the unmistakable may-awe scream across the greens</div></div>
+    <audio id="aud-indian-peafowl" preload="none" src="/fauna/birdsofmalhar/images/audio/indian-peafowl.wav"></audio>
+   </div>
+  </div>
+  <p class="soundnote">Calls under Creative Commons (CC BY-SA), from Wikimedia Commons. Koel <a href="https://commons.wikimedia.org/wiki/File:Eudynamys_scolopaceus_-_Asian_Koel_XC476378.mp3" target="_blank" rel="noopener">Manoj Karingamadathil</a>, Coppersmith Barbet <a href="https://commons.wikimedia.org/wiki/File:Psilopogon_haemacephalus_-_Coppersmith_Barbet_XC122982.mp3" target="_blank" rel="noopener">Sudipto Roy</a>, Coucal <a href="https://commons.wikimedia.org/wiki/File:Greater_coucal_duet_song_recorded_in_July_2023_at_Sangli.wav" target="_blank" rel="noopener">Sharadapte</a>, Bulbul <a href="https://commons.wikimedia.org/wiki/File:Pycnonotus_jocosus_-_Red-whiskered_Bulbul_XC538779.mp3" target="_blank" rel="noopener">Subhashish Panigrahi</a>, Kingfisher <a href="https://commons.wikimedia.org/wiki/File:White-throated_kingfisher_song_recorded_in_April_2022_at_Haripur,_Sangli.wav" target="_blank" rel="noopener">Sharadapte</a>, Peafowl <a href="https://commons.wikimedia.org/wiki/File:Pavo%2Bcristatus.wav" target="_blank" rel="noopener">Pamela Rasmussen</a>.</p>
+ </div>
+</section>
+
 <!-- LEDGER -->
 <section id="ledger">
  <div class="wrap">
@@ -557,13 +652,9 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
    <div>
     <div class="eyebrow" style="color:var(--inkLt);margin-bottom:26px">Species recorded per month &nbsp;·&nbsp; <span style="color:var(--commons)">winter</span> / <span style="color:var(--fauna)">rest of year</span></div>
     <div class="yearchart" id="yearchart"></div>
-    <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:11px;color:var(--inkLt)" class="mono"><span>richness peaks as the migrants arrive</span><span>monsoon nesting →</span></div>
+    <div class="mono" style="margin-top:12px;font-size:11px;color:var(--inkLt)">Hover or tap a month to see what peaks →</div>
    </div>
-   <div class="season-notes">
-    <div class="sn"><div class="mo">Nov – Feb</div><div><h4>The migrant season</h4><p>The list swells. Warblers (Greenish, Tickell's Leaf, Booted), a cast of flycatchers, Gray Wagtails, Rosy and Chestnut-tailed Starlings, even Booted Eagle, all here from the north, gone by April.</p></div></div>
-    <div class="sn"><div class="mo">Mar – May</div><div><h4>Song &amp; passage</h4><p>The koel takes over the mornings and the hawk-cuckoo won't stop. The Indian Pitta passes through the leaf litter in April, two records, both fleeting.</p></div></div>
-    <div class="sn"><div class="mo">Jun – Sep</div><div><h4>The monsoon nests</h4><p>Baya Weavers build over the water and the munias move in, Scaly-breasted, White-rumped, Tricolored. Whistling-ducks and grebes appear on the wet edges.</p></div></div>
-   </div>
+   <div class="monthpanel" id="monthPanel"></div>
   </div>
  </div>
 </section>
@@ -865,15 +956,36 @@ function spark(m,sp){
   </div>`).join('');
 })();
 
-// ── YEAR IN BIRDS (species count per month) ──
+// ── YEAR IN BIRDS (interactive: hover a month -> what peaks) ──
 (function(){
+ const MF=['January','February','March','April','May','June','July','August','September','October','November','December'];
  const counts=MONTHS.map((_,i)=>SPECIES.filter(s=>s.m[i]>0).length);
  const mx=Math.max(...counts);
- document.getElementById('yearchart').innerHTML=MONTHS.map((mo,i)=>{
-  const h=Math.round(counts[i]/mx*100);
-  const win=WINTER_IDX.includes(i)?' win':'';
-  return `<div class="yc"><div class="bar${win}" data-h="${h}" style="height:0%"><span class="n">${counts[i]}</span></div><div class="mo">${mo[0]}</div></div>`;
+ const chart=document.getElementById('yearchart');
+ chart.innerHTML=MONTHS.map((mo,i)=>{
+  const h=Math.round(counts[i]/mx*100), win=WINTER_IDX.includes(i)?' win':'';
+  return `<div class="yc" data-m="${i}" tabindex="0" role="button" aria-label="${MF[i]}: what peaks"><div class="bar${win}" data-h="${h}" style="height:0%"><span class="n">${counts[i]}</span></div><div class="mo">${mo[0]}</div></div>`;
  }).join('');
+ const panel=document.getElementById('monthPanel');
+ const season=i=>[11,0,1].includes(i)?'winter · migrants in':[2,3,4].includes(i)?'spring · song & breeding':[5,6,7,8].includes(i)?'monsoon · nesting':'autumn · the migrants arrive';
+ function updatePanel(i){
+  const peaks=SPECIES.filter(s=>s.pk===MONTHS[i]).sort((a,b)=>b.f-a.f), CAP=18;
+  const chips=peaks.slice(0,CAP).map(s=>`<span class="mp-chip"><i style="background:${TIER_COLOR[s.t]}"></i>${esc(s.n)}</span>`).join('');
+  const more=peaks.length>CAP?`<span class="mp-chip" style="border-style:dashed;color:var(--inkLt)">+${peaks.length-CAP} more</span>`:'';
+  panel.innerHTML=`<div class="mp-month">${MF[i]}</div>`+
+   `<div class="mp-stat"><b>${counts[i]}</b> species recorded · <span class="mp-season">${season(i)}</span></div>`+
+   `<div class="mp-label">Peaks this month · ${peaks.length}</div>`+
+   `<div class="mp-chips">${chips||'<span class="mp-empty">nothing peaks this month</span>'}${more}</div>`;
+ }
+ const ycs=[...chart.children];
+ function highlight(i){chart.classList.add('has-active');ycs.forEach((c,j)=>c.classList.toggle('active',j===i));}
+ ycs.forEach(c=>{const i=+c.dataset.m;
+  c.addEventListener('mouseenter',()=>{highlight(i);updatePanel(i);});
+  c.addEventListener('focus',()=>{highlight(i);updatePanel(i);});
+  c.addEventListener('click',()=>{highlight(i);updatePanel(i);});
+ });
+ chart.addEventListener('mouseleave',()=>{chart.classList.remove('has-active');ycs.forEach(c=>c.classList.remove('active'));});
+ updatePanel(counts.indexOf(mx)); // default: the richest month (no dimming until hover)
 })();
 
 // ── LEDGER ──
@@ -1015,6 +1127,21 @@ document.getElementById('leadSpecies').innerHTML=leaderRows(LEADERS.species);
  if(yc){const yio=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){setYear();yio.disconnect();}}),{threshold:.25});yio.observe(yc);}
  // hero reveals fire on load, gently staggered
  requestAnimationFrame(()=>document.querySelectorAll('.hero .reveal').forEach((e,i)=>{e.style.transitionDelay=(i*0.09)+'s';e.classList.add('in');}));
+})();
+
+// ── heard, not seen: audio play/pause (one at a time) ──
+(function(){
+  let cur=null;
+  document.querySelectorAll('.playbtn').forEach(b=>{
+    const a=document.getElementById('aud-'+b.dataset.aud); if(!a) return;
+    b.addEventListener('click',()=>{
+      if(a.paused){ if(cur&&cur!==a)cur.pause(); a.play(); cur=a; }
+      else a.pause();
+    });
+    a.addEventListener('play',()=>{b.textContent='❚❚';b.classList.add('on');});
+    a.addEventListener('pause',()=>{b.textContent='▶';b.classList.remove('on');});
+    a.addEventListener('ended',()=>{b.textContent='▶';b.classList.remove('on');});
+  });
 })();
 </script>
 </body>
