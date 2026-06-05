@@ -809,6 +809,7 @@ const MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov",
 const WINTER_IDX=[10,11,0,1]; // Nov Dec Jan Feb
 const TIER_LABEL={resident:"Resident",regular:"Regular",seasonal:"Seasonal",scarce:"Scarce",rare:"Rare"};
 const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+const fpct=v=>v>=0.1?v+'%':'<0.1%';  // on the list but rounds to 0 -> show "<0.1%", never "0%"
 const TIER_COLOR={resident:'var(--t-resident)',regular:'var(--t-regular)',seasonal:'var(--t-seasonal)',scarce:'var(--t-scarce)',rare:'var(--t-rare)'};
 const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
 // image-with-fallback: drop a file at images/birds/<slug>.jpg and it appears; until then, a coloured plate shows.
@@ -848,7 +849,7 @@ function spark(m,sp){
     <h3>${esc(name)}</h3>
     <div class="sci">${esc(sci)}</div>
     <div class="note">${esc(note)}</div>
-    <div class="meta"><span>seen in <strong>${sp.f}%</strong> of lists</span><span class="pk">peak ${sp.pk}</span></div>
+    <div class="meta"><span>seen in <strong>${fpct(sp.f)}</strong> of lists</span><span class="pk">peak ${sp.pk}</span></div>
    </div></div>`;
  }).join('');
  document.getElementById('rareGrid').innerHTML=html;
@@ -908,7 +909,7 @@ function renderLedger(){
    <div class="nm">${esc(s.n)}${sci}</div>
    <div><span class="tbadge tb-${s.t}">${TIER_LABEL[s.t]}</span>${s.w?' <span class="mono" style="color:var(--teal);font-size:10px">❄</span>':''}</div>
    <div>${spark(s.m,TIER_COLOR[s.t])}</div>
-   <div class="fq">${s.f}%</div>
+   <div class="fq">${fpct(s.f)}</div>
   </div>`;
  }).join('') || `<div style="padding:34px 0;color:var(--inkLt)">No species match, try a different filter.</div>`;
  lcount.textContent = total ? `Showing ${start+1}–${start+slice.length} of ${total} species` : 'No species match';
