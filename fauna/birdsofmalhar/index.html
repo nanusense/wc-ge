@@ -1303,7 +1303,7 @@ function renderBirdFact(){
   img.onload = function(){ photo.innerHTML=''; photo.appendChild(img); };
   img.onerror = function(){ photo.innerHTML = '<span class="fb">'+name.charAt(0)+'</span>'; };
   var sl = slug(name);
-  img.src = 'images/birds/' + sl + '.jpg';
+  img.src = '/fauna/birdsofmalhar/images/birds/' + sl + '.jpg';
   // photo credit (only for photos not by Sandeep)
   var cred = (window.PHOTO_CREDITS||{})[sl];
   var ce = document.getElementById('factCredit');
