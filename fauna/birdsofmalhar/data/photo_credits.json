@@ -1,0 +1,66 @@
+{
+ "spotted-dove": {
+  "src": "iNaturalist",
+  "author": "William Stephens",
+  "login": "william_stephens",
+  "license": "CC BY",
+  "obs_id": 39425600,
+  "url": "https://www.inaturalist.org/observations/39425600"
+ },
+ "purple-sunbird": {
+  "src": "iNaturalist",
+  "author": "Anil Kumar Verma",
+  "login": "anil_kumar_verma",
+  "license": "CC BY-NC",
+  "obs_id": 69914559,
+  "url": "https://www.inaturalist.org/observations/69914559"
+ },
+ "asian-green-bee-eater": {
+  "src": "iNaturalist",
+  "author": "Dhruva Punde",
+  "login": "dhruvapunde",
+  "license": "CC BY-NC",
+  "obs_id": 330112034,
+  "url": "https://www.inaturalist.org/observations/330112034"
+ },
+ "indian-white-eye": {
+  "src": "iNaturalist",
+  "author": "Hareesha A S",
+  "login": "hareeshaas",
+  "license": "CC BY-NC",
+  "obs_id": 11218001,
+  "url": "https://www.inaturalist.org/observations/11218001"
+ },
+ "red-vented-bulbul": {
+  "src": "iNaturalist",
+  "author": "Bryan Box",
+  "login": "badger8181",
+  "license": "CC BY-NC",
+  "obs_id": 256585452,
+  "url": "https://www.inaturalist.org/observations/256585452"
+ },
+ "yellow-billed-babbler": {
+  "src": "iNaturalist",
+  "author": "Alen Alex Pathisseril",
+  "login": "alenalex",
+  "license": "CC BY-NC",
+  "obs_id": 317734068,
+  "url": "https://www.inaturalist.org/observations/317734068"
+ },
+ "red-wattled-lapwing": {
+  "src": "iNaturalist",
+  "author": "melodydashora",
+  "login": "melodydashora",
+  "license": "CC BY-NC",
+  "obs_id": 18897824,
+  "url": "https://www.inaturalist.org/observations/18897824"
+ },
+ "black-drongo": {
+  "src": "iNaturalist",
+  "author": "\u0418\u0433\u043e\u0440\u044c \u0414\u0432\u0443\u0440\u0435\u043a\u043e\u0432",
+  "login": "igor-dvurekov",
+  "license": "CC BY-NC",
+  "obs_id": 367972761,
+  "url": "https://www.inaturalist.org/observations/367972761"
+ }
+}
