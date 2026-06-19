@@ -1,5 +1,5 @@
 // Malhar Bird Fact of the Day
-// 25 of 154 written so far. Add more as we go.
+// 50 of 154 written so far. Add more as we go.
 // Voice: one or two sentences. Mix of (A) ID/field-mark, (B) behaviour, (D) surprise.
 // Malhar-anchored when the page already tells the story. No em dashes anywhere.
 window.BIRD_FACTS = {
@@ -27,5 +27,30 @@ window.BIRD_FACTS = {
  'Red-vented Bulbul': "One of the world's 100 worst invasive species when introduced elsewhere, but at home in India it's the quintessential garden bird, the one most people learn first.",
  'Yellow-billed Babbler': "Lives in tight gangs of 7 to 10 that the British called Seven Sisters. They preen each other, share food, and any group member will mob a predator threatening any chick.",
  'Red-wattled Lapwing': "Famous for the did-he-do-it cry it makes at any disturbance, day or night, and one of the few birds that distracts predators by faking a broken wing away from the nest.",
- 'Black Drongo': "Aggressive enough to harass kites and crows three times its size, which is why so many smaller birds nest near drongo territories for free protection."
+ 'Black Drongo': "Aggressive enough to harass kites and crows three times its size, which is why so many smaller birds nest near drongo territories for free protection.",
+ 'Pied Bushchat': "The male, jet black with a white wing patch, perches conspicuously on stalks and wires while the female stays nearby in plain brown. The two look so different they were classified as separate species for decades.",
+ 'Indian Robin': "Cocks its tail upward like a wren to flash the chestnut undertail, then drops it again as if remembering itself. Despite the name, it has no relation to the European robin; the British just used 'robin' for any small ground-hopping bird.",
+ 'Scaly-breasted Munia': "Travels in tight twittering flocks that descend on grass-heads and strip them seed by seed. The 'scales' on its breast are pale-edged individual feathers, a pattern absent in the juveniles (which look like uniform dull brown finches).",
+ 'White-browed Wagtail': "India's largest wagtail and an endemic to the subcontinent, it walks pied and dignified along Malhar's rooftops, tail bobbing in perpetual punctuation. Its pre-dawn song is loud enough that residents set it as their wake-up cue.",
+ 'Coppersmith Barbet': "The tonk-tonk-tonk that defines Malhar afternoons can be sustained for over a minute without a breath, and the bird pumps its head as it calls so you can spot it from far away. Crimson forehead, yellow eye-ring, green body: a fruit specialist that helps replant the trees it eats from.",
+ 'Laughing Dove': "Smaller and pinker than the Spotted Dove, named for its chuckling laugh-like call instead of the usual dove coo. Originally from Africa, it has spread across India and now does well in cities everywhere it goes.",
+ 'Eastern Red-rumped Swallow': "Builds a mud nest like a long-necked flask stuck to a ceiling, sometimes 60 cm long, with a narrow tube entrance. Pairs return to repair and reuse the same nest year after year, often for a decade.",
+ 'Spotted Owlet': "Despite the name, often active in daylight, especially at dusk and dawn when families gather at the roost-tree and squabble loudly. The big yellow eyes are fixed in the socket; to look around, the whole head turns, sometimes 270 degrees.",
+ 'Eastern Cattle-Egret': "The small white heron that walks behind cows, buffaloes, even tractors, catching the insects they stir up. In the monsoon breeding season the head, breast, and back turn a rich buff-orange for a few weeks, which is why most people never notice.",
+ "Tickell's Blue Flycatcher": "Bright cobalt-blue above, rust-orange breast: a jewel of shaded undergrowth that sallies out for insects and returns to the same low perch. Named after Samuel Tickell, an East India Company colonel who collected birds in his spare time.",
+ 'Indian Pond-Heron': "Stands so still at the edge of a puddle that you can walk right past one without seeing it. The moment it takes off, the dull brown body explodes into pure white wings, completely hidden when the bird is at rest.",
+ 'Common Iora': "The male's courtship display is to puff himself into a fluffy yellow ball at the top of a tree and parachute slowly down with rapid wing-flicks, whistling all the way. One of the most theatrical performances in the canopy.",
+ 'Asian Tit': "Small, neat black-and-white, almost always travelling in a mixed flock of warblers and sunbirds; when it scolds, the entire flock listens. The mixed flocks are how many shy forest birds get found at all.",
+ 'Gray Francolin': "The pre-dawn KEE-rik-rik that carries across the scrub, sometimes mistaken for an alarm clock, is one francolin telling another from over a kilometre away that this patch is taken. Walks more than it flies, and would rather sneak into cover than take off.",
+ "Blyth's Reed Warbler": "A small drab warbler that has flown from as far as Russia or Finland to spend its winter skulking in Malhar's hedges. Heard far more than seen: the soft tek-tek contact call is the only reliable sign it's even here.",
+ 'Jungle Myna': "Often confused with the Common Myna but cleaner in shape, with a small dark tuft over the bill and no bare yellow patch around the eye. Tends to keep to greener edges rather than rooftops, and is the quieter of the two.",
+ 'Baya Weaver': "A male weaves several half-built nests at once, and females inspect each one like prospective buyers, sometimes rejecting them all and forcing the male to start over. A finished nest takes around 500 trips to complete.",
+ 'Black-rumped Flameback': "A golden-and-black woodpecker that drums on dry branches and metal poles with equal enthusiasm. India's most familiar woodpecker, and the species that nested in the dead-living tree at Malhar's basketball court before it was felled.",
+ 'Common Hawk-Cuckoo': "The pee-PEE-peeya call that gets louder and louder through summer afternoons, which colonial-era listeners decided sounded like 'brain-fever, brain-fever', belongs to a cuckoo that mimics a Shikra to trick small birds away from their nests.",
+ 'White-browed Bulbul': "Drab-looking but with an outsized chuckling song that bursts out of dense bushes at dawn and dusk: easier to identify by the sudden cascade of notes than by sight. The white eyebrow above a yellow eye is the giveaway when it does appear.",
+ 'Red-naped Ibis': "The dark glossy ibis with a featherless crimson nape, found stalking across dry fields rather than wading in water like other ibises. Often the first big bird a new birder learns to pick out from the cattle in a paddock.",
+ 'Spot-breasted Fantail': "Tiny grey-brown bird that flicks its fanned tail open like a Spanish fan in restless arcs. The display is hunting strategy: the sudden flash startles insects out of cover, and the fantail snaps them up before they can hide again.",
+ 'Shikra': "India's most common backyard hawk: short-winged, long-tailed, and built for ambushing small birds in confined cover. The piercing red eye is its calling card, and a Shikra in the trees can silence every sparrow and sunbird in a fifty-metre radius.",
+ 'Indian Golden Oriole': "Bright golden body, jet-black wings, and a deep flute-like whistle that carries from high in the canopy: one of the most beautiful birds in the Malhar trees and one of the hardest to actually see. Most encounters are a single flash of yellow as it crosses a gap.",
+ 'Little Swift': "Spends nearly its entire life on the wing, feeding, drinking, sleeping, even mating in mid-air. A swift that lands does so only to nest. The dark cigar-shaped body and square white-bordered tail tell it apart from swallows: swifts have wings shaped like crescent moons."
 };

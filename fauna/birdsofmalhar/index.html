@@ -22,7 +22,7 @@
 <meta name="twitter:image" content="https://wc-ge.vercel.app/fauna/birdsofmalhar/images/hero.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
 <style>
 :root{
  --bg:#FDFDFC; --paper:#FFFFFF; --surface:#FBFBF9; --card:#FFFFFF;
@@ -31,8 +31,8 @@
  --fauna:#8A5F2E; --faunaLt:#EBDDC2; --faunaDk:#5A3D1C;
  --commons:#2F4C5C; --commonsLt:#D8E0E4;
  --culture:#9C3F2A; --flora:#3F5C3A;
- --serif:'Cormorant Garamond',Georgia,serif;
- --sans:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+ --serif:'Lora',Georgia,serif;
+ --sans:'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;
  --mono:'JetBrains Mono','Courier New',monospace;
  --hand:'Caveat',cursive;
 }
@@ -264,7 +264,8 @@ footer .credit a:hover{color:#FAF6EC}
 /* ════════════ ENHANCEMENT LAYER, colour · depth · media · motion ════════════ */
 :root{
  --teal:#2C6E7F; --teal-dk:#1E4E5A; --gold:#C08A2D; --rust:#A8432B; --leaf:#4A6741;
- --p-sand:#FAF4EA; --p-blue:#ECF3F4; --p-green:#EDF3EA; --p-peach:#FBF0E9;
+ --p-sand:#F5EBD6; --p-blue:#DEE9EC; --p-green:#DCE9D3; --p-peach:#F8E2D1;
+ --forest:#244E3A; --forest-tint:#E8F2EB;
  --t-resident:#5A3D1C; --t-regular:#8A5F2E; --t-seasonal:#C08A2D; --t-scarce:#6E8270; --t-rare:#A8432B;
  --shadow-sm:0 2px 10px rgba(60,40,18,.06); --shadow-md:0 16px 42px rgba(60,40,18,.14);
  --ease:cubic-bezier(.2,.8,.2,1);
@@ -462,6 +463,16 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
 .mp-chip i{display:inline-block;width:7px;height:7px;border-radius:999px;margin-right:6px}
 .mp-empty{font-style:italic;color:var(--inkLt);font-family:var(--serif);font-size:15px}
 
+/* ── Where to look: deep forest band ── */
+.where{background:var(--forest);color:#F4EFE3;position:relative}
+.where::before{content:"";position:absolute;inset:0;background:radial-gradient(1200px 600px at 80% 0%, rgba(255,255,255,0.06), transparent 60%);pointer-events:none}
+.where h2{color:#F4EFE3}
+.where h2 em{background:linear-gradient(120deg,#E8B978,#F4D9A8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.where .tick.eyebrow,.where .eyebrow{color:#E8B978}
+.where .tick::before{background:#E8B978}
+.where .place{background:#FDFCFA;color:var(--ink);border-color:rgba(255,255,255,0.08);box-shadow:0 14px 32px rgba(0,0,0,0.18)}
+.where .place .x{color:var(--forest)}
+
 /* ── Malhar Bird Fact of the Day ── */
 #fact{padding:46px 0 8px}
 .factcard{display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center;background:var(--p-sand);border:1px solid var(--border);border-left:3px solid var(--fauna);border-radius:14px;padding:22px 26px;box-shadow:var(--shadow-sm);max-width:1080px;margin:0 auto}
@@ -540,9 +551,9 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
 <!-- HERO IMAGE -->
 <section style="padding:8px 0 0">
  <div class="wrap">
-  <div class="ph" data-ghost="M. migrans" style="--tone:var(--t-resident);height:clamp(300px,46vw,520px)"><img src="/fauna/birdsofmalhar/images/hero.jpg" alt="A black kite over the Malhar terraces" loading="lazy" onerror="this.remove()"><div class="pl">a black kite rides the morning thermals over Malhar, the most-logged bird here, on 57% of all checklists</div></div>
+  <div class="ph" data-ghost="T. paradisi" style="--tone:var(--leaf);height:clamp(300px,46vw,520px)"><img src="/fauna/birdsofmalhar/images/hero.jpg" alt="An Indian Paradise-Flycatcher, white morph male, perched in a banana plant at Malhar" loading="lazy" style="object-position:38% 42%" onerror="this.remove()"><div class="pl" style="left:auto;right:12px;bottom:12px;max-width:54%">an Indian paradise-flycatcher, white morph male, with the streamers only older males grow</div></div>
   <div class="figrow">
-   <span class="fig">Black Kite · Milvus migrans</span>
+   <span class="fig">Indian Paradise-Flycatcher · Terpsiphone paradisi</span>
   </div>
  </div>
 </section>
@@ -779,13 +790,13 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
 </section>
 
 <!-- WHERE TO LOOK -->
-<section>
+<section class="where">
  <div class="wrap">
   <div class="sec-head"><div>
    <span class="tick eyebrow">A resident's map</span>
    <h2>Where to look in <em>Malhar</em>.</h2>
   </div></div>
-  <p class="sec-intro" style="margin-bottom:30px">The same list reads differently depending on where you stand. Six corners of the community, and what each one gives up if you wait.</p>
+  <p class="sec-intro" style="margin-bottom:30px;color:rgba(255,255,255,0.78)">The same list reads differently depending on where you stand. Six corners of the community, and what each one gives up if you wait.</p>
   <div class="places">
    <div class="place"><div class="ph"><img src="/fauna/birdsofmalhar/images/places/greens.jpg" alt="Indian Peafowl in the Malhar greens" loading="lazy" onerror="this.remove()"><div class="pl">the greens &amp; scrub</div></div><div class="pb"><div class="num">01</div><h3>The greens &amp; scrub<span class="x">peafowl country</span></h3><p class="sp">Open ground and edges. <b>Indian Peafowl</b>, Gray Francolin, Ashy Prinia, Pied Bushchat, Indian Robin, Jerdon's Bushlark, and the lark-flat where a Siberian Stonechat once perched.</p></div></div>
    <div class="place"><div class="ph"><img src="/fauna/birdsofmalhar/images/places/canopy.jpg" alt="Common Iora in the canopy" loading="lazy" onerror="this.remove()"><div class="pl">the flowering canopy</div></div><div class="pb"><div class="num">02</div><h3>The canopy &amp; trees<span class="x">listen for the barbet</span></h3><p class="sp">Rain trees and figs. Both barbets, three sunbirds, <b>Indian White-eye</b>, Pale-billed Flowerpecker, Common Iora, Indian Golden Oriole, the relentless Asian Koel.</p></div></div>
@@ -843,7 +854,7 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
       <a class="linkmore" href="https://www.youtube.com/watch?v=vzOM-wfpeFA" target="_blank" rel="noopener">Watch on YouTube ↗</a>
     </div>
     <div class="watch-grid">
-      <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/vzOM-wfpeFA" title="How to photograph birds, with Girin" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      <div class="video"><iframe src="https://www.youtube.com/embed/vzOM-wfpeFA?rel=0" title="How to photograph birds, with Girin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
       <div class="watch-text">
         <p>Ever noticed a bird perched outside your window and wished you could see it better? Girin, a resident bird photographer, walks through it all: picking the right spot and time of day, and the camera settings that catch a bird in its element.</p>
         <p>No expert knowledge needed. Just curiosity, and a little patience.</p>
@@ -904,7 +915,7 @@ body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opac
    <div class="clinks">
     <a href="https://ebird.org/hotspot/L4022249" target="_blank" rel="noopener"><div><div class="ct">Submit a checklist on eBird</div><div class="cd">The Malhar hotspot, L4022249. Counts toward the shared list.</div></div><span class="ar">↗</span></a>
     <!-- TODO: set href to the submission link (form / RSS / WhatsApp) once available -->
-    <a href="#" rel="noopener"><div><div class="ct">Share your Malhar bird stories</div><div class="cd">A blog, an RSS feed, or social posts about the birds here? Send them in.</div></div><span class="ar">→</span></a>
+    <a href="mailto:shiftingradius@gmail.com?subject=Malhar%20bird%20story%20to%20share"><div><div class="ct">Share your Malhar bird stories</div><div class="cd">A blog, an RSS feed, or social posts about the birds here? Send them in.</div></div><span class="ar">→</span></a>
     <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener"><div><div class="ct">Read the field notes</div><div class="cd">Malhar bird stories &amp; photographs at shiftingradius.com.</div></div><span class="ar">↗</span></a>
    </div>
   </div>
@@ -1035,13 +1046,13 @@ function spark(m,sp){
  const panel=document.getElementById('monthPanel');
  const season=i=>[11,0,1].includes(i)?'winter · migrants in':[2,3,4].includes(i)?'spring · song & breeding':[5,6,7,8].includes(i)?'monsoon · nesting':'autumn · the migrants arrive';
  function updatePanel(i){
-  const peaks=SPECIES.filter(s=>s.pk===MONTHS[i]).sort((a,b)=>b.f-a.f), CAP=18;
+  const peaks=SPECIES.filter(s=>{const mx=Math.max.apply(null,s.m); return mx>0 && s.m[i]>=0.75*mx;}).sort((a,b)=>b.m[i]/Math.max.apply(null,b.m) - a.m[i]/Math.max.apply(null,a.m) || b.f-a.f), CAP=18;
   const chips=peaks.slice(0,CAP).map(s=>`<span class="mp-chip"><i style="background:${TIER_COLOR[s.t]}"></i>${esc(s.n)}</span>`).join('');
   const more=peaks.length>CAP?`<span class="mp-chip" style="border-style:dashed;color:var(--inkLt)">+${peaks.length-CAP} more</span>`:'';
   panel.innerHTML=`<div class="mp-month">${MF[i]}</div>`+
    `<div class="mp-stat"><b>${counts[i]}</b> species recorded · <span class="mp-season">${season(i)}</span></div>`+
-   `<div class="mp-label">Peaks this month · ${peaks.length}</div>`+
-   `<div class="mp-chips">${chips||'<span class="mp-empty">nothing peaks this month</span>'}${more}</div>`;
+   `<div class="mp-label">Most active this month · ${peaks.length}</div>`+
+   `<div class="mp-chips">${chips||'<span class="mp-empty">nothing notably active this month</span>'}${more}</div>`;
  }
  const ycs=[...chart.children];
  function highlight(i){chart.classList.add('has-active');ycs.forEach((c,j)=>c.classList.toggle('active',j===i));}
