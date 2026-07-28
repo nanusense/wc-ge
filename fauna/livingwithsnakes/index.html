@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Living with Snakes at Malhar</title>
+<meta name="description" content="A record of coexistence at Malhar: the snakes that live here, the protocol that keeps people and snakes safe, and the neighbour who answers the call.">
+<meta property="og:title" content="Living with Snakes at Malhar">
+<meta property="og:description" content="A record of coexistence at Malhar: the snakes that live here, the protocol that keeps people and snakes safe, and the neighbour who answers the call.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Living with Snakes at Malhar">
+<meta name="twitter:description" content="A record of coexistence at Malhar: the snakes that live here, the protocol that keeps people and snakes safe, and the neighbour who answers the call.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,340;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Spectral:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0F130E;
+  --bg2:#151B10;
+  --bg3:#1B2216;
+  --ink:#ECE4CF;
+  --inkMid:#B7AE93;
+  --inkLt:#79725C;
+  --rule:rgba(236,228,207,.14);
+  --rule2:rgba(236,228,207,.07);
+  --brass:#CDA632;
+  --brassDk:#8f7318;
+  --brassBright:#E4C15C;
+  --moss:#8CA779;
+  --mossDk:#647857;
+  --oxblood:#A24E48;
+  --oxbloodDk:#6e332e;
+  --paper:#EFE7D2;
+  --paperInk:#26200F;
+  --paperMid:#5c5236;
+  --paperRule:rgba(38,32,15,.16);
+  --serif:'Spectral',Georgia,serif;
+  --display:'Fraunces','Spectral',Georgia,serif;
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --wrap:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--serif);font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:var(--display);font-weight:500;margin:0;letter-spacing:-.01em}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+@media(max-width:720px){.wrap{padding:0 20px}}
+
+/* ── texture: faint moss-noise + vignette on the whole page ── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 120% 70% at 50% -10%, rgba(205,166,50,.06), transparent 60%),
+    radial-gradient(ellipse 100% 60% at 50% 110%, rgba(0,0,0,.5), transparent 60%);
+}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── shared type scale ── */
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);display:inline-flex;align-items:center;gap:9px}
+.eyebrow::before{content:'';width:16px;height:1px;background:var(--brass)}
+.sec{padding:104px 0;position:relative;z-index:1}
+.sec-head{max-width:640px;margin-bottom:44px}
+.sec-head h2{font-size:clamp(28px,3.6vw,40px);margin-top:14px;color:var(--ink)}
+.sec-head h2 em{font-style:italic;color:var(--brass)}
+.sec-intro{color:var(--inkMid);font-size:16.5px;margin-top:14px;max-width:58ch;line-height:1.7}
+.hr{height:1px;background:var(--rule);border:none;margin:0}
+@media(max-width:720px){.sec{padding:64px 0}}
+
+/* ── reveal on scroll ── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ══════════════ HERO ══════════════ */
+.hero{position:relative;padding:96px 0 72px;overflow:hidden;border-bottom:1px solid var(--rule)}
+.hero .wrap{position:relative;z-index:2}
+.hero-art{position:absolute;inset:0;z-index:1;opacity:.9}
+.hero-kicker{color:var(--inkMid);font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:flex-start;gap:10px;margin-bottom:26px}
+.hero-kicker .dot{width:6px;height:6px;border-radius:50%;background:var(--brass);margin-top:5px;flex-shrink:0}
+.hero h1{font-size:clamp(40px,6.2vw,74px);line-height:1.03;max-width:15ch;font-weight:400}
+.hero h1 em{font-style:italic;color:var(--brass);font-weight:400}
+.hero-dek{margin-top:28px;max-width:56ch;font-size:19px;line-height:1.7;color:var(--inkMid)}
+.hero-dek strong{color:var(--ink);font-weight:500}
+.hero-scroll{margin-top:46px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--inkLt)}
+.hero-scroll .ln{width:34px;height:1px;background:var(--inkLt);position:relative;overflow:hidden}
+.hero-scroll .ln::after{content:'';position:absolute;inset:0;background:var(--brass);animation:slide 2.6s var(--ease) infinite}
+@keyframes slide{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+
+/* ── paper insets: pages caught in torchlight against the night ── */
+.paper{background:var(--paper);color:var(--paperInk);border-radius:2px}
+.paper .eyebrow{color:var(--oxbloodDk)}
+.paper .eyebrow::before{background:var(--oxbloodDk)}
+
+/* ── keeper credit ── */
+.keeper{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;padding:30px 34px;margin-top:-1px}
+.kp-ava{width:56px;height:56px;border-radius:50%;background:var(--paperInk);color:var(--paper);display:grid;place-items:center;font-family:var(--display);font-size:19px;flex-shrink:0;position:relative;overflow:hidden}
+.kp-ava img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.kp-lead{font-family:var(--serif);font-size:18px;line-height:1.5}
+.kp-lead strong{font-weight:600}
+.kp-sub{font-size:13px;color:var(--paperMid);margin-top:6px;line-height:1.55}
+.kp-sub em{font-style:italic}
+.kp-sub a{border-bottom:1px solid var(--paperMid)}
+@media(max-width:640px){.keeper{grid-template-columns:auto 1fr;padding:24px 22px}.kp-lead{font-size:16.5px}}
+
+/* ══════════════ CATALOGUE ══════════════ */
+.tier-chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:4px 9px 4px 7px;border-radius:999px;white-space:nowrap}
+.tier-chip::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.tier-nonvenomous{color:var(--moss);background:rgba(140,167,121,.12)}
+.tier-nonvenomous::before{background:var(--moss)}
+.tier-medical{color:var(--oxblood);background:rgba(162,78,72,.16)}
+.tier-medical::before{background:var(--oxblood)}
+.tier-key{display:flex;gap:22px;flex-wrap:wrap;margin-top:8px}
+.tier-key span{font-size:12.5px;color:var(--inkMid);display:flex;align-items:center;gap:7px}
+.tier-key i{width:7px;height:7px;border-radius:50%;display:inline-block}
+
+.catalogue{border-top:1px solid var(--rule)}
+.cat-head{display:grid;grid-template-columns:1.6fr auto auto auto;gap:18px;align-items:center;padding-bottom:12px;margin-top:8px;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--inkLt)}
+.cat-head span:not(:first-child){text-align:right}
+.cat-row{display:grid;grid-template-columns:1.6fr auto auto auto;gap:18px;align-items:center;padding:17px 0;border-bottom:1px solid var(--rule2)}
+.cat-row .nm{font-family:var(--display);font-size:18px}
+.cat-row .sci{font-family:var(--mono);font-style:italic;font-size:12px;color:var(--inkLt);margin-left:10px}
+.cat-row .sz,.cat-row .act{font-family:var(--mono);font-size:12.5px;color:var(--inkMid);text-align:right;white-space:nowrap}
+@media(max-width:680px){
+  .cat-head{display:none}
+  .cat-row{grid-template-columns:1fr;gap:6px;padding:16px 0}
+  .cat-row .sci{display:block;margin-left:0;margin-top:2px}
+  .cat-row .sz,.cat-row .act{text-align:left}
+  .cat-row .sz::before{content:'Size: '}
+  .cat-row .act::before{content:'Active: '}
+}
+
+/* ══════════════ FEATURE CARDS ══════════════ */
+.meet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:8px}
+.meet-card{background:var(--bg);padding:26px 24px 28px;display:flex;flex-direction:column;gap:14px}
+.meet-ph{width:100%;aspect-ratio:4/3;border-radius:2px;background:var(--bg3);display:grid;place-items:center;position:relative;overflow:hidden}
+.meet-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.meet-ph span{font-family:var(--display);font-size:34px;color:var(--inkLt)}
+.meet-nm{font-size:19px;margin-top:2px}
+.meet-nm .sci{display:block;font-family:var(--mono);font-style:italic;font-size:11.5px;color:var(--inkLt);margin-top:4px;font-weight:400}
+.meet-sz{font-family:var(--mono);font-size:11.5px;color:var(--inkMid)}
+.meet-txt{font-size:14.5px;color:var(--inkMid);line-height:1.6}
+.meet-action{font-size:13px;color:var(--ink);border-top:1px solid var(--rule2);padding-top:12px;margin-top:auto}
+.meet-action b{color:var(--brass);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:5px}
+
+/* ══════════════ PROTOCOL (paper, full width) ══════════════ */
+.protocol{padding:80px 0}
+.protocol-inner{padding:52px 44px}
+.protocol h2{color:var(--paperInk)}
+.protocol .sec-intro{color:var(--paperMid)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 34px;margin-top:40px}
+.step{display:flex;gap:16px}
+.step .no{font-family:var(--display);font-size:34px;color:var(--oxbloodDk);line-height:1;flex-shrink:0;font-style:italic}
+.step .tx h4{font-size:15.5px;font-family:var(--serif);font-weight:600;margin-bottom:5px}
+.step .tx p{margin:0;font-size:14px;line-height:1.55;color:var(--paperMid)}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.steps{grid-template-columns:1fr}.protocol-inner{padding:38px 26px}}
+
+/* ══════════════ PRIMER ══════════════ */
+.primer-box{border:1px solid var(--rule);border-left:3px solid var(--brass);padding:32px 36px;margin-top:8px}
+.primer-list{display:flex;flex-direction:column;gap:20px}
+.primer-list li{list-style:none;font-size:16px;line-height:1.6;color:var(--ink);padding-left:0}
+.primer-list b{color:var(--brass);font-weight:600}
+.pullquote{font-family:var(--display);font-style:italic;font-size:clamp(22px,2.6vw,29px);line-height:1.5;color:var(--ink);max-width:22ch;margin:56px auto 0;text-align:center;position:relative}
+.pullquote::before{content:'"';position:absolute;top:-.3em;left:50%;transform:translateX(-50%);font-size:1.6em;color:var(--brass);opacity:.5}
+.pullquote cite{display:block;font-family:var(--mono);font-style:normal;font-size:12px;color:var(--inkLt);margin-top:18px;letter-spacing:.04em}
+
+/* ══════════════ RESCUE JOURNEY ══════════════ */
+.ledger-cta{margin-top:30px;display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid var(--rule);padding:26px 30px;transition:border-color .25s var(--ease)}
+.ledger-cta:hover{border-color:var(--brass)}
+.ledger-cta .lc-t{font-family:var(--display);font-size:19px}
+.ledger-cta .lc-d{font-size:13.5px;color:var(--inkMid);margin-top:5px}
+.ledger-cta .ar{font-size:22px;color:var(--brass);flex-shrink:0}
+@media(max-width:640px){.ledger-cta{flex-direction:column;align-items:flex-start}}
+
+/* ══════════════ SNAKE HELPLINE ══════════════ */
+.helpline-panel{display:grid;grid-template-columns:180px 1fr;gap:34px;align-items:center;padding:34px}
+.hl-qr{width:100%;aspect-ratio:1;background:#fff;border-radius:4px;overflow:hidden;display:grid;place-items:center;padding:8px}
+.hl-qr img{width:100%;height:100%;object-fit:contain}
+.hl-qr span{font-family:var(--mono);color:var(--paperMid);font-size:12px}
+.hl-t{font-family:var(--serif);font-size:17.5px;line-height:1.5}
+.hl-d{font-size:13px;color:var(--paperMid);margin-top:12px;line-height:1.65}
+@media(max-width:640px){.helpline-panel{grid-template-columns:1fr;padding:26px}.hl-qr{max-width:220px;margin:0 auto}}
+
+/* ══════════════ FIELD NOTES ══════════════ */
+.notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:26px;margin-top:8px}
+.note-card{border:1px solid var(--rule);display:flex;flex-direction:column;transition:border-color .25s var(--ease),transform .25s var(--ease)}
+.note-card:hover{border-color:var(--brass);transform:translateY(-3px)}
+.nc-ph{aspect-ratio:16/10;background:var(--bg3);position:relative;overflow:hidden;display:grid;place-items:center}
+.nc-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.nc-ph span{font-family:var(--display);font-size:30px;color:var(--inkLt)}
+.nc-b{padding:18px 20px 22px;display:flex;flex-direction:column;gap:9px;flex:1}
+.nc-tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--brass)}
+.nc-b h3{font-size:17px;line-height:1.3}
+.nc-b p{font-size:13.5px;color:var(--inkMid);line-height:1.55;margin:0;flex:1}
+.nc-rd{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;color:var(--inkLt);margin-top:8px}
+
+/* ══════════════ FACT OF THE DAY ══════════════ */
+.fact-wrap{display:grid;grid-template-columns:200px 1fr;gap:34px;align-items:center;padding:36px}
+.fact-ph{width:100%;aspect-ratio:1;border-radius:50%;background:var(--paperInk);display:grid;place-items:center;position:relative;overflow:hidden;flex-shrink:0}
+.fact-ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fact-ph span{font-family:var(--display);color:var(--paper);font-size:42px}
+.fact-eyebrow{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--oxbloodDk)}
+.fact-eyebrow .tick{width:6px;height:6px;border-radius:50%;background:var(--oxbloodDk);animation:pulse 2.4s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.fact-nm{font-family:var(--display);font-size:26px;margin-top:10px}
+.fact-nm .sci{font-family:var(--mono);font-style:italic;font-size:13px;color:var(--paperMid);font-weight:400;margin-left:10px}
+.fact-tier{margin-top:8px}
+.fact-txt{margin-top:14px;font-size:16.5px;line-height:1.65;max-width:62ch}
+.fact-credit{font-size:11px;color:var(--paperMid);margin-top:12px;font-family:var(--mono)}
+@media(max-width:640px){.fact-wrap{grid-template-columns:1fr;padding:26px}.fact-ph{width:96px;height:96px;margin:0 auto}}
+
+/* ══════════════ FOOTER ══════════════ */
+footer{border-top:1px solid var(--rule);padding:60px 0 46px}
+.foot-links{display:flex;flex-wrap:wrap;gap:22px;font-family:var(--mono);font-size:12.5px}
+.foot-links a{color:var(--inkMid);border-bottom:1px solid transparent}
+.foot-links a:hover{color:var(--brass);border-color:var(--brass)}
+.foot-credit{font-size:12.5px;color:var(--inkLt);margin-top:26px;line-height:1.7;max-width:80ch}
+.foot-sib{margin-top:26px;font-size:13px;color:var(--inkMid)}
+.foot-sib a{color:var(--brass);border-bottom:1px solid var(--brass)}
+.foot-bottom{margin-top:34px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:11px;color:var(--inkLt)}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+
+<!-- ══════════════ HERO ══════════════ -->
+<header class="hero">
+ <svg class="hero-art" viewBox="0 0 1400 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <circle cx="1180" cy="120" r="64" fill="#E4C15C" opacity="0.14"/>
+  <circle cx="1180" cy="120" r="46" fill="#E4C15C" opacity="0.18"/>
+  <g stroke="#ECE4CF" stroke-opacity="0.09" fill="none" stroke-width="2">
+   <path d="M-20 560 Q 120 500 260 555 T 560 540 T 900 565 T 1300 530 T 1500 560"/>
+   <path d="M-20 610 Q 160 560 320 600 T 660 585 T 1000 610 T 1420 580"/>
+  </g>
+  <path d="M60 400 C 180 380, 210 320, 160 280 C 110 240, 150 190, 230 200 C 300 208, 300 260, 350 270 C 410 282, 440 230, 500 245 C 560 260, 550 320, 610 335" fill="none" stroke="#CDA632" stroke-opacity="0.5" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="60" cy="400" r="5" fill="#CDA632" opacity="0.6"/>
+ </svg>
+ <div class="wrap">
+  <div class="hero-kicker"><span class="dot"></span>GOOD EARTH MALHAR · FAUNA · SNAKES</div>
+  <h1 class="reveal">Living with <em>Snakes</em> at Malhar</h1>
+  <p class="hero-dek reveal">Malhar shares its ground with more kinds of snake than most residents ever notice, <strong>nearly all of them non-venomous</strong>, all of them older residents of this land than we are. When one turns up in a garden or a stairwell, the first call here isn't to chase it away. It's to a neighbour who comes out, gently, and moves it on.</p>
+  <p class="hero-dek reveal" style="margin-top:14px;font-size:16px">This page is not a warning. It's a record: of what lives here, what to do if you meet one, and how this community has learned to share the ground with them.</p>
+  <div class="hero-scroll reveal"><span class="ln"></span>SCROLL</div>
+ </div>
+</header>
+
+<!-- ══════════════ KEEPER CREDIT ══════════════ -->
+<div class="wrap">
+ <aside class="keeper paper reveal" aria-label="Page keeper">
+  <div class="kp-ava"><img src="/fauna/livingwithsnakes/images/keeper.jpg" alt="Sandeep Nanu" onerror="this.remove()"><span>SN</span></div>
+  <div>
+   <p class="kp-lead">Kept by <strong>Sandeep Nanu</strong>, one of the neighbours who answers the midnight calls for the <strong>Goodearth Snake Helpline</strong>.</p>
+   <p class="kp-sub"><em>The snakes were always here; this is just where the seeing gets written down.</em> &nbsp;Field notes and photographs from <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener">shiftingradius.com</a> and <a href="https://nanusense.com/blog/category/sandviper/" target="_blank" rel="noopener">nanusense.com</a>.</p>
+  </div>
+ </aside>
+</div>
+
+<!-- ══════════════ CATALOGUE ══════════════ -->
+<section class="sec catalogue" id="catalogue">
+ <div class="wrap">
+  <div class="sec-head reveal">
+   <span class="eyebrow">The catalogue</span>
+   <h2>What lives here</h2>
+   <p class="sec-intro">Twelve of the species recorded at Malhar so far, kept plainly rather than dramatically. Most are non-venomous. A few deserve real caution. None are villains.</p>
+   <div class="tier-key">
+    <span><i style="background:var(--moss)"></i>Non-venomous</span>
+    <span><i style="background:var(--oxblood)"></i>Medically significant</span>
+   </div>
+  </div>
+  <div class="cat-head"><span>Species</span><span>Status</span><span>Size</span><span>Active</span></div>
+  <div id="catRows"></div>
+ </div>
+</section>
+
+<!-- ══════════════ THE ONES YOU'LL MEET ══════════════ -->
+<section class="sec" id="meet" style="padding-top:0">
+ <div class="wrap">
+  <div class="sec-head reveal">
+   <span class="eyebrow">Common encounters</span>
+   <h2>The ones you'll <em>actually</em> meet</h2>
+   <p class="sec-intro">The twelve snakes residents are most likely to run into, drawn from <a href="https://shiftingradius.com/common-snakes/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">Shifting Radius's Common Snakes</a> identification project. Knowing them on sight is most of what keeps an encounter calm.</p>
+  </div>
+  <div class="meet-grid reveal" id="meetGrid"></div>
+ </div>
+</section>
+
+<!-- ══════════════ PROTOCOL ══════════════ -->
+<section class="protocol">
+ <div class="wrap">
+  <div class="paper protocol-inner reveal">
+   <span class="eyebrow">If you see one</span>
+   <h2>What to do if you see a snake</h2>
+   <p class="sec-intro">The Malhar protocol. Six steps, the same every time, whether it's a wolf snake on the stairs or a cobra in the garden.</p>
+   <div class="steps">
+    <div class="step"><span class="no">1</span><div class="tx"><h4>Stay calm, keep your distance</h4><p>Most snakes want to leave undetected, not to fight. Give it room and it usually takes it.</p></div></div>
+    <div class="step"><span class="no">2</span><div class="tx"><h4>Don't corner or provoke it</h4><p>No poking, no throwing things, no trying to catch or kill it yourself. Cornering is what causes bites.</p></div></div>
+    <div class="step"><span class="no">3</span><div class="tx"><h4>Note the block, not the address</h4><p>Which block and roughly what it looks like is enough. Exact house numbers aren't necessary.</p></div></div>
+    <div class="step"><span class="no">4</span><div class="tx"><h4>Call the helpline</h4><p>The Goodearth Snake Helpline (WhatsApp) reaches a trained rescuer directly, day or night.</p></div></div>
+    <div class="step"><span class="no">5</span><div class="tx"><h4>Keep the area lit and clear</h4><p>Keep pets and children back, and a torch on the spot if it's after dark, until the rescuer arrives.</p></div></div>
+    <div class="step"><span class="no">6</span><div class="tx"><h4>It's identified and released</h4><p>Safely, away from homes, unharmed.</p></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ══════════════ PRIMER ══════════════ -->
+<section class="sec" id="primer">
+ <div class="wrap">
+  <div class="sec-head reveal">
+   <span class="eyebrow">A resident's primer</span>
+   <h2>Living with snakes</h2>
+   <p class="sec-intro">The myth-versus-fact essentials, if you only read one section on this page.</p>
+  </div>
+  <div class="primer-box reveal">
+   <ul class="primer-list">
+    <li><b>Of the species recorded here, close to twenty so far, only three are medically significant.</b> The rest are non-venomous, whatever they look like.</li>
+    <li><b>The snakes people see most often here are non-venomous.</b> The Rat Snake and the Wolf Snake account for most helpline calls, and neither is venomous.</li>
+    <li><b>Snakes follow rodents and cover, not people.</b> Keep leaf litter, firewood piles, and gaps under gates and drains clear along your compound wall, and you remove most of what draws them close.</li>
+   </ul>
+  </div>
+  <p class="pullquote reveal">A snake in the garden is not an emergency. It's a neighbour that hasn't learned to knock.<cite>— the Goodearth Snake Helpline</cite></p>
+ </div>
+</section>
+
+<!-- ══════════════ RESCUE JOURNEY ══════════════ -->
+<section class="sec" id="ledger">
+ <div class="wrap">
+  <div class="sec-head reveal">
+   <span class="eyebrow">The keeper's journey</span>
+   <h2>A record kept since 2022</h2>
+  </div>
+  <p class="sec-intro reveal" style="max-width:66ch">It didn't start as a calling. By his own account, it began with curiosity around 2020, a first snake handled bare-handed the following year, and by 2023 the hook, tongs, and training of a serious volunteer. What keeps Sandeep going, four years and hundreds of rescues later, is less an appetite for adventure and more a conviction: that every life, and Malhar's biodiversity, is worth the calls that come at 2am. Every rescue since 2022 is written up, one at a time, in his own words.</p>
+  <a class="ledger-cta reveal" href="https://shiftingradius.com/snake-rescues/" target="_blank" rel="noopener">
+   <div><div class="lc-t">Read the rescue archive</div><div class="lc-d">Every rescue since 2022, written up year by year, on Sandeep's own journal.</div></div>
+   <span class="ar">↗</span>
+  </a>
+ </div>
+</section>
+
+<!-- ══════════════ SNAKE HELPLINE ══════════════ -->
+<section class="sec" id="helpline">
+ <div class="wrap">
+  <div class="sec-head reveal">
+   <span class="eyebrow">Join the network</span>
+   <h2>The Goodearth Snake Helpline</h2>
+   <p class="sec-intro">A WhatsApp group connecting Malhar residents directly to trained rescuers. Report a sighting, ask a question about something you saw, or just watch how the record grows.</p>
+  </div>
+  <div class="paper helpline-panel reveal">
+   <div class="hl-qr"><img src="/fauna/livingwithsnakes/images/helpline-qr.jpg" alt="Goodearth Snake Helpline WhatsApp group QR code" onerror="this.parentNode.innerHTML='<span>QR code<br>coming soon</span>'"></div>
+   <div>
+    <div class="hl-t">Scan or upload this QR code using the WhatsApp camera to join the group.</div>
+    <p class="hl-d">Run by a small team of trained neighbours.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ══════════════ FIELD NOTES ══════════════ -->
+<section class="sec" id="notes">
+ <div class="wrap">
+  <div class="sec-head reveal">
+   <span class="eyebrow">Field notes</span>
+   <h2>Stories from the ground</h2>
+   <p class="sec-intro">A cobra behind a car, a python in the compost, the tailorbird-versus-rat-snake day. Contributed and live from <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">shiftingradius.com</a> and <a href="https://nanusense.com/blog/category/sandviper/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">nanusense.com</a>.</p>
+  </div>
+  <div class="notes-grid reveal" id="notesGrid">
+   <a class="note-card" href="https://shiftingradius.com/2022/05/tailor-bird-vs-rat-snake/" target="_blank" rel="noopener">
+    <div class="nc-ph"><img src="https://i0.wp.com/shiftingradius.com/wp-content/uploads/2022/05/IMG_2067edit-standard.jpg?fit=1024%2C682&ssl=1" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<span>T</span>'"></div>
+    <div class="nc-b"><span class="nc-tag">Coexistence</span><h3>Bird one, snake nil</h3><p>A rat snake working branch to branch toward two tailorbird chicks, the parents throwing themselves at it. This time, the parents won.</p><div class="nc-rd"><span>Read the story →</span><span>2022</span></div></div>
+   </a>
+   <a class="note-card" href="https://shiftingradius.com/2024/02/musings-at-the-end-of-4-rescues-in-a-day/" target="_blank" rel="noopener">
+    <div class="nc-ph"><img src="https://i0.wp.com/shiftingradius.com/wp-content/uploads/2024/02/IMG_6159-1.jpg?fit=1024%2C796&ssl=1" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<span>M</span>'"></div>
+    <div class="nc-b"><span class="nc-tag">Reflection</span><h3>Life of a rescuer</h3><p>A reflection on 175 rescues over two years, and on what the work asks of the person doing it.</p><div class="nc-rd"><span>Read the story →</span><span>2024</span></div></div>
+   </a>
+   <a class="note-card" href="https://shiftingradius.com/2023/10/slithering-into-wisdom/" target="_blank" rel="noopener">
+    <div class="nc-ph"><img src="https://i0.wp.com/shiftingradius.com/wp-content/uploads/2023/10/IMG_4512.jpg?fit=1024%2C576&ssl=1" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<span>S</span>'"></div>
+    <div class="nc-b"><span class="nc-tag">Learning</span><h3>Slithering into wisdom</h3><p>A weekend at a snake-science workshop, learning biology and conservation from working herpetologists.</p><div class="nc-rd"><span>Read the story →</span><span>2023</span></div></div>
+   </a>
+   <a class="note-card" href="https://shiftingradius.com/2024/09/222-since-22-2-22/" target="_blank" rel="noopener">
+    <div class="nc-ph"><img src="https://i0.wp.com/shiftingradius.com/wp-content/uploads/2024/09/dc2883c9-1a9b-4e68-9e9d-b47bde6a23b4.jpg?fit=1024%2C576&ssl=1" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<span>222</span>'"></div>
+    <div class="nc-b"><span class="nc-tag">Milestone</span><h3>Rescue 222</h3><p>The 222nd recorded rescue landed on International Snakebite Awareness Day, and was the first Rock Python logged here.</p><div class="nc-rd"><span>Read the story →</span><span>2024</span></div></div>
+   </a>
+  </div>
+ </div>
+</section>
+
+<!-- ══════════════ FACT OF THE DAY ══════════════ -->
+<section class="sec" id="fact" aria-label="Malhar Snake Fact of the Day">
+ <div class="wrap">
+  <div class="paper fact-wrap reveal">
+   <div class="fact-ph" id="factPhoto"><span>?</span></div>
+   <div>
+    <span class="fact-eyebrow"><span class="tick"></span>Malhar Snake Fact of the Day</span>
+    <div class="fact-nm" id="factName">—</div>
+    <div class="fact-tier" id="factTier"></div>
+    <p class="fact-txt" id="factText"></p>
+    <p class="fact-credit" id="factCredit"></p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+ <div class="wrap">
+  <div class="foot-links">
+   <a href="/fauna/birdsofmalhar">Birds of Malhar ↗</a>
+   <a href="https://shiftingradius.com/snake-rescues/" target="_blank" rel="noopener">Rescue archive ↗</a>
+   <a href="https://shiftingradius.com/common-snakes/" target="_blank" rel="noopener">Common Snakes project ↗</a>
+   <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener">Malhar field notes ↗</a>
+   <a href="https://nanusense.com/blog/category/sandviper/" target="_blank" rel="noopener">SandViper journal ↗</a>
+  </div>
+  <p class="foot-credit">Species identification and photographs from the <a href="https://shiftingradius.com/common-snakes/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">Common Snakes</a> project. Field notes and rescue records by Sandeep Nanu and the Goodearth Snake Helpline, <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">shiftingradius.com</a> and <a href="https://nanusense.com/blog/category/sandviper/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">nanusense.com</a>.</p>
+  <p class="foot-sib">A sibling page to <a href="/fauna/birdsofmalhar">Birds of Malhar</a>, part of the Fauna record at malhar.community.</p>
+  <div class="foot-bottom"><span>MALHAR.COMMUNITY / FAUNA</span><span>Good Earth Malhar, Bengaluru</span></div>
+ </div>
+</footer>
+
+<script src="/fauna/livingwithsnakes/data/species.js"></script>
+<script src="/fauna/livingwithsnakes/data/facts.js"></script>
+<script>
+function slug(s){ return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+function tierChip(t){
+  var map={nonvenomous:['tier-nonvenomous','Non-venomous'],medical:['tier-medical','Medically significant']};
+  var m=map[t]||map.nonvenomous;
+  return '<span class="tier-chip '+m[0]+'">'+m[1]+'</span>';
+}
+
+/* ── catalogue rows ── */
+(function(){
+  var el=document.getElementById('catRows'); if(!el||!window.SPECIES) return;
+  el.innerHTML=window.SPECIES.map(function(s){
+    return '<div class="cat-row"><div><span class="nm">'+s.n+'</span><span class="sci">'+s.sci+'</span></div>'+tierChip(s.tier)+'<span class="sz">'+s.size+'</span><span class="act">'+s.activity+'</span></div>';
+  }).join('');
+})();
+
+/* ── feature cards: the ones you'll actually meet (all 12, from the Common Snakes project) ── */
+(function(){
+  var el=document.getElementById('meetGrid'); if(!el||!window.SPECIES) return;
+  el.innerHTML=window.SPECIES.map(function(s){
+    return '<div class="meet-card">'+
+      '<div class="meet-ph"><img src="'+s.img+'" alt="'+s.n+'" loading="lazy" onerror="this.style.display=\'none\'"><span>'+s.n.charAt(0)+'</span></div>'+
+      '<div><div class="meet-nm">'+s.n+'<span class="sci">'+s.sci+'</span></div><div class="meet-sz" style="margin-top:6px">'+s.size+' · '+s.activity+'</div></div>'+
+      tierChip(s.tier)+
+      '<p class="meet-txt">'+s.behaviour+'</p>'+
+      '<div class="meet-action"><b>If you see one</b>'+s.action+'</div>'+
+    '</div>';
+  }).join('');
+})();
+
+/* ── Snake Fact of the Day: same year-seeded rotation as Birds of Malhar ── */
+function renderSnakeFact(){
+  if(!window.SNAKE_FACTS || !window.SPECIES) return;
+  var keys=Object.keys(window.SNAKE_FACTS); if(!keys.length) return;
+  var d=new Date(), start=new Date(d.getFullYear(),0,0);
+  var doy=Math.floor((d-start)/86400000);
+  function shuffle(arr,seed){
+    var a=arr.slice();
+    function rng(){ seed=(seed*1664525+1013904223)>>>0; return seed/4294967296; }
+    for(var i=a.length-1;i>0;i--){ var j=Math.floor(rng()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+    return a;
+  }
+  var rotation=shuffle(keys, d.getFullYear()*73856093 + 1);
+  var name=rotation[doy % rotation.length];
+  var fact=window.SNAKE_FACTS[name];
+  var sp=window.SPECIES.find(function(s){return s.n===name});
+  var photo=document.getElementById('factPhoto');
+  if(sp && sp.img){
+    var img=new Image();
+    img.onload=function(){ photo.innerHTML=''; photo.appendChild(img); };
+    img.onerror=function(){ photo.innerHTML='<span>'+name.charAt(0)+'</span>'; };
+    img.src=sp.img;
+  } else {
+    photo.innerHTML='<span>'+name.charAt(0)+'</span>';
+  }
+  document.getElementById('factName').innerHTML=name+(sp?' <span class="sci">'+sp.sci+'</span>':'');
+  document.getElementById('factTier').innerHTML=sp?tierChip(sp.tier):'';
+  document.getElementById('factText').textContent=fact;
+  fetch('/fauna/livingwithsnakes/data/photo_credits.json').then(function(r){return r.ok?r.json():{}}).then(function(c){
+    var cred=(c||{})[slug(name)]; var ce=document.getElementById('factCredit');
+    if(ce) ce.innerHTML = cred ? ('© <a href="'+cred.url+'" target="_blank" rel="noopener">'+cred.author+'</a> · '+cred.license) : '';
+  }).catch(function(){});
+}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', renderSnakeFact);
+else renderSnakeFact();
+
+/* ── entrance motion ── */
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){ document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.reveal').forEach(function(e){ if(!e.closest('.hero')) io.observe(e); });
+    requestAnimationFrame(function(){document.querySelectorAll('.hero .reveal').forEach(function(e,i){e.style.transitionDelay=(i*0.1)+'s';e.classList.add('in');})});
+  }
+})();
+
+/* ── live field notes: shiftingradius.com Malhar journal (keyword-filtered)
+   combined with nanusense.com's SandViper category (all snake-rescue writing
+   by definition, so trusted wholesale without a keyword filter) ── */
+(function(){
+  var grid=document.getElementById('notesGrid'); if(!grid) return;
+  var KEYWORDS=['snake','cobra','viper','krait','python','boa','keelback','kukri','rescue','venom','rescuer','herpetolog'];
+
+  function fetchPosts(url){
+    return fetch(url).then(function(r){return r.ok?r.json():[]}).catch(function(){return []});
+  }
+
+  Promise.all([
+    fetchPosts('https://shiftingradius.com/wp-json/wp/v2/posts?categories=40&_embed&per_page=100'),
+    fetchPosts('https://nanusense.com/wp-json/wp/v2/posts?categories=8&_embed&per_page=100')
+  ]).then(function(results){
+    var shiftingradius = Array.isArray(results[0]) ? results[0] : [];
+    var sandviper = Array.isArray(results[1]) ? results[1] : [];
+
+    var srFiltered = shiftingradius.filter(function(p){
+      var t=(p.title.rendered||'').toLowerCase();
+      var ex=(p.excerpt&&p.excerpt.rendered||'').toLowerCase();
+      return KEYWORDS.some(function(k){return t.indexOf(k)>-1||ex.indexOf(k)>-1});
+    });
+    var combined = srFiltered.concat(sandviper);
+
+    /* only replace the 4 hand-curated cards if the combined live pool is at
+       least as rich; a thin live result is worse than the curated set */
+    if(combined.length < 4) return;
+    for(var i=combined.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=combined[i];combined[i]=combined[j];combined[j]=tmp;}
+    combined=combined.slice(0,9);
+    grid.innerHTML=combined.map(function(p){
+      var dt=new Date(p.date).toLocaleDateString('en-GB',{month:'short',year:'numeric'});
+      var img='';
+      try{ var m=p._embedded['wp:featuredmedia'][0], s=(m.media_details||{}).sizes||{};
+           img=((s.large||s.medium_large||s.medium||{}).source_url)||m.source_url; }catch(e){}
+      var media = img
+        ? '<div class="nc-ph"><img src="'+img+'" alt="" loading="lazy" onerror="this.parentNode.innerHTML=\'<span>&#10024;</span>\'"></div>'
+        : '<div class="nc-ph"><span>&#10024;</span></div>';
+      return '<a class="note-card" href="'+p.link+'" target="_blank" rel="noopener">'+media+'<div class="nc-b"><span class="nc-tag">Field note</span><h3>'+p.title.rendered+'</h3><div style="flex:1"></div><div class="nc-rd"><span>Read the story →</span><span>'+dt+'</span></div></div></a>';
+    }).join('');
+  });
+})();
+</script>
+</body>
+</html>
