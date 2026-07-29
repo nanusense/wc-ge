@@ -123,20 +123,6 @@ body::before{
 .tier-key i{width:7px;height:7px;border-radius:50%;display:inline-block}
 
 .catalogue{border-top:1px solid var(--rule)}
-.cat-head{display:grid;grid-template-columns:1.6fr auto auto auto;gap:18px;align-items:center;padding-bottom:12px;margin-top:8px;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--inkLt)}
-.cat-head span:not(:first-child){text-align:right}
-.cat-row{display:grid;grid-template-columns:1.6fr auto auto auto;gap:18px;align-items:center;padding:17px 0;border-bottom:1px solid var(--rule2)}
-.cat-row .nm{font-family:var(--display);font-size:18px}
-.cat-row .sci{font-family:var(--mono);font-style:italic;font-size:12px;color:var(--inkLt);margin-left:10px}
-.cat-row .sz,.cat-row .act{font-family:var(--mono);font-size:12.5px;color:var(--inkMid);text-align:right;white-space:nowrap}
-@media(max-width:680px){
-  .cat-head{display:none}
-  .cat-row{grid-template-columns:1fr;gap:6px;padding:16px 0}
-  .cat-row .sci{display:block;margin-left:0;margin-top:2px}
-  .cat-row .sz,.cat-row .act{text-align:left}
-  .cat-row .sz::before{content:'Size: '}
-  .cat-row .act::before{content:'Active: '}
-}
 
 /* ══════════════ FEATURE CARDS ══════════════ */
 .meet-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:8px}
@@ -258,36 +244,23 @@ footer{border-top:1px solid var(--rule);padding:60px 0 46px}
  <aside class="keeper paper reveal" aria-label="Page keeper">
   <div class="kp-ava"><img src="/fauna/livingwithsnakes/images/keeper.jpg" alt="Sandeep Nanu" onerror="this.remove()"><span>SN</span></div>
   <div>
-   <p class="kp-lead">Kept by <strong>Sandeep Nanu</strong>, one of the neighbours who answers the midnight calls for the <strong>Goodearth Snake Helpline</strong>.</p>
+   <p class="kp-lead">Kept by <strong>Sandeep Nanu</strong>, one of the rescuers, drawing on the shared work of the <strong>Goodearth Snake Helpline</strong>.</p>
    <p class="kp-sub"><em>The snakes were always here; this is just where the seeing gets written down.</em> &nbsp;Field notes and photographs from <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener">shiftingradius.com</a> and <a href="https://nanusense.com/blog/category/sandviper/" target="_blank" rel="noopener">nanusense.com</a>.</p>
   </div>
  </aside>
 </div>
 
-<!-- ══════════════ CATALOGUE ══════════════ -->
+<!-- ══════════════ CATALOGUE / COMMON ENCOUNTERS ══════════════ -->
 <section class="sec catalogue" id="catalogue">
  <div class="wrap">
   <div class="sec-head reveal">
    <span class="eyebrow">The catalogue</span>
    <h2>What lives here</h2>
-   <p class="sec-intro">A dozen snakes from the <a href="https://shiftingradius.com/common-snakes/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">Common Snakes</a> identification project, common to this part of Bangalore and the ones most likely to turn up at Malhar, kept plainly rather than dramatically. Most are non-venomous. A few deserve real caution. None are villains.</p>
+   <p class="sec-intro">The rescue log has recorded close to twenty species over the years; this catalogue is not the full list. Below are the twelve you're most likely to actually meet, drawn from the <a href="https://shiftingradius.com/common-snakes/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">Common Snakes</a> identification project, common to this part of Bangalore. Knowing them on sight, and what to do if you see one, is most of what keeps an encounter calm.</p>
    <div class="tier-key">
     <span><i style="background:var(--moss)"></i>Non-venomous</span>
     <span><i style="background:var(--oxblood)"></i>Medically significant</span>
    </div>
-  </div>
-  <div class="cat-head"><span>Species</span><span>Status</span><span>Size</span><span>Active</span></div>
-  <div id="catRows"></div>
- </div>
-</section>
-
-<!-- ══════════════ THE ONES YOU'LL MEET ══════════════ -->
-<section class="sec" id="meet" style="padding-top:0">
- <div class="wrap">
-  <div class="sec-head reveal">
-   <span class="eyebrow">Common encounters</span>
-   <h2>The ones you'll <em>actually</em> meet</h2>
-   <p class="sec-intro">The twelve snakes residents are most likely to run into, drawn from <a href="https://shiftingradius.com/common-snakes/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">Shifting Radius's Common Snakes</a> identification project. Knowing them on sight is most of what keeps an encounter calm.</p>
   </div>
   <div class="meet-grid" id="meetGrid"></div>
  </div>
@@ -419,7 +392,7 @@ footer{border-top:1px solid var(--rule);padding:60px 0 46px}
    <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener">Malhar field notes ↗</a>
    <a href="https://nanusense.com/blog/category/sandviper/" target="_blank" rel="noopener">SandViper journal ↗</a>
   </div>
-  <p class="foot-credit">Species identification and photographs from the <a href="https://shiftingradius.com/common-snakes/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">Common Snakes</a> project. Field notes and rescue records by Sandeep Nanu and the Goodearth Snake Helpline, <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">shiftingradius.com</a> and <a href="https://nanusense.com/blog/category/sandviper/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">nanusense.com</a>.</p>
+  <p class="foot-credit">Species identification and photographs from the <a href="https://shiftingradius.com/common-snakes/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">Common Snakes</a> project. Rescues logged by the Goodearth Snake Helpline team. Field notes and photographs by Sandeep Nanu, <a href="https://shiftingradius.com/category/malhar/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">shiftingradius.com</a> and <a href="https://nanusense.com/blog/category/sandviper/" target="_blank" rel="noopener" style="color:var(--brass);border-bottom:1px solid var(--brass)">nanusense.com</a>.</p>
   <p class="foot-sib">A sibling page to <a href="https://malhar.community/fauna/birdsofmalhar/">Birds of Malhar</a>, part of the Fauna record at malhar.community.</p>
   <div class="foot-bottom"><span>MALHAR.COMMUNITY / FAUNA</span><span>Good Earth Malhar, Bengaluru</span></div>
  </div>
@@ -434,14 +407,6 @@ function tierChip(t){
   var m=map[t]||map.nonvenomous;
   return '<span class="tier-chip '+m[0]+'">'+m[1]+'</span>';
 }
-
-/* ── catalogue rows ── */
-(function(){
-  var el=document.getElementById('catRows'); if(!el||!window.SPECIES) return;
-  el.innerHTML=window.SPECIES.map(function(s){
-    return '<div class="cat-row"><div><span class="nm">'+s.n+'</span><span class="sci">'+s.sci+'</span></div>'+tierChip(s.tier)+'<span class="sz">'+s.size+'</span><span class="act">'+s.activity+'</span></div>';
-  }).join('');
-})();
 
 /* ── feature cards: the ones you'll actually meet (all 12, from the Common Snakes project) ── */
 (function(){
