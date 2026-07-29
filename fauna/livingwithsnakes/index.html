@@ -90,7 +90,11 @@ body::before{
 .hero h1 em{font-style:italic;color:var(--brass);font-weight:400}
 .hero-dek{margin-top:28px;max-width:56ch;font-size:19px;line-height:1.7;color:var(--inkMid)}
 .hero-dek strong{color:var(--ink);font-weight:500}
-.hero-scroll{margin-top:46px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--inkLt)}
+.hero-cta{margin-top:34px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--ink);border:1px solid var(--oxblood);padding:11px 20px;border-radius:999px;transition:background .25s var(--ease),color .25s var(--ease)}
+.hero-cta .dot{width:7px;height:7px;border-radius:50%;background:var(--oxblood);flex-shrink:0}
+.hero-cta:hover{background:var(--oxblood);color:var(--paper)}
+.hero-cta:hover .dot{background:var(--paper)}
+.hero-scroll{margin-top:28px;display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--inkLt)}
 .hero-scroll .ln{width:34px;height:1px;background:var(--inkLt);position:relative;overflow:hidden}
 .hero-scroll .ln::after{content:'';position:absolute;inset:0;background:var(--brass);animation:slide 2.6s var(--ease) infinite}
 @keyframes slide{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
@@ -137,9 +141,9 @@ body::before{
 .meet-action{font-size:13px;color:var(--ink);border-top:1px solid var(--rule2);padding-top:12px;margin-top:auto}
 .meet-action b{color:var(--brass);font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:5px}
 
-/* ══════════════ PROTOCOL (paper, full width) ══════════════ */
+/* ══════════════ PROTOCOL (paper, full width, highlighted) ══════════════ */
 .protocol{padding:80px 0}
-.protocol-inner{padding:52px 44px}
+.protocol-inner{padding:52px 44px;border-top:6px solid var(--oxblood);position:relative;box-shadow:0 30px 70px -30px rgba(162,78,72,.35)}
 .protocol h2{color:var(--paperInk)}
 .protocol .sec-intro{color:var(--paperMid)}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 34px;margin-top:40px}
@@ -149,6 +153,15 @@ body::before{
 .step .tx p{margin:0;font-size:14px;line-height:1.55;color:var(--paperMid)}
 @media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
 @media(max-width:640px){.steps{grid-template-columns:1fr}.protocol-inner{padding:38px 26px}}
+
+.bite-callout{margin-top:44px;padding:26px 30px;background:rgba(162,78,72,.08);border:1px solid rgba(162,78,72,.35);border-left:4px solid var(--oxblood)}
+.bite-callout .bc-head{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--oxbloodDk);font-weight:600}
+.bite-callout .bc-head .dot{width:7px;height:7px;border-radius:50%;background:var(--oxblood);flex-shrink:0}
+.bite-callout h4{font-family:var(--display);font-size:19px;margin-top:10px;color:var(--paperInk)}
+.bite-callout p{margin:10px 0 0;font-size:14.5px;line-height:1.6;color:var(--paperMid)}
+.bite-callout ul{margin:12px 0 0;padding-left:18px}
+.bite-callout li{font-size:14.5px;line-height:1.6;color:var(--paperMid);margin-bottom:4px}
+.bite-callout b{color:var(--oxbloodDk)}
 
 /* ══════════════ PRIMER ══════════════ */
 .primer-box{border:1px solid var(--rule);border-left:3px solid var(--brass);padding:32px 36px;margin-top:8px}
@@ -235,6 +248,7 @@ footer{border-top:1px solid var(--rule);padding:60px 0 46px}
   <h1 class="reveal">Living with <em>Snakes</em> at Malhar</h1>
   <p class="hero-dek reveal">Malhar shares its ground with more kinds of snake than most residents ever notice, <strong>most of them shy and wanting nothing to do with us</strong>, all of them older residents of this land than we are. When one turns up in a garden or a stairwell, the first call here isn't to chase it away. It's to a neighbour who comes out, gently, and moves it on.</p>
   <p class="hero-dek reveal" style="margin-top:14px;font-size:16px">This page is not a warning. It's a record: of what lives here, what to do if you meet one, and how this community has learned to share the ground with them.</p>
+  <a class="hero-cta reveal" href="#protocol"><span class="dot"></span>Know what to do if you see one</a>
   <div class="hero-scroll reveal"><span class="ln"></span>SCROLL</div>
  </div>
 </header>
@@ -267,7 +281,7 @@ footer{border-top:1px solid var(--rule);padding:60px 0 46px}
 </section>
 
 <!-- ══════════════ PROTOCOL ══════════════ -->
-<section class="protocol">
+<section class="protocol" id="protocol">
  <div class="wrap">
   <div class="paper protocol-inner reveal">
    <span class="eyebrow">If you see one</span>
@@ -275,11 +289,37 @@ footer{border-top:1px solid var(--rule);padding:60px 0 46px}
    <p class="sec-intro">The Malhar protocol. Six steps, the same every time, whether it's a wolf snake on the stairs or a cobra in the garden.</p>
    <div class="steps">
     <div class="step"><span class="no">1</span><div class="tx"><h4>Stay calm, keep your distance</h4><p>Most snakes want to leave undetected, not to fight. Give it room and it usually takes it.</p></div></div>
-    <div class="step"><span class="no">2</span><div class="tx"><h4>Don't corner or provoke it</h4><p>No poking, no throwing things, no trying to catch or kill it yourself. Cornering is what causes bites.</p></div></div>
-    <div class="step"><span class="no">3</span><div class="tx"><h4>Note the block, not the address</h4><p>Which block and roughly what it looks like is enough. Exact house numbers aren't necessary.</p></div></div>
-    <div class="step"><span class="no">4</span><div class="tx"><h4>Call the helpline</h4><p>The Goodearth Snake Helpline (WhatsApp) reaches a trained rescuer directly, day or night.</p></div></div>
-    <div class="step"><span class="no">5</span><div class="tx"><h4>Keep the area lit and clear</h4><p>Keep pets and children back, and a torch on the spot if it's after dark, until the rescuer arrives.</p></div></div>
-    <div class="step"><span class="no">6</span><div class="tx"><h4>It's identified and released</h4><p>Safely, away from homes, unharmed.</p></div></div>
+    <div class="step"><span class="no">2</span><div class="tx"><h4>Don't corner or provoke it</h4><p>No poking, no throwing things, no trying to catch or harm it. Cornering, not the snake, is what causes most bites.</p></div></div>
+    <div class="step"><span class="no">3</span><div class="tx"><h4>Keep people and pets well back</h4><p>You can't always judge how far a snake can reach from how it's coiled. Move children and animals away before doing anything else.</p></div></div>
+    <div class="step"><span class="no">4</span><div class="tx"><h4>Call the helpline, note the block not the address</h4><p>The Goodearth Snake Helpline (WhatsApp) reaches a trained rescuer directly, day or night. Which block and roughly what it looks like is enough detail.</p></div></div>
+    <div class="step"><span class="no">5</span><div class="tx"><h4>Keep the area lit and clear until they arrive</h4><p>A torch on the spot after dark helps the rescuer as much as it helps you. Don't leave and don't let anyone try to finish this themselves.</p></div></div>
+    <div class="step"><span class="no">6</span><div class="tx"><h4>It's identified and released</h4><p>Safely, away from homes, unharmed. That's the outcome every time, for every species.</p></div></div>
+   </div>
+   <div class="bite-callout">
+    <div class="bc-head"><span class="dot"></span>If a bite happens</div>
+    <h4>Get to a hospital. Nothing else treats a venomous bite.</h4>
+    <p>Anti-venom, given at a hospital, is the only treatment that works. Call the helpline on the way, they can advise en route, but don't wait to see if symptoms appear before leaving.</p>
+    <ul>
+     <li><b>Do:</b> keep the bitten limb still and lower than the heart, remove rings or tight clothing near the bite before it swells, and go straight to the nearest hospital.</li>
+     <li><b>Don't:</b> cut the wound, try to suck out venom, apply ice or a tourniquet, or use any home remedy. All of these cost time without helping.</li>
+     <li><b>If you can, safely:</b> note the snake's colour and pattern, or a photo from a distance, to help identify it. Never go back for it.</li>
+    </ul>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ══════════════ FACT OF THE DAY ══════════════ -->
+<section class="sec" id="fact" aria-label="Malhar Snake Fact of the Day">
+ <div class="wrap">
+  <div class="paper fact-wrap reveal">
+   <div class="fact-ph" id="factPhoto"><span>?</span></div>
+   <div>
+    <span class="fact-eyebrow"><span class="tick"></span>Malhar Snake Fact of the Day</span>
+    <div class="fact-nm" id="factName">—</div>
+    <div class="fact-tier" id="factTier"></div>
+    <p class="fact-txt" id="factText"></p>
+    <p class="fact-credit" id="factCredit"></p>
    </div>
   </div>
  </div>
@@ -297,6 +337,9 @@ footer{border-top:1px solid var(--rule);padding:60px 0 46px}
    <ul class="primer-list">
     <li><b>Of the species recorded here, close to twenty so far, only three are medically significant.</b> The rest are non-venomous, whatever they look like.</li>
     <li><b>The snakes people see most often here are non-venomous.</b> The Rat Snake and the Wolf Snake account for most helpline calls, and neither is venomous.</li>
+    <li><b>A patterned or banded snake is not automatically dangerous.</b> The Wolf Snake, Trinket Snake, and Banded Kukri are all boldly marked and all harmless. Pattern alone is never a safe way to judge a threat, that's what the catalogue above is for.</li>
+    <li><b>Killing a snake doesn't make a garden safer.</b> Most snakes here are hunting the rodents that would otherwise draw in more snakes. A rescued snake, relocated, does the same job somewhere it won't run into anyone.</li>
+    <li><b>If a bite does happen, there is one real treatment: anti-venom, at a hospital.</b> Get there immediately and call the helpline on the way, they can advise en route. No folk remedy has ever been shown to work, and the time spent trying one is the time that matters most.</li>
     <li><b>Snakes follow rodents and cover, not people.</b> Keep leaf litter, firewood piles, and gaps under gates and drains clear along your compound wall, and you remove most of what draws them close.</li>
    </ul>
   </div>
@@ -362,22 +405,6 @@ footer{border-top:1px solid var(--rule);padding:60px 0 46px}
     <div class="nc-ph"><img src="https://i0.wp.com/shiftingradius.com/wp-content/uploads/2024/09/dc2883c9-1a9b-4e68-9e9d-b47bde6a23b4.jpg?fit=1024%2C576&ssl=1" alt="" loading="lazy" onerror="this.parentNode.innerHTML='<span>222</span>'"></div>
     <div class="nc-b"><span class="nc-tag">Milestone</span><h3>Rescue 222</h3><p>The 222nd recorded rescue landed on International Snakebite Awareness Day, and was the first Rock Python logged here.</p><div class="nc-rd"><span>Read the story →</span><span>2024</span></div></div>
    </a>
-  </div>
- </div>
-</section>
-
-<!-- ══════════════ FACT OF THE DAY ══════════════ -->
-<section class="sec" id="fact" aria-label="Malhar Snake Fact of the Day">
- <div class="wrap">
-  <div class="paper fact-wrap reveal">
-   <div class="fact-ph" id="factPhoto"><span>?</span></div>
-   <div>
-    <span class="fact-eyebrow"><span class="tick"></span>Malhar Snake Fact of the Day</span>
-    <div class="fact-nm" id="factName">—</div>
-    <div class="fact-tier" id="factTier"></div>
-    <p class="fact-txt" id="factText"></p>
-    <p class="fact-credit" id="factCredit"></p>
-   </div>
   </div>
  </div>
 </section>
