@@ -28,6 +28,8 @@ window.CONNECTIONS = {
    number: 1,
    title: "H for Honge.\nH for Hope.",
    image: "honge.jpg",
+   imageW: 1503,
+   imageH: 2185,
    imageAlt: "Watercolor of a stone bench beneath a Honge tree in a central courtyard",
    imageAfterParagraph: 5,
    paragraphs: [
@@ -50,6 +52,8 @@ window.CONNECTIONS = {
    number: 2,
    title: "A Hibiscus\nExchange",
    image: "hibiscus-exchange.jpg",
+   imageW: 1683,
+   imageH: 2369,
    imageAlt: "Watercolor of a courtyard with a bowl of hibiscus flowers floating in water",
    imageAfterParagraph: 7,
    paragraphs: [
@@ -75,6 +79,8 @@ window.CONNECTIONS = {
    title: "Garba and\nBelonging",
    epigraph: "‘My earliest memory is trailing my mother during Garba. I may have been three or four years old. I remember moving in circles to the beat of the dhol all night.’",
    image: "garba-belonging.jpg",
+   imageW: 1412,
+   imageH: 1989,
    imageAlt: "Watercolor of a family walking together at night under string lights during Garba",
    imageAfterParagraph: 2,
    paragraphs: [
@@ -93,6 +99,8 @@ window.CONNECTIONS = {
    number: 4,
    title: "A Walk to\nSlowness",
    image: "walk-to-slowness.jpg",
+   imageW: 1508,
+   imageH: 2192,
    imageAlt: "Watercolor of two boulders and a garden shed along a walking path",
    imageAfterParagraph: 4,
    paragraphs: [
@@ -113,6 +121,8 @@ window.CONNECTIONS = {
    number: 5,
    title: "Birds and\nMeaning",
    image: "birds-and-meaning.jpg",
+   imageW: 1340,
+   imageH: 1897,
    imageAlt: "Watercolor of a barred window overlooking flowering trees with small birds",
    imageAfterParagraph: 1,
    paragraphs: [
@@ -137,6 +147,8 @@ window.CONNECTIONS = {
    number: 6,
    title: "A Pet Boulder",
    image: "pet-boulder.jpg",
+   imageW: 1578,
+   imageH: 2233,
    imageAlt: "Watercolor of a boulder in a garden beside a brick pergola",
    imageAfterParagraph: 7,
    paragraphs: [
@@ -157,6 +169,8 @@ window.CONNECTIONS = {
    number: 7,
    title: "Eyes on the Ball",
    image: "eyes-on-the-ball.jpg",
+   imageW: 1446,
+   imageH: 1944,
    imageAlt: "Watercolor close-up of legs kicking a football on grass",
    imageAfterParagraph: 1,
    paragraphs: [
@@ -176,6 +190,8 @@ window.CONNECTIONS = {
    number: 8,
    title: "Are You Game?",
    image: "are-you-game.jpg",
+   imageW: 1557,
+   imageH: 1721,
    imageAlt: "Watercolor of hands stacking wooden blocks around a game table",
    imageAfterParagraph: 2,
    paragraphs: [
@@ -198,6 +214,8 @@ window.CONNECTIONS = {
    number: 9,
    title: "It Takes a Village",
    image: "it-takes-a-village.jpg",
+   imageW: 1450,
+   imageH: 2046,
    imageAlt: "Watercolor of two women exchanging fruit at a doorstep",
    imageAfterParagraph: 8,
    paragraphs: [
@@ -220,6 +238,8 @@ window.CONNECTIONS = {
    number: 10,
    title: "All the Light\nWe See",
    image: "all-the-light-we-see.jpg",
+   imageW: 1363,
+   imageH: 1893,
    imageAlt: "Watercolor of a sunlit courtyard beneath a wooden pergola",
    imageAfterParagraph: 6,
    paragraphs: [
@@ -242,6 +262,8 @@ window.CONNECTIONS = {
    number: 11,
    title: "An Aged Love",
    image: "an-aged-love.jpg",
+   imageW: 1287,
+   imageH: 1802,
    imageAlt: "Watercolor of a terrace lined with bonsai trees on stone benches",
    imageAfterParagraph: 4,
    paragraphs: [
@@ -259,6 +281,8 @@ window.CONNECTIONS = {
    number: 12,
    title: "Return to Self",
    image: "return-to-self.jpg",
+   imageW: 1421,
+   imageH: 1993,
    imageAlt: "Watercolor of a lamplit path between homes at night",
    imageAfterParagraph: 7,
    paragraphs: [

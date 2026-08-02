@@ -41,7 +41,7 @@ body{
   font-size:18px;line-height:1.72;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
 a{color:inherit}
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
 @media(max-width:640px){body{font-size:16.5px}.wrap{padding:0 22px}}
@@ -189,7 +189,7 @@ footer{border-top:1px solid var(--rule);padding:48px 0}
  </div>
 </footer>
 
-<script src="/culture/publications/connections/data/stories.js"></script>
+<script src="/culture/publications/connections/data/stories.js?v=2"></script>
 <script>
 (function(){
   var C = window.CONNECTIONS;
@@ -249,7 +249,7 @@ footer{border-top:1px solid var(--rule);padding:48px 0}
       prose.appendChild(el('p', i === 0 ? 'lede' : '', text));
       if(i === s.imageAfterParagraph){
         var figure = el('figure', 'plate reveal');
-        figure.innerHTML = '<img src="' + IMG + s.image + '?v=3" alt="' + s.imageAlt + '" loading="lazy">';
+        figure.innerHTML = '<img src="' + IMG + s.image + '?v=3" alt="' + s.imageAlt + '" width="' + s.imageW + '" height="' + s.imageH + '" loading="lazy">';
         prose.appendChild(figure);
       }
     });
