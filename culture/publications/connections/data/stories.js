@@ -289,7 +289,7 @@ window.CONNECTIONS = {
  },
 
  backCover: {
-  text: "In vivid watercolours and simple evocative prose, this book captures the nuances of community life among residents of GoodEarth homes in Bengaluru. Much like the relationship between a Barbet and the soft decay of an old tree trunk where it makes its home, these stories illuminate silent and unlikely bonds.",
+  text: "In vivid watercolours and simple evocative prose, this book captures the nuances of community life among residents of GoodEarth homes in Bengaluru. Much like the relationship between a barbet and the soft decay of an old tree trunk where it makes its home, these stories illuminate silent and unlikely bonds.",
   image: "back-cover.jpg",
   imageAlt: "Watercolor of a barbet perched on a mossy tree branch"
  }
