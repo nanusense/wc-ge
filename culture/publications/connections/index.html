@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connections — Rohini Rajagopal</title>
+<meta name="description" content="Twelve true stories of what makes a community, gathered from residents of Good Earth Malhar by resident author Rohini Rajagopal, with watercolors by Disha Sahu.">
+<meta property="og:title" content="Connections — Rohini Rajagopal">
+<meta property="og:description" content="Twelve true stories of what makes a community, gathered from residents of Good Earth Malhar by resident author Rohini Rajagopal, with watercolors by Disha Sahu.">
+<meta property="og:type" content="book">
+<meta property="og:image" content="/culture/publications/connections/images/cover-wraparound.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Connections — Rohini Rajagopal">
+<meta name="twitter:description" content="Twelve true stories of what makes a community, gathered from residents of Good Earth Malhar.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,400;1,7..72,500;1,7..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FBF6EA;
+  --paper2:#F3ECDA;
+  --paper3:#EDE4CE;
+  --ink:#241F17;
+  --inkMid:#5C5344;
+  --inkLt:#8B8271;
+  --rule:rgba(36,31,23,.14);
+  --rule2:rgba(36,31,23,.08);
+  --teal:#2E5A50;
+  --tealLt:#457C6E;
+  --terracotta:#AC5F2E;
+  --serif:'Literata',Georgia,'Times New Roman',serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --measure:66ch;
+  --wrap:920px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-optical-sizing:auto;
+  font-size:18px;line-height:1.72;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+@media(max-width:640px){body{font-size:16.5px}.wrap{padding:0 22px}}
+
+.eyebrow{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:.04em;color:var(--tealLt);display:flex;align-items:center;gap:12px}
+.eyebrow::after{content:'';flex:1;height:1px;background:var(--rule)}
+.eyebrow.center{justify-content:center}
+.eyebrow.center::before,.eyebrow.center::after{content:'';width:34px;height:1px;background:var(--rule);flex:none}
+
+p{margin:0 0 1.35em}
+p:last-child{margin-bottom:0}
+
+/* ══════════════ COVER ══════════════ */
+.cover{position:relative;border-bottom:1px solid var(--rule);overflow:hidden}
+.wrap-banner{width:100%;overflow:hidden;background:var(--paper2)}
+.wrap-banner img{width:100%;height:100%;object-fit:cover;aspect-ratio:4563/2577;max-height:62vh}
+.cover-copy{text-align:center;padding:56px 28px 64px}
+.cover-copy .pub{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--inkLt);margin-bottom:20px}
+.cover-copy h1{font-family:var(--serif);font-weight:600;font-size:clamp(46px,7vw,84px);line-height:.98;margin:0;color:var(--ink)}
+.cover-copy .by{margin-top:26px;font-size:22px;font-style:italic;color:var(--teal)}
+.cover-copy .by b{font-weight:600;font-style:normal}
+.cover-copy .dek{margin-top:28px;font-size:17px;line-height:1.7;color:var(--inkMid);max-width:46ch;margin-left:auto;margin-right:auto}
+.cover-cta{margin-top:32px;display:inline-flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.02em;color:var(--paper);background:var(--teal);padding:13px 24px;border-radius:2px;transition:background .25s var(--ease)}
+.cover-cta:hover{background:var(--terracotta)}
+
+/* ══════════════ TOC ══════════════ */
+.toc{padding:80px 0}
+.toc h2{font-size:14px;text-align:center;font-style:italic;color:var(--tealLt);margin:0 0 40px;font-weight:400}
+.toc-list{list-style:none;margin:0 auto;padding:0;max-width:560px;border-top:1px solid var(--rule)}
+.toc-list li{border-bottom:1px solid var(--rule)}
+.toc-list a{display:flex;align-items:baseline;gap:18px;padding:15px 4px;text-decoration:none;transition:color .2s var(--ease),padding-left .2s var(--ease)}
+.toc-list a:hover{color:var(--terracotta);padding-left:8px}
+.toc-num{font-style:italic;color:var(--inkLt);font-size:15px;flex:none;width:22px}
+.toc-title{font-size:17px;flex:1}
+.toc-intro-link,.toc-colophon-link{display:block;text-align:center;margin-top:26px;font-size:14px;font-style:italic;color:var(--inkMid)}
+
+/* ══════════════ CHAPTER (intro + stories) ══════════════ */
+.chapter{padding:96px 0;border-top:1px solid var(--rule)}
+.chapter-head{text-align:center;margin-bottom:56px}
+.chapter-head .kicker{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--inkLt);margin-bottom:18px}
+.chapter-head h2{font-family:var(--serif);font-weight:600;font-size:clamp(34px,5vw,54px);line-height:1.1;margin:0;color:var(--ink)}
+.chapter-head .rule{width:46px;height:1px;background:var(--terracotta);margin:26px auto 0}
+.chapter-head .epigraph{max-width:52ch;margin:34px auto 0;font-style:italic;font-size:17px;line-height:1.7;color:var(--inkMid)}
+
+.prose{max-width:var(--measure);margin:0 auto;font-size:18.5px}
+.prose p.lede::first-letter{
+  float:left;font-family:var(--serif);font-weight:600;font-size:74px;line-height:.82;
+  padding:6px 10px 0 0;color:var(--teal);
+}
+.prose p{text-align:left}
+@media(max-width:640px){.prose{font-size:17px}.prose p.lede::first-letter{font-size:56px;padding-right:8px}}
+
+/* ══════════════ PLATE (illustration) ══════════════ */
+.plate{max-width:760px;margin:52px auto;text-align:center}
+.plate img{border-radius:2px;margin:0 auto;box-shadow:0 34px 70px -36px rgba(36,31,23,.38)}
+.plate figcaption{margin-top:16px;font-size:13px;font-style:italic;color:var(--inkLt)}
+
+/* ══════════════ COLOPHON ══════════════ */
+.colophon-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:760px;margin:0 auto}
+.colophon-block h3{font-family:var(--serif);font-style:italic;font-weight:500;font-size:19px;margin:0 0 14px;color:var(--teal)}
+.colophon-block p{font-size:15.5px;color:var(--inkMid);line-height:1.65}
+@media(max-width:640px){.colophon-grid{grid-template-columns:1fr;gap:36px}}
+
+/* ══════════════ BACK COVER ══════════════ */
+.back-cover{padding:0;border-top:1px solid var(--rule)}
+.back-cover-text{font-size:19px;font-style:italic;line-height:1.75;color:var(--ink);text-align:center;max-width:56ch;margin:56px auto;padding:0 28px}
+
+/* ══════════════ FOOTER ══════════════ */
+footer{border-top:1px solid var(--rule);padding:48px 0}
+.foot-inner{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12.5px;letter-spacing:.04em;color:var(--inkLt)}
+
+/* ══════════════ REVEAL ══════════════ */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ══════════════ BACK-TO-TOP ══════════════ */
+.top-link{display:block;text-align:center;margin-top:60px;font-size:13px;font-style:italic;color:var(--inkLt);text-decoration:none}
+.top-link:hover{color:var(--terracotta)}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ COVER ══════════════ -->
+<header class="cover">
+ <div class="wrap-banner reveal">
+  <img src="/culture/publications/connections/images/cover-wraparound.jpg?v=3" alt="Connections, full cover watercolor of a bird nesting in a tree hollow" loading="eager">
+ </div>
+ <div class="cover-copy">
+  <div class="pub reveal">Good Earth Malhar · Culture</div>
+  <h1 class="reveal">Connections</h1>
+  <p class="by reveal">by <b>Rohini Rajagopal</b></p>
+  <p class="dek reveal">Twelve true stories of what makes a community, gathered from the residents of Good Earth Malhar. What does a boulder mean to a child? How can a night walk become a return to the self? Why might the exchange of hibiscus flowers signal a deep yet unspoken connection? What does borrowing banana leaves from a neighbour have to do with belonging?</p>
+  <a class="cover-cta reveal" href="#contents">Begin reading ↓</a>
+ </div>
+</header>
+
+<!-- ══════════════ CONTENTS ══════════════ -->
+<nav class="toc" id="contents">
+ <div class="wrap">
+  <h2>Contents</h2>
+  <ol class="toc-list" id="tocList"></ol>
+  <a class="toc-intro-link" href="#introduction">Read the Introduction first ↓</a>
+ </div>
+</nav>
+
+<!-- ══════════════ INTRODUCTION ══════════════ -->
+<section class="chapter" id="introduction">
+ <div class="wrap">
+  <div class="chapter-head reveal">
+   <h2>Introduction</h2>
+   <div class="rule"></div>
+  </div>
+  <div class="prose reveal" id="introProse"></div>
+ </div>
+</section>
+
+<!-- ══════════════ STORIES (rendered) ══════════════ -->
+<div id="stories"></div>
+
+<!-- ══════════════ COLOPHON ══════════════ -->
+<section class="chapter colophon">
+ <div class="wrap">
+  <div class="chapter-head reveal">
+   <div class="kicker">The Book</div>
+   <h2>Written &amp; Painted By</h2>
+   <div class="rule"></div>
+  </div>
+  <div class="colophon-grid reveal" id="colophonGrid"></div>
+ </div>
+</section>
+
+<!-- ══════════════ BACK COVER ══════════════ -->
+<section class="back-cover">
+ <p class="back-cover-text reveal" id="backCoverText"></p>
+ <div class="wrap-banner reveal">
+  <img src="/culture/publications/connections/images/cover-wraparound.jpg?v=3" alt="Connections, full cover watercolor of a bird nesting in a tree hollow" loading="lazy">
+ </div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
+ <div class="wrap foot-inner">
+  <span>CONNECTIONS · A GOOD EARTH MALHAR PUBLICATION</span>
+  <span>Text by Rohini Rajagopal · Art by Disha Sahu</span>
+ </div>
+</footer>
+
+<script src="/culture/publications/connections/data/stories.js"></script>
+<script>
+(function(){
+  var C = window.CONNECTIONS;
+  if(!C) return;
+  var IMG = '/culture/publications/connections/images/';
+
+  function el(tag, cls, html){
+    var e = document.createElement(tag);
+    if(cls) e.className = cls;
+    if(html != null) e.innerHTML = html;
+    return e;
+  }
+
+  function renderParas(container, paragraphs, ledeFirst){
+    paragraphs.forEach(function(text, i){
+      var p = el('p', (ledeFirst && i === 0) ? 'lede' : '', text);
+      container.appendChild(p);
+    });
+  }
+
+  /* ── table of contents ── */
+  var tocList = document.getElementById('tocList');
+  C.stories.forEach(function(s){
+    var li = document.createElement('li');
+    var num = s.number < 10 ? '0' + s.number : '' + s.number;
+    var titleOneLine = s.title.replace(/\n/g, ' ');
+    li.innerHTML = '<a href="#' + s.slug + '"><span class="toc-num">' + num + '</span><span class="toc-title">' + titleOneLine + '</span></a>';
+    tocList.appendChild(li);
+  });
+
+  /* ── introduction ── */
+  renderParas(document.getElementById('introProse'), C.intro.paragraphs, true);
+
+  /* ── stories ── */
+  var storiesRoot = document.getElementById('stories');
+  C.stories.forEach(function(s){
+    var section = el('section', 'chapter');
+    section.id = s.slug;
+
+    var wrap = el('div', 'wrap');
+
+    var head = el('div', 'chapter-head reveal');
+    var num = s.number < 10 ? '0' + s.number : '' + s.number;
+    head.appendChild(el('div', 'kicker', 'Story ' + num + ' of Twelve'));
+    var h2 = el('h2');
+    s.title.split('\n').forEach(function(line, i){
+      if(i > 0) h2.appendChild(document.createElement('br'));
+      h2.appendChild(document.createTextNode(line));
+    });
+    head.appendChild(h2);
+    head.appendChild(el('div', 'rule'));
+    if(s.epigraph) head.appendChild(el('p', 'epigraph', s.epigraph));
+    wrap.appendChild(head);
+
+    var prose = el('div', 'prose reveal');
+    s.paragraphs.forEach(function(text, i){
+      prose.appendChild(el('p', i === 0 ? 'lede' : '', text));
+      if(i === s.imageAfterParagraph){
+        var figure = el('figure', 'plate reveal');
+        figure.innerHTML = '<img src="' + IMG + s.image + '?v=3" alt="' + s.imageAlt + '" loading="lazy">';
+        prose.appendChild(figure);
+      }
+    });
+    wrap.appendChild(prose);
+
+    section.appendChild(wrap);
+    storiesRoot.appendChild(section);
+  });
+
+  /* ── colophon ── */
+  var cg = document.getElementById('colophonGrid');
+  cg.innerHTML =
+    '<div class="colophon-block"><h3>' + C.colophon.author.heading + '</h3><p>' + C.colophon.author.bio + '</p></div>' +
+    '<div class="colophon-block"><h3>' + C.colophon.illustrator.heading + '</h3><p>' + C.colophon.illustrator.bio + '</p></div>';
+
+  /* ── back cover ── */
+  document.getElementById('backCoverText').textContent = C.backCover.text;
+
+  /* ── back-to-top link on every story ── */
+  document.querySelectorAll('.chapter').forEach(function(sec){
+    var link = el('a', 'top-link wrap', 'Back to contents ↑');
+    link.href = '#contents';
+    sec.appendChild(link);
+  });
+
+  /* ── reveal on scroll ── */
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = document.querySelectorAll('.reveal');
+  if(reduce){
+    revealEls.forEach(function(e){ e.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){ entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, {threshold:.08, rootMargin:'0px 0px -4% 0px'});
+    revealEls.forEach(function(e){ io.observe(e); });
+    requestAnimationFrame(function(){
+      document.querySelectorAll('.cover .reveal').forEach(function(e,i){
+        e.style.transitionDelay = (i*0.08)+'s';
+        e.classList.add('in');
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
