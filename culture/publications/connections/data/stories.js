@@ -77,7 +77,7 @@ window.CONNECTIONS = {
    slug: "garba-and-belonging",
    number: 3,
    title: "Garba and\nBelonging",
-   epigraph: "‘My earliest memory is trailing my mother during Garba. I may have been three or four years old. I remember moving in circles to the beat of the dhol all night.’",
+   epigraph: "‘My earliest memory is trailing my mother during garba. I may have been three or four years old. I remember moving in circles to the beat of the dhol all night.’",
    image: "garba-belonging.jpg",
    imageW: 1412,
    imageH: 1989,
