@@ -344,7 +344,12 @@ footer{background:var(--forestDk);color:rgba(251,241,219,.85);padding:64px 0 34p
 
 <!-- ══════════════ HERO ══════════════ -->
 <header class="hero">
- <div class="hero-bg"><img src="/fauna/straylove/images/hero/panel.jpg" alt="Community dogs of Malhar resting together in the shade" loading="eager"></div>
+ <div class="hero-bg">
+  <picture>
+   <source media="(max-width:720px)" srcset="/fauna/straylove/images/hero/side-panel.jpg">
+   <img src="/fauna/straylove/images/hero/panel.jpg" alt="Community dogs of Malhar resting together in the shade" loading="eager">
+  </picture>
+ </div>
  <div class="wrap hero-inner">
   <div class="hero-kicker"><span class="dot"></span>GOOD EARTH MALHAR &middot; FAUNA &middot; STRAY LOVE</div>
   <h1 class="reveal">Stray <span>Love</span></h1>
@@ -608,7 +613,7 @@ function esc(s){ return String(s==null?'':s).replace(/[&<>]/g, function(c){retur
 
 function approachTag(a){
   var t = (a||'').toLowerCase();
-  if(t.indexOf('do not')>-1 || t.indexOf('does not')>-1) return {cls:'tag-no', label:'Does not approach'};
+  if(t.indexOf('do not')>-1 || t.indexOf('does not')>-1) return {cls:'tag-no', label:a};
   if(t.indexOf('usually')>-1 || t.indexOf('unknown')>-1) return {cls:'tag-caution', label:a};
   if(t.indexOf('familiar')>-1 || t.indexOf('right body language')>-1) return {cls:'tag-caution', label:a};
   return {cls:'tag-ok', label:a};
