@@ -71,7 +71,7 @@ window.STRAYLOVE_DOGS = [
   bio:"Saya is the black shadow of the Motif gang. Still learning to navigate life on the streets after being displaced from the Motif site, she prefers to keep her distance and watch the world go by. She trusts perhaps three people in the entire world, and those lucky few are rewarded with belly rubs. With everyone else, Saya is cautious and observant, a trait shaped by the injuries she has endured. She may be wary, but she's incredibly resilient. Her closest companion is Biscuit. Give Saya time and space, and you might just earn your way into her very small circle of trust."
  },
  {
-  id:'cowpatch', name:'Cowpatch', gang:'Motif/Tarana Gang', photo:null,
+  id:'cowpatch', name:'Cowpatch', gang:'Motif/Tarana Gang', photo:'cowpatch.jpg',
   age:'2+ years', sex:'Male', neutered:true,
   vaccination:'Updated, next round due April 2027',
   approach:'Does not approach people, do not approach',
@@ -87,7 +87,7 @@ window.STRAYLOVE_DOGS = [
   bio:"Gia Mumma is part of the Motif gang, but has always been a little on the outside, with the others keeping her at a distance. She's incredibly shy: a girl who desperately wants cuddles but is often too nervous to come close enough to ask for them. She recently lost her constant companion, her daughter Gia, to an unknown cause, and has been visibly heartbroken since. Yet the moment she spots someone she knows, her sadness seems to lift and she bounces with pure joy. She may be shy, but there's a whole lot of love waiting to come out."
  },
  {
-  id:'skinny', name:'Skinny', gang:'Wannabe Motif/Tarana Gang', photo:null,
+  id:'skinny', name:'Skinny', gang:'Wannabe Motif/Tarana Gang', photo:'skinny.jpg',
   age:'2+ years', sex:'Male', neutered:true,
   vaccination:'Updated, next round due September 2026',
   approach:'Approachable with the right body language',
@@ -95,7 +95,7 @@ window.STRAYLOVE_DOGS = [
   bio:"Skinny got his name for obvious reasons, but he's slowly filling out and getting healthier. An absolute dork and lovable goof, he practically dances when he sees people he loves. Unfortunately, thanks to his trusting nature he has innocently approached people who have hurt him in the past, so he's learning to be a little more cautious. He loves belly rubs and is currently awaiting approval for his application to join the Motif gang. Until then, he's making himself useful as the community architect, digging little holes in piles of mud to curl up in when it rains."
  },
  {
-  id:'stubby', name:'Stubby', gang:'Octave Gang', photo:null,
+  id:'stubby', name:'Stubby', gang:'Octave Gang', photo:'stubby.jpg',
   age:'3+ years', sex:'Male', neutered:true,
   vaccination:'Updated, next round due September 2026',
   approach:'Approachable with the right body language',
@@ -111,7 +111,7 @@ window.STRAYLOVE_DOGS = [
   bio:"Spotty has the brightest, most endearing eyes, always looking as though he's searching for his next great adventure. Goofy to the core but deceptively clever, he has managed to outsmart everyone so far: we haven't been able to catch him at all. He gets ridiculously excited when he sees his feeders, promptly demolishes his food, and is invariably the first to finish and ask for more. And then there's that wonderfully soft fur, which makes him look like he should be a cuddle bug, if only he'd stay still long enough."
  },
  {
-  id:'ammu', name:'Ammu', gang:'Octave Gang', photo:null,
+  id:'ammu', name:'Ammu', gang:'Octave Gang', photo:'ammu.jpg',
   age:'2+ years', sex:'Female', neutered:true,
   vaccination:'Updated, next round due April 2027',
   approach:'Does not approach people',
@@ -119,7 +119,7 @@ window.STRAYLOVE_DOGS = [
   bio:"Ammu was found at Octave, severely malnourished and caring for a bunch of pups. She's come a long way since then: her pups have all found homes, she's been neutered, and she's now a healthy little girl who happily prances around the community. She gets incredibly excited when she sees people, but is still a little too shy to come all the way over. Give her time, and she may just work up the courage to say hello."
  },
  {
-  id:'white-mars', name:'White Mars', gang:'Octave Gang', photo:null,
+  id:'white-mars', name:'White Mars', gang:'Octave Gang', photo:'white-mars.jpg',
   age:'3+ years', sex:'Female', neutered:true,
   vaccination:'Updated, next round due September 2026',
   approach:'Approachable with the right body language',
@@ -127,7 +127,7 @@ window.STRAYLOVE_DOGS = [
   bio:"White Mars was named because she looks so much like Mars, just in a white coat. Although, after living on a construction site, she's now acquired a rather impressive layer of brown. She has the same beautiful eyes and wonderfully fluffy coat as her namesake, with pale yellow eyes that glow like sparkling champagne. There's something quietly captivating about her: an almost intoxicating beauty that makes you look twice. Once wary of people, she has slowly warmed up to those she knows and is now a very sweet, gentle girl."
  },
  {
-  id:'bhuri', name:'Bhuri', gang:'Octave Gang', photo:null,
+  id:'bhuri', name:'Bhuri', gang:'Octave Gang', photo:'bhuri.jpg',
   age:'3+ years', sex:'Female', neutered:true,
   vaccination:'Updated, next round due September 2026',
   approach:'Approachable',
