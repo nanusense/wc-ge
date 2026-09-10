@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Art Adda – Malhar's Sunday Art Popup | Culture</title>
+<meta name="description" content="Art Adda: Malhar's monthly Sunday art popup at Good Earth Malhar & Other Community Spaces. Every 2nd Sunday, meet the artists, browse recent editions, and learn how to show your own work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F1EA;
+    --paper-2:#EBE7DD;
+    --ink:#131210;
+    --ink-soft:#4A4843;
+    --ink-faint:#8D8A82;
+    --line:#D8D3C7;
+    --line-strong:#C2BCAE;
+    --accent:#B4452E;
+    --accent-deep:#8A3420;
+    --accent-ink:#F4F1EA;
+    --radius:14px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Newsreader',Georgia,serif;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:0;
+    background-image:radial-gradient(circle at 1px 1px, rgba(19,18,16,0.06) 1px, transparent 0);
+    background-size:24px 24px;
+    opacity:.55;
+  }
+  a{color:var(--ink);text-decoration-color:var(--line-strong);text-underline-offset:3px;}
+  a:hover{text-decoration-color:var(--accent);}
+  h1,h2,h3{font-family:'Newsreader',Georgia,serif;font-weight:600;color:var(--ink);margin:0;}
+  .wrap{max-width:920px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+  .eyebrow{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:.7rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:700;
+    margin-bottom:10px;
+  }
+
+  /* header */
+  header.site{
+    position:sticky;top:0;z-index:40;
+    background:rgba(244,241,234,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .site-bar{
+    max-width:920px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    flex-wrap:wrap;
+  }
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:1.05rem;color:var(--ink);text-decoration:none;white-space:nowrap;flex:none;}
+  .brand .mark{
+    width:24px;height:24px;flex:none;
+    border-radius:3px;
+    background:var(--accent);
+    position:relative;
+  }
+  .brand .mark::after{
+    content:"";position:absolute;inset:5px;
+    border:1.5px solid var(--paper);border-radius:1px;
+  }
+  .crumb{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:.75rem;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    flex:1 1 auto;min-width:0;text-align:right;
+  }
+  .crumb a{color:var(--ink-soft);text-decoration:none;}
+  .crumb a:hover{color:var(--ink);}
+  .bot-link{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:.76rem;font-weight:600;color:var(--paper);background:#25D366;
+    padding:7px 13px;border-radius:100px;text-decoration:none;white-space:nowrap;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .jumpnav{
+    display:flex;gap:22px;overflow-x:auto;padding:0 24px 12px;max-width:920px;margin:0 auto;
+    scrollbar-width:none;
+  }
+  .jumpnav::-webkit-scrollbar{display:none;}
+  .jumpnav a{
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:.76rem;font-weight:600;color:var(--ink-soft);text-decoration:none;white-space:nowrap;
+    padding-bottom:2px;border-bottom:2px solid transparent;
+    text-transform:uppercase;letter-spacing:.04em;
+  }
+  .jumpnav a:hover{color:var(--ink);border-color:var(--accent);}
+
+  /* hero */
+  .hero{padding:60px 0 30px;position:relative;overflow:hidden;}
+  .hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center;}
+  .hero h1{font-size:clamp(2.8rem,7vw,4.6rem);line-height:.98;letter-spacing:-.01em;}
+  .hero h1 em{font-style:italic;color:var(--ink);}
+  .hero-sub{font-size:1.16rem;color:var(--ink-soft);max-width:34em;margin-top:18px;}
+  .datechip{
+    display:inline-flex;align-items:center;gap:10px;margin-top:26px;
+    background:var(--paper-2);border:1px solid var(--line);border-radius:100px;
+    padding:9px 18px 9px 14px;font-weight:600;font-size:.86rem;box-shadow:0 2px 10px rgba(19,18,16,.06);
+    font-family:'JetBrains Mono',ui-monospace,monospace;color:var(--ink-soft);
+  }
+  .datechip .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none;}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.88rem;
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+    padding:12px 20px;border-radius:100px;text-decoration:none;transition:transform .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--accent);color:var(--accent-ink);}
+  .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);}
+
+  /* hero illustration: clothesline of small "artworks" */
+  .hero-art{position:relative;height:260px;}
+  .hero-art svg{width:100%;height:100%;overflow:visible;}
+
+  /* stat row */
+  .stats{display:flex;gap:0;flex-wrap:wrap;margin-top:44px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .stat{flex:1 1 160px;padding:18px 24px;border-right:1px solid var(--line);}
+  .stat:first-child{padding-left:0;}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-size:1.9rem;font-weight:600;color:var(--ink);line-height:1;}
+  .stat .lbl{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px;}
+  .stats-note{font-size:.82rem;color:var(--ink-soft);margin-top:10px;font-family:'JetBrains Mono',ui-monospace,monospace;}
+
+  section{padding:56px 0;}
+  .section-head{max-width:44em;margin-bottom:32px;}
+  .section-head p{color:var(--ink-soft);font-size:1.02rem;}
+
+  .divider{display:flex;align-items:center;gap:14px;color:var(--ink-faint);margin:0 0 34px;}
+  .divider .peg{flex:none;}
+  .divider .rule{flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent);}
+  .divider .rule.right{background:linear-gradient(270deg,var(--line),transparent);}
+
+  p.lede{font-size:1.08rem;}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease;}
+  .reveal.is-visible{opacity:1;transform:translateY(0);}
+
+  /* pull quote */
+  .pullquote{
+    display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
+    background:var(--paper-2);
+    border:1px solid var(--line);border-radius:20px;padding:30px 32px;margin-top:30px;
+  }
+  .pullquote .qmark{font-family:'Newsreader',Georgia,serif;font-style:italic;font-size:3.2rem;color:var(--accent);line-height:.6;margin-top:12px;}
+  .pullquote blockquote{margin:0;font-size:1.2rem;font-style:italic;font-family:'Newsreader',Georgia,serif;line-height:1.5;}
+  .pullquote footer{margin-top:14px;font-family:'JetBrains Mono',ui-monospace,monospace;font-style:normal;font-size:.78rem;color:var(--ink-soft);}
+  .pullquote footer a{color:var(--ink-soft);}
+  .pullquote .founders-note{margin-top:6px;font-size:.92rem;color:var(--ink-soft);font-style:normal;font-family:'Newsreader',Georgia,serif;}
+  .pullquote .founders-note a{color:var(--ink-soft);}
+
+  /* info grid (when & where) */
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin-bottom:28px;}
+  .info-card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;}
+  .info-card .k{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px;}
+  .info-card .v{font-weight:600;font-size:1.05rem;}
+
+  /* editions timeline */
+  .timeline{position:relative;padding-left:26px;border-left:2px dashed var(--line);}
+  .ed-block{
+    position:relative;margin-bottom:18px;
+    display:block;text-decoration:none;color:inherit;
+    padding:14px 18px;border-radius:var(--radius);
+    transition:background .15s ease,transform .15s ease;
+  }
+  .ed-block:last-child{margin-bottom:0;}
+  .ed-block::before{
+    content:"";position:absolute;left:-33px;top:25px;width:14px;height:14px;border-radius:50%;
+    background:var(--accent);border:3px solid var(--paper);box-shadow:0 0 0 2px var(--accent);
+  }
+  .ed-block:hover{background:var(--paper-2);transform:translateX(2px);}
+  .ed-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin-bottom:4px;}
+  .ed-date{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:700;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:3px 10px;border-radius:100px;}
+  .ed-head h3{font-size:1.34rem;color:var(--ink);}
+  .ed-block p{margin:4px 0 0;color:var(--ink-soft);font-size:.98rem;}
+  .ed-artists{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.74rem;color:var(--ink-soft);margin-top:8px;}
+  .ed-view{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.74rem;font-weight:700;color:var(--accent);margin-top:10px;}
+  .ed-block:hover .ed-view{text-decoration:underline;}
+  .ed-more{margin-top:30px;}
+  .ed-more a{font-weight:700;text-decoration:none;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.86rem;color:var(--ink);border-bottom:1px solid var(--line-strong);}
+  .ed-more a:hover{border-color:var(--accent);}
+
+  /* artist chips */
+  .artist-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+  .artist-card{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;position:relative;
+    display:block;text-decoration:none;color:inherit;transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .artist-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(19,18,16,.10);}
+  .artist-card .pin{position:absolute;top:-7px;left:18px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 2px 4px rgba(19,18,16,.25);}
+  .artist-card h4{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:1.12rem;margin:6px 0 6px;}
+  .artist-card .medium{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.68rem;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;}
+  .artist-view{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.7rem;font-weight:700;color:var(--ink-faint);margin-top:12px;}
+  .artist-card:hover .artist-view{color:var(--accent);text-decoration:underline;}
+  .artist-more{
+    background:transparent;border:1.5px dashed var(--line);border-radius:var(--radius);
+    padding:18px 20px;display:flex;align-items:center;justify-content:center;text-align:center;
+  }
+  .artist-more a{font-weight:700;text-decoration:none;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.84rem;color:var(--ink);}
+  .artist-more a:hover{color:var(--accent);}
+
+  /* checklist */
+  .checklist{margin:26px 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .checklist li{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:14px 16px;font-size:.94rem;display:flex;gap:10px;align-items:flex-start;
+  }
+  .checklist li .n{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:700;color:var(--accent);font-size:.78rem;flex:none;margin-top:3px;}
+
+  footer{
+    border-top:1px solid var(--line);padding:40px 0 34px;margin-top:20px;
+    background:var(--paper-2);
+  }
+  .foot-links{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:18px;font-family:'JetBrains Mono',ui-monospace,monospace;}
+  .foot-links a{font-weight:600;font-size:.84rem;text-decoration:none;color:var(--ink-soft);}
+  .foot-links a:hover{color:var(--accent);}
+  .foot-note{font-size:.8rem;color:var(--ink-soft);max-width:52em;}
+  .foot-brand{font-family:'Newsreader',Georgia,serif;font-weight:600;color:var(--ink);margin-bottom:10px;font-size:1.05rem;}
+
+  @media (max-width:760px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-art{height:150px;order:-1;}
+  }
+  @media (max-width:640px){
+    .hero{padding:40px 0 24px;}
+    section{padding:40px 0;}
+    .timeline{padding-left:20px;}
+    .ed-block::before{left:-27px;}
+    .stats{flex-direction:column;}
+    .stat{padding:16px 0;border-right:none;border-bottom:1px solid var(--line);}
+    .stat:first-child{padding-left:0;}
+    .stat:last-child{border-bottom:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="site-bar">
+    <a class="brand" href="https://malhar.community"><span class="mark"></span>malhar.community</a>
+    <span class="crumb"><a href="https://malhar.community">Culture</a> / Art Adda</span>
+    <a class="bot-link" href="https://wa.me/919364908349" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.87.52 3.63 1.4 5.14L2 22l5.13-1.5a9.86 9.86 0 0 0 4.9 1.32h.01c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2Z"/></svg>
+      Ask the Bot
+    </a>
+  </div>
+  <nav class="jumpnav" aria-label="Section navigation">
+    <a href="#idea">What it is</a>
+    <a href="#when">When &amp; where</a>
+    <a href="#editions">Editions</a>
+    <a href="#artists">Artists</a>
+    <a href="#takepart">Take part</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Culture · Art Adda</div>
+        <h1>Art, coffee &amp;<br><em>conversation.</em></h1>
+        <p class="hero-sub">A monthly Sunday art popup at Good Earth Malhar &amp; Other Community Spaces – resident artists display their own work and stay to talk about it, right in the middle of an ordinary Sunday.</p>
+        <div class="datechip"><span class="dot"></span>Every 2nd Sunday · 7:00–10:30 AM &amp; 4:00–7:30 PM</div>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#editions">See recent editions ↓</a>
+          <a class="btn btn-ghost" href="https://theartadda.in" target="_blank" rel="noopener">Visit theartadda.in ↗</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
+          <line x1="10" y1="40" x2="310" y2="40" stroke="var(--ink-faint)" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round"/>
+          <!-- clothespin 1 + frame (single colour highlight) -->
+          <g transform="translate(40,40)">
+            <rect x="-6" y="0" width="12" height="16" rx="2" fill="var(--ink-soft)"/>
+            <circle cx="0" cy="6" r="2" fill="var(--paper)"/>
+            <rect x="-46" y="16" width="92" height="112" rx="3" fill="var(--paper-2)" stroke="var(--line-strong)"/>
+            <rect x="-34" y="30" width="68" height="84" fill="none" stroke="var(--ink)" stroke-width="2"/>
+            <path d="M-30 96 L-8 62 L10 82 L22 68 L34 96 Z" fill="var(--accent)" opacity=".9"/>
+            <circle cx="10" cy="46" r="7" fill="var(--ink-soft)"/>
+          </g>
+          <!-- clothespin 2 + frame (line study) -->
+          <g transform="translate(170,40)">
+            <rect x="-6" y="0" width="12" height="16" rx="2" fill="var(--ink-soft)"/>
+            <circle cx="0" cy="6" r="2" fill="var(--paper)"/>
+            <rect x="-52" y="16" width="104" height="70" rx="3" fill="var(--paper-2)" stroke="var(--line-strong)"/>
+            <rect x="-40" y="27" width="80" height="48" fill="none" stroke="var(--ink-soft)" stroke-width="2"/>
+            <line x1="-40" y1="27" x2="40" y2="75" stroke="var(--ink-soft)" stroke-width="1.4" opacity=".6"/>
+            <line x1="40" y1="27" x2="-40" y2="75" stroke="var(--ink-soft)" stroke-width="1.4" opacity=".6"/>
+          </g>
+          <!-- clothespin 3 + frame (line study) -->
+          <g transform="translate(268,40)">
+            <rect x="-6" y="0" width="12" height="16" rx="2" fill="var(--ink-soft)"/>
+            <circle cx="0" cy="6" r="2" fill="var(--paper)"/>
+            <rect x="-34" y="16" width="68" height="150" rx="3" fill="var(--paper-2)" stroke="var(--line-strong)"/>
+            <circle cx="0" cy="70" r="20" fill="none" stroke="var(--ink-soft)" stroke-width="2"/>
+            <rect x="-16" y="112" width="32" height="32" fill="none" stroke="var(--ink-soft)" stroke-width="2"/>
+          </g>
+          <!-- easel bottom left -->
+          <g transform="translate(210,150)" stroke="var(--ink-faint)" stroke-width="2" fill="none" stroke-linecap="round">
+            <line x1="0" y1="0" x2="-18" y2="60"/>
+            <line x1="0" y1="0" x2="18" y2="60"/>
+            <line x1="0" y1="14" x2="0" y2="64"/>
+            <line x1="-14" y1="46" x2="14" y2="46"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="stats reveal">
+      <div class="stat"><div class="num">9</div><div class="lbl">Editions held</div></div>
+      <div class="stat"><div class="num">10+</div><div class="lbl">Artists shown</div></div>
+      <div class="stat"><div class="num">Mar 2025</div><div class="lbl">Founded</div></div>
+    </div>
+    <p class="stats-note">Counts as of September 2026 – the archive grows every month. Live numbers at <a href="https://theartadda.in" target="_blank" rel="noopener">theartadda.in ↗</a>.</p>
+  </section>
+
+  <section class="wrap reveal" id="idea">
+    <div class="divider"><span class="peg">&#128204;</span><span class="rule"></span></div>
+    <div class="section-head">
+      <div class="eyebrow">The idea</div>
+      <h2>A gallery for one Sunday a month</h2>
+    </div>
+    <p class="lede">Art Adda is a monthly art popup at Good Earth Malhar &amp; Other Community Spaces. Once every second Sunday, resident artists bring their own work – paintings, photography, murals, illustration – and stand beside it to talk about how it was made.</p>
+    <p>There's no white cube. Work leans against the wall by the billing counter, hangs from rope and clothespins strung near the wash basin, or perches on an easel by the door. It's woven straight into the regular Sunday crowd – breakfast in the morning, snacks in the evening – so an ordinary gathering becomes, for a few hours, a gallery.</p>
+
+    <div class="pullquote">
+      <div class="qmark">&#8220;</div>
+      <div>
+        <blockquote>Art shouldn't wait behind gallery glass. At Adda it meets you mid-Sunday — between the coffee, the conversation and the corner where you wait for your order.</blockquote>
+        <footer>– <a href="https://theartadda.in/artists/sneha/" target="_blank" rel="noopener">Sneha M L</a>, co-founder</footer>
+        <p class="founders-note">Art Adda was founded in March 2025 by <a href="https://theartadda.in/artists/sneha/" target="_blank" rel="noopener">Sneha M L</a> and <a href="https://theartadda.in/artists/sharada/" target="_blank" rel="noopener">Sharada Arun</a>, who turned a first show of four friends into a Sunday ritual that's grown month by month since. Read more on the <a href="https://theartadda.in/vision" target="_blank" rel="noopener">vision page ↗</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap reveal" id="when">
+    <div class="divider"><span class="peg">&#128204;</span><span class="rule"></span></div>
+    <div class="section-head">
+      <div class="eyebrow">When &amp; where</div>
+      <h2>The Sunday rhythm</h2>
+    </div>
+    <div class="info-grid">
+      <div class="info-card"><div class="k">Venue</div><div class="v">Good Earth Malhar &amp; Other Community Spaces</div></div>
+      <div class="info-card"><div class="k">When</div><div class="v">Every 2nd Sunday</div></div>
+      <div class="info-card"><div class="k">Morning session</div><div class="v">7:00 – 10:30 AM</div></div>
+      <div class="info-card"><div class="k">Evening session</div><div class="v">4:00 – 7:30 PM</div></div>
+    </div>
+    <p>Set-up starts around 6:30 AM, about 30 minutes once an artist knows what goes where. Everyone stays through both sessions to talk with visitors, take feedback, and tell the story behind each piece.</p>
+  </section>
+
+  <section class="wrap reveal" id="editions">
+    <div class="divider"><span class="peg">&#128204;</span><span class="rule"></span></div>
+    <div class="section-head">
+      <div class="eyebrow">The archive</div>
+      <h2>Recent editions</h2>
+      <p>Nine editions in, each one built around whoever's showing that month, sometimes a single artist's body of work, sometimes several brought together.</p>
+    </div>
+
+    <div class="timeline">
+      <a class="ed-block" href="https://theartadda.in/editions/2026-04/" target="_blank" rel="noopener">
+        <div class="ed-head"><span class="ed-date">Apr 2026</span><h3>Inspired by Nature</h3></div>
+        <p>A fresh set of works under the April Sunday light at Adda.</p>
+        <div class="ed-view">View edition ↗</div>
+      </a>
+      <a class="ed-block" href="https://theartadda.in/editions/2026-01/" target="_blank" rel="noopener">
+        <div class="ed-head"><span class="ed-date">Jan 2026</span><h3>Breathe in Nature</h3></div>
+        <p>Priya Hegde opens 2026 with paintings, illustrations and digital work rooted in the quiet beauty of nature.</p>
+        <div class="ed-artists">Priya Hegde</div>
+        <div class="ed-view">View edition ↗</div>
+      </a>
+      <a class="ed-block" href="https://theartadda.in/editions/2025-11/" target="_blank" rel="noopener">
+        <div class="ed-head"><span class="ed-date">Nov 2025</span><h3>Children's Day Special</h3></div>
+        <p>A celebration of children's work, bold, colourful, playful and unexpected. Eight young artists put up their own work and met a curious community.</p>
+        <div class="ed-view">View edition ↗</div>
+      </a>
+      <a class="ed-block" href="https://theartadda.in/editions/2025-10/" target="_blank" rel="noopener">
+        <div class="ed-head"><span class="ed-date">Oct 2025</span><h3>Studies in Form &amp; Figure</h3></div>
+        <p>Pradosh Nair presents portraits, landscapes and small studies in charcoal, watercolour and acrylic.</p>
+        <div class="ed-artists">Pradosh Nair</div>
+        <div class="ed-view">View edition ↗</div>
+      </a>
+      <a class="ed-block" href="https://theartadda.in/editions/2025-08/" target="_blank" rel="noopener">
+        <div class="ed-head"><span class="ed-date">Aug 2025</span><h3>Landscapes, Architecture, Travels &amp; Tides</h3></div>
+        <p>Ramaa's heritage photography meets Sharada Arun's meditative watercolours.</p>
+        <div class="ed-artists">Ramaa · Sharada Arun</div>
+        <div class="ed-view">View edition ↗</div>
+      </a>
+      <a class="ed-block" href="https://theartadda.in/editions/2025-07/" target="_blank" rel="noopener">
+        <div class="ed-head"><span class="ed-date">Jul 2025</span><h3>Murals &amp; Traditionals</h3></div>
+        <p>Nirmala Kamath's Kerala mural paintings alongside Simran Sridhar's mosaics and sketches.</p>
+        <div class="ed-artists">Nirmala Kamath · Simran Sridhar</div>
+        <div class="ed-view">View edition ↗</div>
+      </a>
+    </div>
+    <div class="ed-more"><a href="https://theartadda.in/editions" target="_blank" rel="noopener">All 9 editions on theartadda.in →</a></div>
+  </section>
+
+  <section class="wrap reveal" id="artists">
+    <div class="divider"><span class="peg">&#128204;</span><span class="rule"></span></div>
+    <div class="section-head">
+      <div class="eyebrow">The community</div>
+      <h2>Hands behind the work</h2>
+      <p>Self-taught and formally trained, designers and engineers turned painters, a decade of yoga-teaching turned watercolour practice, everyone who's shown at Art Adda so far. New names join with every edition.</p>
+    </div>
+    <div class="artist-grid">
+      <a class="artist-card" href="https://theartadda.in/artists/disha/" target="_blank" rel="noopener"><span class="pin"></span><h4>Disha Sahu</h4><div class="medium">Urban Sketching · Watercolour</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/nirmala/" target="_blank" rel="noopener"><span class="pin"></span><h4>Nirmala Kamath</h4><div class="medium">Kerala Mural Painting</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/pradosh/" target="_blank" rel="noopener"><span class="pin"></span><h4>Pradosh Nair</h4><div class="medium">Charcoal · Watercolour · Acrylic</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/prashansa/" target="_blank" rel="noopener"><span class="pin"></span><h4>Prashansa Daga</h4><div class="medium">Watercolour · Acrylic</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/priya/" target="_blank" rel="noopener"><span class="pin"></span><h4>Priya Hegde</h4><div class="medium">Painting · Illustration · Digital</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/ramaa/" target="_blank" rel="noopener"><span class="pin"></span><h4>Ramaa</h4><div class="medium">Travel &amp; Heritage Photography</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/sangeetha/" target="_blank" rel="noopener"><span class="pin"></span><h4>Sangeetha Kadur</h4><div class="medium">Wildlife Art · Nature Journaling</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/sharada/" target="_blank" rel="noopener"><span class="pin"></span><h4>Sharada Arun</h4><div class="medium">Watercolour</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/sneha/" target="_blank" rel="noopener"><span class="pin"></span><h4>Sneha M L</h4><div class="medium">Contemporary · Abstract</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/vydehi/" target="_blank" rel="noopener"><span class="pin"></span><h4>Vydehi Kadur</h4><div class="medium">Illustration · Underwater Photography</div><div class="artist-view">View profile ↗</div></a>
+      <div class="artist-more"><a href="https://theartadda.in/artists" target="_blank" rel="noopener">Full filterable directory ↗</a></div>
+    </div>
+  </section>
+
+  <section class="wrap reveal" id="takepart">
+    <div class="divider"><span class="peg">&#128204;</span><span class="rule"></span></div>
+    <div class="section-head">
+      <div class="eyebrow">Join in</div>
+      <h2>Bring your work to a Sunday</h2>
+      <p>Any resident artist can show at Art Adda. Submit your work and the guidelines will walk you through the practical side, how to display, price, and protect a piece in a food-and-coffee space.</p>
+    </div>
+
+    <ul class="checklist">
+      <li><span class="n">01</span>Full name, phone, and Malhar community (optional)</li>
+      <li><span class="n">02</span>A portrait – a picture of you, the artist</li>
+      <li><span class="n">03</span>An A4-page bio, in your own words</li>
+      <li><span class="n">04</span>Image, title, date, medium &amp; size for each piece</li>
+    </ul>
+
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="https://theartadda.in/submit" target="_blank" rel="noopener">Submit your work ↗</a>
+      <a class="btn btn-ghost" href="https://theartadda.in/guidelines" target="_blank" rel="noopener">Read the guidelines ↗</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-brand">malhar.community</div>
+    <div class="foot-links">
+      <a href="https://theartadda.in" target="_blank" rel="noopener">theartadda.in ↗</a>
+      <a href="https://theartadda.in/artists" target="_blank" rel="noopener">Artists ↗</a>
+      <a href="https://theartadda.in/editions" target="_blank" rel="noopener">Editions ↗</a>
+      <a href="https://theartadda.in/guidelines" target="_blank" rel="noopener">Guidelines ↗</a>
+      <a href="https://wa.me/919364908349" target="_blank" rel="noopener">WhatsApp Bot ↗</a>
+      <a href="https://malhar.community">malhar.community Home ↗</a>
+    </div>
+    <p class="foot-note">Artist directory, edition archive, and guidelines are maintained live at theartadda.in and grow every month – this page was last checked against the source on 10 September 2026. This is a community reference page; visit theartadda.in for the current lists.</p>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, {threshold:.1});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>
