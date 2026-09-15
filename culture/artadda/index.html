@@ -130,20 +130,35 @@
   .btn-primary{background:var(--accent);color:var(--accent-ink);}
   .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);}
 
-  /* hero photo cluster: today's 3 artworks from theartadda.in */
+  /* hero photo cluster: today's 3 artworks from theartadda.in.
+     Layout mirrors theartadda.in's own hero — one full-width piece on
+     top, two square ones below — including the hover credit label and
+     click-through to the artist's page. */
   .hero-photos{
-    display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr;
-    gap:8px;height:260px;
+    display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.7fr 1fr;
+    gap:10px;height:300px;
   }
-  .photo-slot{
-    position:relative;overflow:hidden;border-radius:var(--radius);
+  .art{
+    position:relative;overflow:hidden;border-radius:4px;
     border:1px solid var(--line);background:var(--paper-2);
+    display:block;cursor:pointer;
   }
-  .photo-slot:nth-child(1){grid-row:1 / 3;grid-column:1;}
-  .photo-slot:nth-child(2){grid-row:1;grid-column:2;}
-  .photo-slot:nth-child(3){grid-row:2;grid-column:2;}
-  .photo-slot img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .4s ease;}
-  .photo-slot img.is-loaded{opacity:1;}
+  .art:nth-child(1){grid-row:1;grid-column:1 / 3;}
+  .art:nth-child(2){grid-row:2;grid-column:1;}
+  .art:nth-child(3){grid-row:2;grid-column:2;}
+  .art img{
+    width:100%;height:100%;object-fit:cover;display:block;opacity:0;
+    transition:opacity .4s ease, filter .3s ease, transform .5s ease;
+  }
+  .art img.is-loaded{opacity:1;}
+  .art:hover img{filter:contrast(1.03) brightness(.98);transform:scale(1.02);}
+  .art-credit{
+    position:absolute;left:8px;bottom:8px;font-family:'JetBrains Mono',ui-monospace,monospace;
+    font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;color:var(--accent-ink);
+    background:rgba(19,18,16,.65);padding:4px 8px;border-radius:2px;
+    opacity:0;transition:opacity .2s ease;pointer-events:none;
+  }
+  .art:hover .art-credit{opacity:1;}
   .photo-credit{
     font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.68rem;color:var(--ink-faint);
     margin-top:10px;text-align:right;
@@ -305,9 +320,9 @@
         </div>
       </div>
       <div class="hero-photos" id="heroPhotos">
-        <div class="photo-slot"><img loading="eager" alt=""></div>
-        <div class="photo-slot"><img loading="eager" alt=""></div>
-        <div class="photo-slot"><img loading="eager" alt=""></div>
+        <a class="art" target="_blank" rel="noopener"><img loading="eager" alt=""><span class="art-credit"></span></a>
+        <a class="art" target="_blank" rel="noopener"><img loading="eager" alt=""><span class="art-credit"></span></a>
+        <a class="art" target="_blank" rel="noopener"><img loading="eager" alt=""><span class="art-credit"></span></a>
       </div>
     </div>
     <p class="photo-credit">Today's picks from <a href="https://theartadda.in" target="_blank" rel="noopener">theartadda.in ↗</a> — changes daily</p>
@@ -473,36 +488,43 @@
   // today's date so the set is stable all day and changes at midnight —
   // mirroring the rotation on theartadda.in itself. Update this list from
   // time to time as their gallery grows; the rotation needs no other upkeep.
+  // Each entry's artist (a/s) is confirmed by cross-checking against that
+  // artist's own /artists/<slug>/ page — WordPress's own attachment-slug
+  // hierarchy (e.g. some URLs nesting under an unrelated artist's slug)
+  // turned out not to be a reliable attribution source, so a few
+  // ambiguous images were left out rather than credited to a guess.
   const ARTWORK_POOL = [
-    {t:'Talisman',u:'https://theartadda.in/wp-content/uploads/2026/08/Talisman.jpg'},
-    {t:'Sunrise',u:'https://theartadda.in/wp-content/uploads/2026/08/Sunrise-1024x791.jpg'},
-    {t:'Saligrama',u:'https://theartadda.in/wp-content/uploads/2026/08/Saligrama-768x766.jpg'},
-    {t:'Sahasrara The Big Bang',u:'https://theartadda.in/wp-content/uploads/2026/08/Sahasrara-copy-768x762.jpg'},
-    {t:'Reflections 19',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-19-768x584.jpg'},
-    {t:'Reflections 17',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-17-768x593.jpg'},
-    {t:'Reflections 14',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-14-768x573.jpg'},
-    {t:'Reflections 10',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-10-768x579.jpg'},
-    {t:'Gabbadi',u:'https://theartadda.in/wp-content/uploads/2026/08/Gabbadi-718x1024.jpeg'},
-    {t:'Flowers',u:'https://theartadda.in/wp-content/uploads/2026/08/Flowers-744x1024.jpeg'},
-    {t:'Prashansa Flowers',u:'https://theartadda.in/wp-content/uploads/2026/08/Prashansa-Flowers-665x1024.jpeg'},
-    {t:'Prashansa Flowers 2',u:'https://theartadda.in/wp-content/uploads/2026/08/Prashansa-Flowers-2-576x1024.jpeg'},
-    {t:'Prashansa Swans',u:'https://theartadda.in/wp-content/uploads/2026/08/Prashansa-Swans-1024x768.jpeg'},
-    {t:'Disha Landscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Disha-Landscape-1024x715.jpeg'},
-    {t:'Disha Benaras',u:'https://theartadda.in/wp-content/uploads/2026/08/Disha-Benaras-705x1024.jpeg'},
-    {t:'Sharada Landscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Sharada-Landscape-677x1024.jpeg'},
-    {t:'Sharada Landscape 2',u:'https://theartadda.in/wp-content/uploads/2026/08/Sharada-Landscape-2-684x1024.jpeg'},
-    {t:'Sharadha Landscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Sharadha-Landscape-701x1024.jpeg'},
-    {t:'Sangeetha Flowers',u:'https://theartadda.in/wp-content/uploads/2026/08/Sangeetha-Flowers-1024x576.jpeg'},
-    {t:'Cityscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Pradosh-Cityskape-746x1024.jpeg'},
-    {t:'Kingfisher',u:'https://theartadda.in/wp-content/uploads/2026/08/Pradosh_Watercolor_kingfisher-701x1024.jpeg'},
-    {t:'Flowerpot',u:'https://theartadda.in/wp-content/uploads/2026/08/Pradosh_watercolor_FLowerpot-742x1024.jpeg'},
-    {t:'Sushi the Dog',u:'https://theartadda.in/wp-content/uploads/2026/09/ArtAdda-Artworks_Sushi-The-Dog.jpg'},
-    {t:'Lilies and Sky',u:'https://theartadda.in/wp-content/uploads/2026/09/ArtAdda-Artworks_Lilies-and-Sky.jpg'},
-    {t:'Jaisalmer Haveli',u:'https://theartadda.in/wp-content/uploads/2026/09/ArtAdda-Artworks_Jaisalmer-Haveli.jpg'},
-    {t:'Mexico Cityscape',u:'https://theartadda.in/wp-content/uploads/2026/09/ArtAdda-Artworks_Mexico-Cityscape.jpg'},
-    {t:'Footsteps Around the World',u:'https://theartadda.in/wp-content/uploads/2026/09/Footsteps-around-the-World-Paper-Collage-and-Calligraphic-Mark-Making_-1024x1012.jpg'},
-    {t:'Bengaluru Through Time',u:'https://theartadda.in/wp-content/uploads/2026/09/Bengaluru-through-Time_-893x1024.jpg'},
-    {t:"Kolkata's Streetview",u:'https://theartadda.in/wp-content/uploads/2026/09/Kolkatta_s-Streetview-1024x749.jpg'}
+    {t:'Talisman',u:'https://theartadda.in/wp-content/uploads/2026/08/Talisman.jpg',a:'Sneha M L',s:'sneha'},
+    {t:'Sunrise',u:'https://theartadda.in/wp-content/uploads/2026/08/Sunrise-1024x791.jpg',a:'Sneha M L',s:'sneha'},
+    {t:'Sahasrara The Big Bang',u:'https://theartadda.in/wp-content/uploads/2026/08/Sahasrara-copy-768x762.jpg',a:'Sneha M L',s:'sneha'},
+    {t:'Reflections 19',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-19-768x584.jpg',a:'Sneha M L',s:'sneha'},
+    {t:'Reflections 17',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-17-768x593.jpg',a:'Sneha M L',s:'sneha'},
+    {t:'Reflections 14',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-14-768x573.jpg',a:'Sneha M L',s:'sneha'},
+    {t:'Reflections 10',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-10-768x579.jpg',a:'Sneha M L',s:'sneha'},
+    {t:'Gabbadi',u:'https://theartadda.in/wp-content/uploads/2026/08/Gabbadi-718x1024.jpeg',a:'Sneha M L',s:'sneha'},
+    {t:'Flowers',u:'https://theartadda.in/wp-content/uploads/2026/08/Flowers-744x1024.jpeg',a:'Sneha M L',s:'sneha'},
+    {t:'Disha Landscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Disha-Landscape-1024x715.jpeg',a:'Disha Sahu',s:'disha'},
+    {t:'Disha Benaras',u:'https://theartadda.in/wp-content/uploads/2026/08/Disha-Benaras-705x1024.jpeg',a:'Disha Sahu',s:'disha'},
+    {t:'Sushi the Dog',u:'https://theartadda.in/wp-content/uploads/2026/09/ArtAdda-Artworks_Sushi-The-Dog.jpg',a:'Disha Sahu',s:'disha'},
+    {t:'Jaisalmer Haveli',u:'https://theartadda.in/wp-content/uploads/2026/09/ArtAdda-Artworks_Jaisalmer-Haveli.jpg',a:'Disha Sahu',s:'disha'},
+    {t:'Mexico Cityscape',u:'https://theartadda.in/wp-content/uploads/2026/09/ArtAdda-Artworks_Mexico-Cityscape.jpg',a:'Disha Sahu',s:'disha'},
+    {t:'Footsteps Around the World',u:'https://theartadda.in/wp-content/uploads/2026/09/Footsteps-around-the-World-Paper-Collage-and-Calligraphic-Mark-Making_-1024x1012.jpg',a:'Disha Sahu',s:'disha'},
+    {t:'Bengaluru Through Time',u:'https://theartadda.in/wp-content/uploads/2026/09/Bengaluru-through-Time_-893x1024.jpg',a:'Disha Sahu',s:'disha'},
+    {t:"Kolkata's Streetview",u:'https://theartadda.in/wp-content/uploads/2026/09/Kolkatta_s-Streetview-1024x749.jpg',a:'Disha Sahu',s:'disha'},
+    {t:'Prashansa Flowers',u:'https://theartadda.in/wp-content/uploads/2026/08/Prashansa-Flowers-665x1024.jpeg',a:'Prashansa Daga',s:'prashansa'},
+    {t:'Prashansa Flowers 2',u:'https://theartadda.in/wp-content/uploads/2026/08/Prashansa-Flowers-2-576x1024.jpeg',a:'Prashansa Daga',s:'prashansa'},
+    {t:'Prashansa Swans',u:'https://theartadda.in/wp-content/uploads/2026/08/Prashansa-Swans-1024x768.jpeg',a:'Prashansa Daga',s:'prashansa'},
+    {t:'Sharada Landscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Sharada-Landscape-677x1024.jpeg',a:'Sharada Arun',s:'sharada'},
+    {t:'Sharada Landscape 2',u:'https://theartadda.in/wp-content/uploads/2026/08/Sharada-Landscape-2-684x1024.jpeg',a:'Sharada Arun',s:'sharada'},
+    {t:'Sharadha Landscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Sharadha-Landscape-701x1024.jpeg',a:'Sharada Arun',s:'sharada'},
+    {t:'Cityscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Pradosh-Cityskape-746x1024.jpeg',a:'Pradosh Nair',s:'pradosh'},
+    {t:'Kingfisher',u:'https://theartadda.in/wp-content/uploads/2026/08/Pradosh_Watercolor_kingfisher-701x1024.jpeg',a:'Pradosh Nair',s:'pradosh'},
+    {t:'Flowerpot',u:'https://theartadda.in/wp-content/uploads/2026/08/Pradosh_watercolor_FLowerpot-742x1024.jpeg',a:'Pradosh Nair',s:'pradosh'},
+    {t:"Nirmala's Peacock",u:'https://theartadda.in/wp-content/uploads/2026/08/Nirmalas-Peacock-825x1024.jpg',a:'Nirmala Kamath',s:'nirmala'},
+    {t:'Priya Bridge',u:'https://theartadda.in/wp-content/uploads/2026/08/Priya-Bridge-813x1024.jpeg',a:'Priya Hegde',s:'priya'},
+    {t:'Ramaa Architecture',u:'https://theartadda.in/wp-content/uploads/2026/08/Ramaa-Architecture-768x533.jpeg',a:'Ramaa',s:'ramaa'},
+    {t:'Sangeetha Flowers',u:'https://theartadda.in/wp-content/uploads/2026/08/Sangeetha-Flowers-1-1024x679.jpeg',a:'Sangeetha Kadur',s:'sangeetha'},
+    {t:'Vydehi Stingray',u:'https://theartadda.in/wp-content/uploads/2026/08/Vydehi-Stingray-1024x717.jpeg',a:'Vydehi Kadur',s:'vydehi'}
   ];
 
   function seededShuffle(arr, seedStr){
@@ -518,15 +540,19 @@
   const today = new Date().toISOString().slice(0,10);
   const queue = seededShuffle(ARTWORK_POOL, today);
 
-  function fillSlot(imgEl){
+  function fillSlot(linkEl){
     const pick = queue.shift();
-    if(!pick){ imgEl.closest('.photo-slot').style.display = 'none'; return; }
-    imgEl.onerror = () => fillSlot(imgEl);
+    if(!pick){ linkEl.style.display = 'none'; return; }
+    const imgEl = linkEl.querySelector('img');
+    const creditEl = linkEl.querySelector('.art-credit');
+    imgEl.onerror = () => fillSlot(linkEl);
     imgEl.onload = () => imgEl.classList.add('is-loaded');
-    imgEl.alt = 'Artwork from a past Art Adda edition: ' + pick.t;
+    imgEl.alt = 'Artwork by ' + pick.a + ', shown at a past Art Adda edition';
     imgEl.src = pick.u;
+    creditEl.textContent = pick.a;
+    linkEl.href = 'https://theartadda.in/artists/' + pick.s + '/';
   }
-  document.querySelectorAll('#heroPhotos img').forEach(fillSlot);
+  document.querySelectorAll('#heroPhotos .art').forEach(fillSlot);
 </script>
 
 </body>
