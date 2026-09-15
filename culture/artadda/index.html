@@ -130,9 +130,25 @@
   .btn-primary{background:var(--accent);color:var(--accent-ink);}
   .btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink);}
 
-  /* hero illustration: clothesline of small "artworks" */
-  .hero-art{position:relative;height:260px;}
-  .hero-art svg{width:100%;height:100%;overflow:visible;}
+  /* hero photo cluster: today's 3 artworks from theartadda.in */
+  .hero-photos{
+    display:grid;grid-template-columns:1.3fr 1fr;grid-template-rows:1fr 1fr;
+    gap:8px;height:260px;
+  }
+  .photo-slot{
+    position:relative;overflow:hidden;border-radius:var(--radius);
+    border:1px solid var(--line);background:var(--paper-2);
+  }
+  .photo-slot:nth-child(1){grid-row:1 / 3;grid-column:1;}
+  .photo-slot:nth-child(2){grid-row:1;grid-column:2;}
+  .photo-slot:nth-child(3){grid-row:2;grid-column:2;}
+  .photo-slot img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .4s ease;}
+  .photo-slot img.is-loaded{opacity:1;}
+  .photo-credit{
+    font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.68rem;color:var(--ink-faint);
+    margin-top:10px;text-align:right;
+  }
+  .photo-credit a{color:var(--ink-faint);}
 
   /* stat row */
   .stats{display:flex;gap:0;flex-wrap:wrap;margin-top:44px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
@@ -241,7 +257,7 @@
 
   @media (max-width:760px){
     .hero-grid{grid-template-columns:1fr;}
-    .hero-art{height:150px;order:-1;}
+    .hero-photos{height:190px;order:-1;}
   }
   @media (max-width:640px){
     .hero{padding-top:40px;padding-bottom:24px;}
@@ -288,45 +304,13 @@
           <a class="btn btn-ghost" href="https://theartadda.in" target="_blank" rel="noopener">Visit theartadda.in ↗</a>
         </div>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <svg viewBox="0 0 320 260" xmlns="http://www.w3.org/2000/svg">
-          <line x1="10" y1="40" x2="310" y2="40" stroke="var(--ink-faint)" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round"/>
-          <!-- clothespin 1 + frame (single colour highlight) -->
-          <g transform="translate(40,40)">
-            <rect x="-6" y="0" width="12" height="16" rx="2" fill="var(--ink-soft)"/>
-            <circle cx="0" cy="6" r="2" fill="var(--paper)"/>
-            <rect x="-46" y="16" width="92" height="112" rx="3" fill="var(--paper-2)" stroke="var(--line-strong)"/>
-            <rect x="-34" y="30" width="68" height="84" fill="none" stroke="var(--ink)" stroke-width="2"/>
-            <path d="M-30 96 L-8 62 L10 82 L22 68 L34 96 Z" fill="var(--accent)" opacity=".9"/>
-            <circle cx="10" cy="46" r="7" fill="var(--ink-soft)"/>
-          </g>
-          <!-- clothespin 2 + frame (line study) -->
-          <g transform="translate(170,40)">
-            <rect x="-6" y="0" width="12" height="16" rx="2" fill="var(--ink-soft)"/>
-            <circle cx="0" cy="6" r="2" fill="var(--paper)"/>
-            <rect x="-52" y="16" width="104" height="70" rx="3" fill="var(--paper-2)" stroke="var(--line-strong)"/>
-            <rect x="-40" y="27" width="80" height="48" fill="none" stroke="var(--ink-soft)" stroke-width="2"/>
-            <line x1="-40" y1="27" x2="40" y2="75" stroke="var(--ink-soft)" stroke-width="1.4" opacity=".6"/>
-            <line x1="40" y1="27" x2="-40" y2="75" stroke="var(--ink-soft)" stroke-width="1.4" opacity=".6"/>
-          </g>
-          <!-- clothespin 3 + frame (line study) -->
-          <g transform="translate(268,40)">
-            <rect x="-6" y="0" width="12" height="16" rx="2" fill="var(--ink-soft)"/>
-            <circle cx="0" cy="6" r="2" fill="var(--paper)"/>
-            <rect x="-34" y="16" width="68" height="150" rx="3" fill="var(--paper-2)" stroke="var(--line-strong)"/>
-            <circle cx="0" cy="70" r="20" fill="none" stroke="var(--ink-soft)" stroke-width="2"/>
-            <rect x="-16" y="112" width="32" height="32" fill="none" stroke="var(--ink-soft)" stroke-width="2"/>
-          </g>
-          <!-- easel bottom left -->
-          <g transform="translate(210,150)" stroke="var(--ink-faint)" stroke-width="2" fill="none" stroke-linecap="round">
-            <line x1="0" y1="0" x2="-18" y2="60"/>
-            <line x1="0" y1="0" x2="18" y2="60"/>
-            <line x1="0" y1="14" x2="0" y2="64"/>
-            <line x1="-14" y1="46" x2="14" y2="46"/>
-          </g>
-        </svg>
+      <div class="hero-photos" id="heroPhotos">
+        <div class="photo-slot"><img loading="eager" alt=""></div>
+        <div class="photo-slot"><img loading="eager" alt=""></div>
+        <div class="photo-slot"><img loading="eager" alt=""></div>
       </div>
     </div>
+    <p class="photo-credit">Today's picks from <a href="https://theartadda.in" target="_blank" rel="noopener">theartadda.in ↗</a> — changes daily</p>
 
     <div class="stats reveal">
       <div class="stat"><div class="num">9</div><div class="lbl">Editions held</div></div>
@@ -481,6 +465,68 @@
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
   }, {threshold:.1});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+<script>
+  // A curated pool of past Art Adda artworks (hotlinked from theartadda.in's
+  // own media library). Three are picked at random each day, seeded by
+  // today's date so the set is stable all day and changes at midnight —
+  // mirroring the rotation on theartadda.in itself. Update this list from
+  // time to time as their gallery grows; the rotation needs no other upkeep.
+  const ARTWORK_POOL = [
+    {t:'Talisman',u:'https://theartadda.in/wp-content/uploads/2026/08/Talisman.jpg'},
+    {t:'Sunrise',u:'https://theartadda.in/wp-content/uploads/2026/08/Sunrise-1024x791.jpg'},
+    {t:'Saligrama',u:'https://theartadda.in/wp-content/uploads/2026/08/Saligrama-768x766.jpg'},
+    {t:'Sahasrara The Big Bang',u:'https://theartadda.in/wp-content/uploads/2026/08/Sahasrara-copy-768x762.jpg'},
+    {t:'Reflections 19',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-19-768x584.jpg'},
+    {t:'Reflections 17',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-17-768x593.jpg'},
+    {t:'Reflections 14',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-14-768x573.jpg'},
+    {t:'Reflections 10',u:'https://theartadda.in/wp-content/uploads/2026/08/Reflections-10-768x579.jpg'},
+    {t:'Gabbadi',u:'https://theartadda.in/wp-content/uploads/2026/08/Gabbadi-718x1024.jpeg'},
+    {t:'Flowers',u:'https://theartadda.in/wp-content/uploads/2026/08/Flowers-744x1024.jpeg'},
+    {t:'Prashansa Flowers',u:'https://theartadda.in/wp-content/uploads/2026/08/Prashansa-Flowers-665x1024.jpeg'},
+    {t:'Prashansa Flowers 2',u:'https://theartadda.in/wp-content/uploads/2026/08/Prashansa-Flowers-2-576x1024.jpeg'},
+    {t:'Prashansa Swans',u:'https://theartadda.in/wp-content/uploads/2026/08/Prashansa-Swans-1024x768.jpeg'},
+    {t:'Disha Landscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Disha-Landscape-1024x715.jpeg'},
+    {t:'Disha Benaras',u:'https://theartadda.in/wp-content/uploads/2026/08/Disha-Benaras-705x1024.jpeg'},
+    {t:'Sharada Landscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Sharada-Landscape-677x1024.jpeg'},
+    {t:'Sharada Landscape 2',u:'https://theartadda.in/wp-content/uploads/2026/08/Sharada-Landscape-2-684x1024.jpeg'},
+    {t:'Sharadha Landscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Sharadha-Landscape-701x1024.jpeg'},
+    {t:'Sangeetha Flowers',u:'https://theartadda.in/wp-content/uploads/2026/08/Sangeetha-Flowers-1024x576.jpeg'},
+    {t:'Cityscape',u:'https://theartadda.in/wp-content/uploads/2026/08/Pradosh-Cityskape-746x1024.jpeg'},
+    {t:'Kingfisher',u:'https://theartadda.in/wp-content/uploads/2026/08/Pradosh_Watercolor_kingfisher-701x1024.jpeg'},
+    {t:'Flowerpot',u:'https://theartadda.in/wp-content/uploads/2026/08/Pradosh_watercolor_FLowerpot-742x1024.jpeg'},
+    {t:'Sushi the Dog',u:'https://theartadda.in/wp-content/uploads/2026/09/ArtAdda-Artworks_Sushi-The-Dog.jpg'},
+    {t:'Lilies and Sky',u:'https://theartadda.in/wp-content/uploads/2026/09/ArtAdda-Artworks_Lilies-and-Sky.jpg'},
+    {t:'Jaisalmer Haveli',u:'https://theartadda.in/wp-content/uploads/2026/09/ArtAdda-Artworks_Jaisalmer-Haveli.jpg'},
+    {t:'Mexico Cityscape',u:'https://theartadda.in/wp-content/uploads/2026/09/ArtAdda-Artworks_Mexico-Cityscape.jpg'},
+    {t:'Footsteps Around the World',u:'https://theartadda.in/wp-content/uploads/2026/09/Footsteps-around-the-World-Paper-Collage-and-Calligraphic-Mark-Making_-1024x1012.jpg'},
+    {t:'Bengaluru Through Time',u:'https://theartadda.in/wp-content/uploads/2026/09/Bengaluru-through-Time_-893x1024.jpg'},
+    {t:"Kolkata's Streetview",u:'https://theartadda.in/wp-content/uploads/2026/09/Kolkatta_s-Streetview-1024x749.jpg'}
+  ];
+
+  function seededShuffle(arr, seedStr){
+    let h = 0;
+    for(let i=0;i<seedStr.length;i++){ h = (Math.imul(31,h) + seedStr.charCodeAt(i)) | 0; }
+    let seed = h >>> 0;
+    function rand(){ seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
+    const a = arr.slice();
+    for(let i=a.length-1;i>0;i--){ const j = Math.floor(rand()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; }
+    return a;
+  }
+
+  const today = new Date().toISOString().slice(0,10);
+  const queue = seededShuffle(ARTWORK_POOL, today);
+
+  function fillSlot(imgEl){
+    const pick = queue.shift();
+    if(!pick){ imgEl.closest('.photo-slot').style.display = 'none'; return; }
+    imgEl.onerror = () => fillSlot(imgEl);
+    imgEl.onload = () => imgEl.classList.add('is-loaded');
+    imgEl.alt = 'Artwork from a past Art Adda edition: ' + pick.t;
+    imgEl.src = pick.u;
+  }
+  document.querySelectorAll('#heroPhotos img').forEach(fillSlot);
 </script>
 
 </body>
