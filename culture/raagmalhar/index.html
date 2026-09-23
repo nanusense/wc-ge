@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raag Malhār · malhar.community</title>
+<meta name="description" content="Raag Malhār: a community-kept directory of the musicians, dancers and teachers of Malhar, gathered from each community's own Music &amp; Dance Directory.">
+<link rel="canonical" href="https://wc-ge.vercel.app/culture/raagmalhar">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="malhar.community">
+<meta property="og:title" content="Raag Malhār">
+<meta property="og:description" content="Eight communities, one long list of everyone who sings, dances, or plays at Malhar.">
+<meta property="og:url" content="https://wc-ge.vercel.app/culture/raagmalhar">
+<meta property="og:image" content="https://wc-ge.vercel.app/culture/raagmalhar/images/hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Raag Malhār">
+<meta name="twitter:description" content="Eight communities, one long list of everyone who sings, dances, or plays at Malhar.">
+<meta name="twitter:image" content="https://wc-ge.vercel.app/culture/raagmalhar/images/hero.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+ --bg:#FDFDFC; --paper:#FFFFFF; --surface:#FBFBF9; --card:#FFFFFF;
+ --ink:#1C1A16; --inkMid:#5A554C; --inkLt:#8E887D;
+ --rule:#C4BDAC; --hairline:#E5DFCF; --border:#D8D1C1;
+ --culture:#9C3F2A; --cultureLt:#EFDBD3; --cultureDk:#6E2B1C;
+ --serif:'Lora',Georgia,serif;
+ --sans:'Instrument Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+ --mono:'JetBrains Mono','Courier New',monospace;
+ /* page-local discipline tones, same pattern as the tier colours on Birds of Malhar */
+ --d-vocal:#9C3F2A; --d-dance:#3F6B52; --d-instr:#3D5A78; --d-prod:#8A6A2E;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;font-size:16px}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding:0 56px}
+.col-narrow{max-width:1000px;margin:0 auto}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:400;letter-spacing:-0.01em;line-height:1.08}
+.eyebrow{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--culture)}
+.mono{font-family:var(--mono)}
+.serif{font-family:var(--serif)}
+.tick{display:inline-flex;align-items:center;gap:8px}
+.tick::before{content:'';width:30px;height:2px;background:var(--culture)}
+
+/* ── TOP BAR / CRUMB (shared pattern) ── */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 56px;border-bottom:1px solid var(--rule);background:var(--bg);position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.1) blur(2px)}
+.logo{display:flex;align-items:baseline;gap:1px}
+.logo b{font-family:var(--serif);font-size:24px;font-weight:500;letter-spacing:-0.01em}
+.logo i{font-family:var(--serif);font-size:24px;font-weight:400;font-style:italic;color:var(--inkMid)}
+.crumb{display:flex;gap:10px;align-items:center;padding:13px 56px;border-bottom:1px solid var(--hairline);font-size:12px;color:var(--inkLt)}
+.crumb a:hover{color:var(--culture)}
+.crumb .here{color:var(--ink)}
+.crumb .tag{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--inkLt)}
+@media(max-width:680px){.crumb .tag{display:none}}
+
+/* ── HERO ── */
+.hero{padding:74px 0 16px}
+.hero h1{font-size:clamp(48px,7.4vw,96px);line-height:0.96;letter-spacing:-0.02em;color:var(--ink);margin:18px 0 0 -2px}
+.hero .sub{font-family:var(--serif);font-style:italic;font-weight:400;font-size:clamp(22px,3vw,34px);color:var(--culture);line-height:1.2;margin-top:16px;max-width:820px}
+.hero .lead{font-family:var(--serif);font-size:clamp(18px,2vw,21px);line-height:1.55;color:var(--inkMid);max-width:760px;margin-top:26px}
+.hero-media{margin-top:36px;border:1px solid var(--border);border-radius:2px;overflow:hidden}
+.hero-media img{width:100%;height:auto;max-height:440px;object-fit:cover;object-position:center 32%}
+.statstrip{display:flex;flex-wrap:wrap;gap:0;margin-top:40px;border-top:2px solid var(--ink);border-bottom:1px solid var(--hairline)}
+.stat{flex:1;min-width:140px;padding:20px 26px 20px 0;margin-right:26px;border-right:1px solid var(--hairline)}
+.stat:last-child{border-right:none}
+.stat .v{font-family:var(--serif);font-size:40px;line-height:1;color:var(--cultureDk)}
+.stat .l{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--inkLt);margin-top:8px}
+.statnote{font-family:var(--mono);font-size:11px;line-height:1.65;color:var(--inkLt);margin-top:18px;max-width:720px;letter-spacing:0.01em}
+@media(max-width:680px){.stat{min-width:45%;margin-right:0;padding-right:16px}}
+
+/* ── SECTION SCAFFOLD ── */
+section{padding:60px 0}
+.sec-head{max-width:640px;margin-bottom:30px}
+.sec-head h2{font-size:clamp(28px,4vw,42px);letter-spacing:-0.015em;margin-top:10px}
+.sec-head h2 em{font-style:italic;color:var(--culture)}
+.sec-head p{font-family:var(--serif);font-size:16px;color:var(--inkMid);line-height:1.55;margin-top:12px}
+
+/* ── TEACHER / OUTSIDE-TEACHER CARDS ── */
+.tcard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.tcard{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--culture);padding:18px 20px}
+.tcard h4{font-size:19px}
+.tcard .loc{font-family:var(--mono);font-size:11px;color:var(--inkLt);margin-top:5px}
+.tcard .what{font-family:var(--serif);font-size:14.5px;color:var(--inkMid);margin-top:12px}
+.tcard .what b{color:var(--ink);font-weight:600}
+.tcard .ph{display:inline-block;margin-top:13px;font-family:var(--mono);font-size:12px;color:var(--culture);background:var(--cultureLt);padding:4px 9px;border-radius:2px}
+
+.outside-head{display:flex;align-items:center;gap:14px;margin:42px 0 6px}
+.outside-head .rule{flex:1;height:1px;background:var(--hairline)}
+.outside-note{font-family:var(--serif);font-size:14.5px;color:var(--inkMid);margin-bottom:18px}
+.orow-wrap{border-top:1px solid var(--hairline)}
+.orow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding:13px 0;border-bottom:1px solid var(--hairline);align-items:baseline;font-size:14px}
+.orow .on{font-weight:600}
+.orow .ow{font-family:var(--mono);font-size:11.5px;color:var(--inkLt);text-align:right}
+.orow .os{color:var(--inkMid);font-family:var(--serif)}
+@media(max-width:640px){.orow{grid-template-columns:1fr;gap:2px}.orow .ow{text-align:left}}
+
+/* ── WATCH CARD ── */
+.watch{margin-top:36px;border:1px solid var(--border);background:var(--card)}
+.watch-h{padding:20px 22px 4px}
+.watch-h .eyebrow{margin-bottom:8px}
+.watch-h h3{font-size:20px}
+.watch-h .who{font-family:var(--mono);font-size:11.5px;color:var(--inkLt);margin-top:6px}
+.video-embed{position:relative;width:100%;aspect-ratio:16/9;background:#000;margin-top:16px}
+.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* ── COMMUNITY CARDS ── */
+.comm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.comm-card{background:var(--card);border:1px solid var(--border);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.comm-card .top{display:flex;justify-content:space-between;align-items:baseline}
+.comm-card h4{font-size:20px}
+.comm-card .count{font-family:var(--mono);font-size:11px;color:var(--inkLt)}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px}
+.dtag{font-family:var(--mono);font-size:10px;letter-spacing:0.04em;text-transform:uppercase;padding:3px 8px;border-radius:2px}
+.dtag.vocal{background:var(--cultureLt);color:var(--d-vocal)}
+.dtag.dance{background:#E1EAE3;color:var(--d-dance)}
+.dtag.instrumental{background:#DFE6EC;color:var(--d-instr)}
+.dtag.production{background:#ECE4CF;color:var(--d-prod)}
+.comm-card .note{font-family:var(--serif);font-size:13.5px;color:var(--inkMid);border-top:1px solid var(--hairline);padding-top:11px}
+.comm-card .note b{color:var(--ink);font-weight:600}
+.comm-card .note.empty{color:var(--inkLt);font-style:italic}
+
+/* ── DIRECTORY / LEDGER ── */
+.ledger-controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:18px}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.fbtn{font-family:var(--sans);font-size:12px;padding:7px 14px;border:1px solid var(--rule);background:transparent;color:var(--inkMid);border-radius:999px;cursor:pointer;transition:all .15s}
+.fbtn:hover{border-color:var(--culture);color:var(--culture)}
+.fbtn.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.search,.csel{font-family:var(--sans);font-size:13px;padding:8px 14px;border:1px solid var(--rule);background:var(--card);color:var(--ink);border-radius:999px;outline:none}
+.search{min-width:190px;flex:1}
+.search:focus,.csel:focus{border-color:var(--culture)}
+.lcount{font-family:var(--mono);font-size:11px;color:var(--inkLt);margin:6px 0 12px}
+.dirwrap{border-top:2px solid var(--ink)}
+.drow{display:grid;grid-template-columns:16px 1.6fr 0.9fr 1fr;gap:16px;align-items:center;padding:12px 0;border-bottom:1px solid var(--hairline)}
+.drow .dots{display:flex;gap:3px}
+.ddot{width:8px;height:8px;border-radius:50%}
+.ddot.vocal{background:var(--d-vocal)} .ddot.dance{background:var(--d-dance)} .ddot.instrumental{background:var(--d-instr)} .ddot.production{background:var(--d-prod)}
+.drow .nm{font-weight:600;font-size:15px}
+.drow .badge{font-family:var(--mono);font-size:9.5px;text-transform:uppercase;letter-spacing:0.05em;color:var(--culture);border:1px solid var(--culture);border-radius:99px;padding:1px 7px;margin-left:7px;vertical-align:2px}
+.drow .st{font-family:var(--serif);font-size:13.5px;color:var(--inkMid);margin-top:2px}
+.drow .cm{font-family:var(--mono);font-size:12px;color:var(--inkLt)}
+.drow .ph{font-family:var(--mono);font-size:12px;color:var(--inkMid)}
+@media(max-width:640px){.drow{grid-template-columns:16px 1fr}.drow .cm,.drow .ph{grid-column:2;font-size:11px}}
+.empty-state{padding:26px 0;text-align:center;color:var(--inkLt);font-size:13px}
+
+/* ── SPOTLIGHTS ── */
+.spot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.spot{background:var(--ink);color:#D9D2C4;padding:24px 22px;border-radius:2px}
+.spot .tagline{font-family:var(--mono);font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#E3A85C;margin-bottom:12px}
+.spot h3{color:#FBF6EA;font-size:21px;margin-bottom:10px}
+.spot p{font-family:var(--serif);font-size:14px;line-height:1.55}
+
+/* ── GEAR ── */
+.gear-list{display:flex;flex-direction:column;gap:1px;background:var(--hairline);border:1px solid var(--hairline)}
+.gear-item{display:flex;justify-content:space-between;align-items:center;gap:14px;background:var(--card);padding:15px 18px}
+.gear-item .what{font-weight:600;font-size:15px}
+.gear-item .who{font-family:var(--mono);font-size:11.5px;color:var(--inkLt);margin-top:4px}
+.gear-item .status{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:0.05em;background:#E1EAE3;color:var(--d-dance);padding:4px 10px;border-radius:99px;white-space:nowrap}
+
+/* ── FOOTER (shared pattern) ── */
+footer{border-top:1px solid var(--hairline);padding:48px 0 30px;background:var(--surface)}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px}
+.fgrid .logo{margin-bottom:12px}
+.fdesc{font-family:var(--serif);font-size:14px;color:var(--inkMid);max-width:34em;line-height:1.6}
+footer h5{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--inkLt);margin-bottom:12px}
+.fl{display:block;font-size:13.5px;color:var(--inkMid);margin-bottom:9px;text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:3px}
+.fl:hover{color:var(--culture);text-decoration-color:var(--culture)}
+.credit{margin-top:34px;padding-top:20px;border-top:1px solid var(--hairline);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--inkLt)}
+.credit span:last-child{font-family:var(--mono)}
+@media(max-width:820px){.fgrid{grid-template-columns:1fr}}
+
+@media(max-width:760px){
+ .topbar,.crumb{padding-left:20px;padding-right:20px}
+ .wrap{padding:0 20px}
+ .hero{padding-top:44px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+ <a class="logo" href="https://malhar.community"><b>malhar</b><i>.community</i></a>
+</header>
+
+<div class="crumb">
+ <a href="https://wc-ge.vercel.app">Dimensions</a><span>/</span>
+ <a href="https://wc-ge.vercel.app">Culture</a><span>/</span>
+ <span class="here">Raag Malhār</span>
+ <span class="tag">culture · music &amp; dance · 8 communities</span>
+</div>
+
+<main>
+<section class="hero" id="overview">
+ <div class="wrap">
+  <div class="col-narrow">
+   <span class="tick eyebrow">Culture · Raag Malhār · the community record</span>
+   <h1>Raag Malhār</h1>
+   <div class="sub">Eight communities, one long list of everyone who sings, dances, or plays.</div>
+   <p class="lead">From a Carnatic vocalist who teaches over video calls in the evenings, to a saxophonist happy to lend his horn for a weekend gig, this is who makes music and dance happen at Malhar, gathered from each community's own directory.</p>
+  </div>
+
+  <div class="hero-media"><img src="images/hero.jpg" alt="Residents dancing together in a circle at Malhar Mela"></div>
+
+  <div class="statstrip">
+   <div class="stat"><div class="v">48</div><div class="l">Residents who sing, dance or play</div></div>
+   <div class="stat"><div class="v">8</div><div class="l">Communities represented</div></div>
+   <div class="stat"><div class="v">9</div><div class="l">Teaching from home</div></div>
+   <div class="stat"><div class="v">17</div><div class="l">Styles &amp; instruments so far</div></div>
+  </div>
+  <p class="statnote">Compiled from the Music &amp; Dance Directory kept by each of Malhar's eight communities: Mosaic, Motif, Terraces, Footprints, Patterns, Resonance, Medley and Orchard. It's only as complete as what's been shared. Some communities have a longer list simply because more neighbours have added their names. Kept by Arvind Diwakar, Medley.</p>
+ </div>
+</section>
+
+<section id="teachers">
+ <div class="wrap">
+  <div class="sec-head">
+   <span class="tick eyebrow">Start here</span>
+   <h2>Find a <em>teacher</em></h2>
+   <p>Nine residents already teach from home, some in person, one entirely online. Reach out directly.</p>
+  </div>
+
+  <div class="tcard-grid">
+   <div class="tcard"><h4>Ranjini Vasuki</h4><div class="loc">Mosaic</div><div class="what"><b>Carnatic vocals</b></div><a class="ph" href="tel:9844137140">98441 37140</a></div>
+   <div class="tcard"><h4>Shruthi</h4><div class="loc">Mosaic</div><div class="what"><b>Bharatanatyam</b>, classical dance</div><a class="ph" href="tel:9900588242">99005 88242</a></div>
+   <div class="tcard"><h4>Jaishree Charan</h4><div class="loc">Terraces</div><div class="what"><b>Carnatic vocals</b>, online &amp; evenings</div><a class="ph" href="tel:9342137918">93421 37918</a></div>
+   <div class="tcard"><h4>Kamaan / Ruth</h4><div class="loc">Footprints</div><div class="what"><b>Guitar &amp; piano</b></div><a class="ph" href="tel:9945695069">99456 95069</a></div>
+   <div class="tcard"><h4>Vidya Deshpande</h4><div class="loc">Patterns</div><div class="what"><b>Hindustani vocals</b>, Bhagavad Gita chanting</div><a class="ph" href="tel:9535866443">95358 66443</a></div>
+   <div class="tcard"><h4>Rachana</h4><div class="loc">Patterns</div><div class="what"><b>Carnatic vocals</b></div><a class="ph" href="tel:9916856041">99168 56041</a></div>
+   <div class="tcard"><h4>Arvind Diwakar</h4><div class="loc">Medley</div><div class="what"><b>Flute</b></div><a class="ph" href="tel:9731066233">97310 66233</a></div>
+   <div class="tcard"><h4>Vanitha</h4><div class="loc">Medley</div><div class="what"><b>Carnatic vocals</b>: classical, semi-classical, film &amp; devotional</div><a class="ph" href="tel:9901471640">99014 71640</a></div>
+   <div class="tcard"><h4>Suchitra</h4><div class="loc">Medley</div><div class="what"><b>Sanskrit chanting</b>: Bhagavad Gita &amp; bhajans</div><a class="ph" href="tel:9108452823">91084 52823</a></div>
+  </div>
+
+  <div class="outside-head"><span class="eyebrow">Or from outside</span><span class="rule"></span></div>
+  <p class="outside-note">Not neighbours themselves, but each has students inside the community.</p>
+  <div class="orow-wrap" id="outsideList"></div>
+
+  <div class="watch">
+   <div class="watch-h">
+    <div class="eyebrow">See it made</div>
+    <h3>Arvind shows how a bamboo flute comes together</h3>
+    <div class="who">Arvind Diwakar · Medley · flute teacher &amp; craftsman</div>
+   </div>
+   <div class="video-embed">
+    <iframe src="https://www.youtube.com/embed/VSPWahQeFQ0" title="Arvind Diwakar, making a bamboo flute" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="communities" style="background:var(--surface)">
+ <div class="wrap">
+  <div class="sec-head">
+   <span class="tick eyebrow">By community</span>
+   <h2>Eight small <em>ensembles</em></h2>
+   <p>Each community has its own character: Resonance is a house of vocalists, Orchard leans toward dance, Medley is the one to visit for an instrument. Find the one nearest you.</p>
+  </div>
+  <div class="comm-grid" id="communityGrid"></div>
+ </div>
+</section>
+
+<section id="directory">
+ <div class="wrap">
+  <div class="sec-head">
+   <span class="tick eyebrow">The full list</span>
+   <h2>Browse <em>everyone</em></h2>
+   <p>Filter by what they do, where they live, or search a name.</p>
+  </div>
+
+  <div class="ledger-controls">
+   <div class="filters" id="disciplineChips">
+    <button class="fbtn on" data-discipline="all">All</button>
+    <button class="fbtn" data-discipline="vocal">Vocal</button>
+    <button class="fbtn" data-discipline="dance">Dance</button>
+    <button class="fbtn" data-discipline="instrumental">Instrumental</button>
+    <button class="fbtn" data-discipline="production">Production</button>
+   </div>
+   <select class="csel" id="communitySelect" aria-label="Filter by community"><option value="all">All communities</option></select>
+   <input class="search" type="search" id="searchInput" placeholder="Search a name…" aria-label="Search by name">
+  </div>
+
+  <div class="lcount" id="countLabel"></div>
+  <div class="dirwrap" id="directoryList"></div>
+ </div>
+</section>
+
+<section id="spotlights" style="background:var(--ink)">
+ <div class="wrap">
+  <div class="sec-head">
+   <span class="tick eyebrow" style="color:#E3A85C">Worth knowing</span>
+   <h2 style="color:#FBF6EA">Three to <em style="color:#E3A85C">meet</em></h2>
+  </div>
+  <div class="spot-grid">
+   <div class="spot">
+    <div class="tagline">Motif · Production</div>
+    <h3>Giridhar, the one-man studio</h3>
+    <p>The only resident in the whole directory listed under recording. Giridhar records and posts music on YouTube from Motif. If a performance needs capturing properly, he's the one to ask.</p>
+   </div>
+   <div class="spot">
+    <div class="tagline">Medley · Two disciplines</div>
+    <h3>Chinmayee plays and sings, same breath</h3>
+    <p>Violin in one hand, bhajans and Carnatic vocals in the other. Chinmayee is one of only a few residents in the directory listed under both an instrument and a voice.</p>
+   </div>
+   <div class="spot">
+    <div class="tagline">Orchard · Two dance forms</div>
+    <h3>Meenakshi dances two classical languages</h3>
+    <p>Bharatanatyam and Odissi, side by side in the same dancer. Two classical vocabularies that most people spend a lifetime choosing between.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section id="gear" style="background:var(--surface)">
+ <div class="wrap">
+  <div class="sec-head">
+   <span class="tick eyebrow">Before you buy</span>
+   <h2>Gear you can <em>borrow</em></h2>
+   <p>Not much listed yet, but it's a start.</p>
+  </div>
+  <div class="gear-list">
+   <div class="gear-item"><div><div class="what">Speakers &amp; mics</div><div class="who">Rajini Alok · Mosaic · 97313 85721</div></div><div class="status">For rent</div></div>
+   <div class="gear-item"><div><div class="what">Saxophone</div><div class="who">Arjun · Orchard · 98440 82404</div></div><div class="status">Ask Arjun</div></div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="wrap">
+  <div class="fgrid">
+   <div>
+    <span class="logo"><b>malhar</b><i>.community</i></span>
+    <p class="fdesc">A living archive of the place we share, its flora, fauna, commons, culture and the things made here. Raag Malhār is one entry in the Culture dimension.</p>
+   </div>
+   <div>
+    <h5>This entry</h5>
+    <a class="fl" href="#teachers">Find a teacher</a>
+    <a class="fl" href="#communities">Communities</a>
+    <a class="fl" href="#directory">Full directory</a>
+    <a class="fl" href="#spotlights">Worth knowing</a>
+   </div>
+   <div>
+    <h5>Raag Malhār</h5>
+    <a class="fl" href="tel:9731066233">Message Arvind, custodian ↗</a>
+    <a class="fl" href="https://malhar.community">malhar.community Home ↗</a>
+   </div>
+  </div>
+  <div class="credit">
+   <span>Not on this list, or something's changed? Arvind Diwakar, Medley, keeps this page up to date. Message or call him at 97310 66233 to be added, corrected, or removed.</span>
+   <span>malhar.community · Culture · Raag Malhār</span>
+  </div>
+ </div>
+</footer>
+
+<script>
+(function(){
+  var people = [
+    {name:"Ranjini Vasuki", community:"Mosaic", phone:"98441 37140", disciplines:["vocal"], style:"Carnatic vocals, with her boys", teacher:true},
+    {name:"Shruthi", community:"Mosaic", phone:"99005 88242", disciplines:["dance"], style:"Bharatanatyam, classical &amp; freestyle, with Tintu", teacher:true},
+    {name:"Rama Venugopal", community:"Mosaic", phone:"98451 63873", disciplines:["dance"], style:"Bharatanatyam"},
+    {name:"Gayathri &amp; Murali", community:"Mosaic", phone:"98450 79703", disciplines:["vocal"], style:"Light music, vocals"},
+    {name:"Sreedevi", community:"Mosaic", phone:"", disciplines:["vocal"], style:"Light &amp; Western vocals"},
+    {name:"Shyam", community:"Mosaic", phone:"99807 20011", disciplines:["instrumental"], style:"Guitar"},
+
+    {name:"Anand", community:"Motif", phone:"98197 83950", disciplines:["vocal"], style:"Vocals"},
+    {name:"Kyra / Rajathi", community:"Motif", phone:"98804 33183", phoneNote:"parent's number", disciplines:["vocal"], style:"Vocals"},
+    {name:"Nivedita / Samir", community:"Motif", phone:"96200 11809", phoneNote:"parent's number", disciplines:["vocal"], style:"Vocals"},
+    {name:"Giridhar", community:"Motif", phone:"96632 00133", disciplines:["production"], style:"Recording &amp; YouTube"},
+    {name:"Guruprasad", community:"Motif", phone:"98454 72927", disciplines:["vocal"], style:"Vocals"},
+
+    {name:"Jaishree Charan", community:"Terraces", phone:"93421 37918", disciplines:["vocal"], style:"Light &amp; Carnatic vocals", teacher:true},
+    {name:"Mou Dutta", community:"Terraces", phone:"73033 98323", disciplines:["vocal","dance"], style:"Light music vocals; also choreographs dance"},
+    {name:"Ratna", community:"Terraces", phone:"98865 89350", disciplines:["vocal"], style:"Hindustani vocals"},
+    {name:"Deepika", community:"Terraces", phone:"99403 86072", disciplines:["vocal"], style:"Hindustani vocals"},
+    {name:"Bhooma Sharma", community:"Terraces", phone:"98455 27589", disciplines:["vocal"], style:"Hindustani vocals"},
+
+    {name:"Kamaan / Ruth", community:"Footprints", phone:"99456 95069", disciplines:["instrumental"], style:"Guitar &amp; piano", teacher:true},
+    {name:"Dr Aarthi Doss", community:"Footprints", phone:"94492 94625", disciplines:["vocal"], style:"Light music &amp; bhajan vocals"},
+    {name:"Dr. Guru", community:"Footprints", phone:"94488 99120", disciplines:["vocal"], style:"Light music vocals"},
+    {name:"Shriya", community:"Footprints", phone:"99014 01537", disciplines:["vocal","instrumental"], style:"English &amp; light vocals, guitar"},
+
+    {name:"Vidya Deshpande", community:"Patterns", phone:"95358 66443", disciplines:["vocal"], style:"Hindustani &amp; light vocals, Bhagavad Gita chanting", teacher:true},
+    {name:"Rachana", community:"Patterns", phone:"99168 56041", disciplines:["vocal"], style:"Carnatic vocals", teacher:true},
+    {name:"Spoorthi", community:"Patterns", phone:"78996 43917", disciplines:["dance"], style:"Kathak"},
+    {name:"Reshmi Gagan", community:"Patterns", phone:"77603 60777", disciplines:["dance"], style:"Dance"},
+
+    {name:"Suha", community:"Resonance", phone:"", disciplines:["vocal"], style:"Hindustani vocals"},
+    {name:"Pallavi", community:"Resonance", phone:"91 96325 49648", disciplines:["vocal"], style:"Hindustani vocals"},
+    {name:"Shruthi", community:"Resonance", phone:"", disciplines:["vocal"], style:"Carnatic vocals"},
+    {name:"Sujatha", community:"Resonance", phone:"", disciplines:["vocal"], style:"Carnatic vocals"},
+    {name:"Aanya", community:"Resonance", phone:"98455 03030", disciplines:["vocal"], style:"English &amp; Western vocals"},
+    {name:"Aarya", community:"Resonance", phone:"96325 49648", disciplines:["vocal"], style:"English &amp; Western vocals"},
+    {name:"Raghava", community:"Resonance", phone:"99455 03030", disciplines:["instrumental"], style:"Guitar"},
+    {name:"Karthik Srinivasan", community:"Resonance", phone:"", disciplines:["instrumental"], style:"Guitar"},
+    {name:"Prasad", community:"Resonance", phone:"99015 85005", disciplines:["instrumental"], style:"Carnatic flute"},
+
+    {name:"Arvind Diwakar", community:"Medley", phone:"97310 66233", disciplines:["vocal","instrumental"], style:"Light vocals; flute", teacher:true},
+    {name:"Vanitha", community:"Medley", phone:"99014 71640", disciplines:["vocal"], style:"Carnatic classical, semi-classical, film &amp; devotional", teacher:true},
+    {name:"Suchitra", community:"Medley", phone:"91084 52823", disciplines:["vocal"], style:"Bhajan &amp; Carnatic vocals, Sanskrit chanting", teacher:true},
+    {name:"Nachiket", community:"Medley", phone:"91084 52833", disciplines:["instrumental"], style:"Mridangam"},
+    {name:"Chinmayee", community:"Medley", phone:"91084 52823", disciplines:["instrumental","vocal"], style:"Violin; bhajan &amp; Carnatic vocals"},
+    {name:"Venky", community:"Medley", phone:"98804 09375", disciplines:["instrumental"], style:"Guitar"},
+    {name:"Praveen", community:"Medley", phone:"97426 41501", disciplines:["instrumental"], style:"Guitar"},
+
+    {name:"Deepa G", community:"Orchard", phone:"97413 66664", disciplines:["dance"], style:"Bharatanatyam"},
+    {name:"Meenakshi", community:"Orchard", phone:"98996 80669", disciplines:["dance"], style:"Bharatanatyam &amp; Odissi"},
+    {name:"Dhwani Raghavan", community:"Orchard", phone:"91083 82505", disciplines:["dance"], style:"Zumba &amp; Bollywood"},
+    {name:"Krithi Raghavan", community:"Orchard", phone:"90086 30022", disciplines:["vocal"], style:"Carnatic vocals"},
+    {name:"Proteep Mallick", community:"Orchard", phone:"96861 72110", disciplines:["vocal"], style:"Hindustani vocals"},
+    {name:"Procheta Mallick", community:"Orchard", phone:"99028 74525", disciplines:["vocal"], style:"Carnatic vocals"},
+    {name:"Sreejith B.S", community:"Orchard", phone:"98868 80752", disciplines:["instrumental"], style:"Piano"},
+    {name:"Arjun", community:"Orchard", phone:"98440 82404", disciplines:["instrumental"], style:"Saxophone. Also rents out his sax"}
+  ];
+
+  var outsideTeachers = [
+    {name:"Sanjeev", phone:"96638 85047", style:"Guitar &amp; keyboard", where:"Visits all communities"},
+    {name:"Samudyata Bhat", phone:"87622 88999", style:"Bharatanatyam", where:"Teaches in Footprints"},
+    {name:"Srivatsa", phone:"90352 02737", style:"Violin", where:"Teaches in Medley"},
+    {name:"Durga Mythreyee", phone:"80080 93346", style:"Veena", where:"Online"},
+    {name:"Jayanthi Eshwaraputhi", phone:"96638 98137", style:"Kathak", where:"Teaches in Mosaic &amp; Resonance"},
+    {name:"Sugandha Murali", phone:"98607 10282 / 86188 68713", style:"Hindustani vocals", where:"Jayanagar &amp; JP Nagar. Residents travel"}
+  ];
+
+  var communities = [
+    {name:"Mosaic", count:6, disciplines:["vocal","dance","instrumental"], teachNote:"Taught at home by <b>Ranjini Vasuki</b> (Carnatic vocals) &amp; <b>Shruthi</b> (Bharatanatyam)"},
+    {name:"Motif", count:5, disciplines:["vocal","production"], teachNote:"No resident teacher listed yet", empty:true},
+    {name:"Terraces", count:5, disciplines:["vocal","dance"], teachNote:"Taught at home by <b>Jaishree Charan</b> (Carnatic, evenings &amp; online)"},
+    {name:"Footprints", count:4, disciplines:["vocal","instrumental"], teachNote:"Taught at home by <b>Kamaan / Ruth</b> (guitar &amp; piano)"},
+    {name:"Patterns", count:4, disciplines:["vocal","dance"], teachNote:"Taught at home by <b>Vidya Deshpande</b> (Hindustani) &amp; <b>Rachana</b> (Carnatic)"},
+    {name:"Resonance", count:9, disciplines:["vocal","instrumental"], teachNote:"The largest roster here, but no resident teacher listed yet", empty:true},
+    {name:"Medley", count:7, disciplines:["vocal","instrumental"], teachNote:"Taught at home by <b>Arvind Diwakar</b> (flute), <b>Vanitha</b> &amp; <b>Suchitra</b> (vocals)"},
+    {name:"Orchard", count:8, disciplines:["dance","vocal","instrumental"], teachNote:"Malhar's most dance-heavy community. No resident teacher listed yet", empty:true}
+  ];
+
+  var disciplineLabel = {vocal:"Vocal", dance:"Dance", instrumental:"Instrumental", production:"Production"};
+
+  function el(tag, cls, html){
+    var e = document.createElement(tag);
+    if(cls) e.className = cls;
+    if(html !== undefined) e.innerHTML = html;
+    return e;
+  }
+
+  var outsideList = document.getElementById("outsideList");
+  outsideTeachers.forEach(function(t){
+    var row = el("div","orow");
+    row.appendChild(el("div","on", t.name));
+    row.appendChild(el("div","os", t.style));
+    row.appendChild(el("div","ow", t.where + " &middot; " + t.phone));
+    outsideList.appendChild(row);
+  });
+
+  var grid = document.getElementById("communityGrid");
+  var communitySelect = document.getElementById("communitySelect");
+  communities.forEach(function(c){
+    var card = el("div","comm-card");
+    var top = el("div","top");
+    top.appendChild(el("h4",null, c.name));
+    top.appendChild(el("div","count", c.count + " listed"));
+    card.appendChild(top);
+    var tags = el("div","tagrow");
+    c.disciplines.forEach(function(d){ tags.appendChild(el("span","dtag " + d, disciplineLabel[d])); });
+    card.appendChild(tags);
+    card.appendChild(el("div","note" + (c.empty ? " empty" : ""), c.teachNote));
+    grid.appendChild(card);
+
+    var opt = el("option", null, c.name);
+    opt.value = c.name;
+    communitySelect.appendChild(opt);
+  });
+
+  var listEl = document.getElementById("directoryList");
+  var countEl = document.getElementById("countLabel");
+  var state = {discipline:"all", community:"all", query:""};
+
+  function render(){
+    listEl.innerHTML = "";
+    var query = state.query.trim().toLowerCase();
+    var filtered = people.filter(function(p){
+      if(state.discipline !== "all" && p.disciplines.indexOf(state.discipline) === -1) return false;
+      if(state.community !== "all" && p.community !== state.community) return false;
+      if(query && p.name.toLowerCase().indexOf(query) === -1) return false;
+      return true;
+    });
+
+    countEl.textContent = "Showing " + filtered.length + " of " + people.length;
+
+    if(filtered.length === 0){
+      listEl.appendChild(el("div","empty-state","No one matches that yet. Try clearing a filter."));
+      return;
+    }
+
+    filtered.forEach(function(p){
+      var row = el("div","drow");
+      var dots = el("div","dots");
+      p.disciplines.forEach(function(d){ dots.appendChild(el("span","ddot " + d)); });
+      row.appendChild(dots);
+
+      var main = el("div");
+      var nameHtml = p.name + (p.teacher ? '<span class="badge">teaches</span>' : "");
+      main.appendChild(el("div","nm", nameHtml));
+      main.appendChild(el("div","st", p.style));
+      row.appendChild(main);
+
+      row.appendChild(el("div","cm", p.community));
+
+      var phoneText = p.phone ? p.phone + (p.phoneNote ? " (" + p.phoneNote + ")" : "") : "unlisted";
+      row.appendChild(el("div","ph", phoneText));
+
+      listEl.appendChild(row);
+    });
+  }
+
+  document.getElementById("disciplineChips").addEventListener("click", function(e){
+    var btn = e.target.closest(".fbtn");
+    if(!btn) return;
+    state.discipline = btn.dataset.discipline;
+    this.querySelectorAll(".fbtn").forEach(function(c){ c.classList.toggle("on", c === btn); });
+    render();
+  });
+
+  communitySelect.addEventListener("change", function(){
+    state.community = this.value;
+    render();
+  });
+
+  document.getElementById("searchInput").addEventListener("input", function(){
+    state.query = this.value;
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
