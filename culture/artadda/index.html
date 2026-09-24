@@ -212,7 +212,8 @@
   .timeline{position:relative;padding-left:26px;border-left:2px dashed var(--line);}
   .ed-block{
     position:relative;margin-bottom:18px;
-    display:block;text-decoration:none;color:inherit;
+    display:flex;gap:14px;align-items:flex-start;
+    text-decoration:none;color:inherit;
     padding:14px 18px;border-radius:var(--radius);
     transition:background .15s ease,transform .15s ease;
   }
@@ -222,10 +223,18 @@
     background:var(--accent);border:3px solid var(--paper);box-shadow:0 0 0 2px var(--accent);
   }
   .ed-block:hover{background:var(--paper-2);transform:translateX(2px);}
+  .ed-thumb{
+    flex:none;width:72px;height:90px;border-radius:6px;overflow:hidden;
+    background:var(--paper);border:1px solid var(--line);
+  }
+  .ed-thumb img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .4s ease, filter .3s ease;}
+  .ed-thumb img.is-loaded{opacity:1;}
+  .ed-block:hover .ed-thumb img{filter:contrast(1.03) brightness(.98);}
+  .ed-body{flex:1;min-width:0;}
   .ed-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin-bottom:4px;}
   .ed-date{font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:700;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);background:var(--paper);border:1px solid var(--line);padding:3px 10px;border-radius:100px;}
   .ed-head h3{font-size:1.34rem;color:var(--ink);}
-  .ed-block p{margin:4px 0 0;color:var(--ink-soft);font-size:.98rem;}
+  .ed-body p{margin:4px 0 0;color:var(--ink-soft);font-size:.98rem;}
   .ed-artists{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.74rem;color:var(--ink-soft);margin-top:8px;}
   .ed-view{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.74rem;font-weight:700;color:var(--accent);margin-top:10px;}
   .ed-block:hover .ed-view{text-decoration:underline;}
@@ -234,14 +243,20 @@
   .ed-more a:hover{border-color:var(--accent);}
 
   /* artist chips */
-  .artist-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+  .artist-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;}
   .artist-card{
-    background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;position:relative;
+    background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:14px;position:relative;
     display:block;text-decoration:none;color:inherit;transition:transform .15s ease,box-shadow .15s ease;
   }
   .artist-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(19,18,16,.10);}
-  .artist-card .pin{position:absolute;top:-7px;left:18px;width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 2px 4px rgba(19,18,16,.25);}
-  .artist-card h4{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:1.12rem;margin:6px 0 6px;}
+  .artist-photo{
+    width:100%;aspect-ratio:3/4;border-radius:4px;overflow:hidden;
+    background:var(--paper);border:1px solid var(--line);margin-bottom:12px;
+  }
+  .artist-photo img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .4s ease, filter .3s ease, transform .5s ease;}
+  .artist-photo img.is-loaded{opacity:1;}
+  .artist-card:hover .artist-photo img{filter:contrast(1.03) brightness(.98);transform:scale(1.03);}
+  .artist-card h4{font-family:'Newsreader',Georgia,serif;font-weight:600;font-size:1.12rem;margin:0 0 6px;}
   .artist-card .medium{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.68rem;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft);font-weight:700;}
   .artist-view{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:.7rem;font-weight:700;color:var(--ink-faint);margin-top:12px;}
   .artist-card:hover .artist-view{color:var(--accent);text-decoration:underline;}
@@ -329,7 +344,7 @@
 
     <div class="stats reveal">
       <div class="stat"><div class="num">9</div><div class="lbl">Editions held</div></div>
-      <div class="stat"><div class="num">10+</div><div class="lbl">Artists shown</div></div>
+      <div class="stat"><div class="num">11+</div><div class="lbl">Artists shown</div></div>
       <div class="stat"><div class="num">Mar 2025</div><div class="lbl">Founded</div></div>
     </div>
     <p class="stats-note">Counts as of September 2026 – the archive grows every month. Live numbers at <a href="https://theartadda.in" target="_blank" rel="noopener">theartadda.in ↗</a>.</p>
@@ -377,40 +392,57 @@
       <p>Nine editions in, each one built around whoever's showing that month, sometimes a single artist's body of work, sometimes several brought together.</p>
     </div>
 
-    <div class="timeline">
-      <a class="ed-block" href="https://theartadda.in/editions/2026-04/" target="_blank" rel="noopener">
-        <div class="ed-head"><span class="ed-date">Apr 2026</span><h3>Inspired by Nature</h3></div>
-        <p>A fresh set of works under the April Sunday light at Adda.</p>
-        <div class="ed-view">View edition ↗</div>
+    <div class="timeline" id="editionsTimeline">
+      <a class="ed-block" href="https://theartadda.in/editions/2026-04/" target="_blank" rel="noopener" data-thumb="https://theartadda.in/wp-content/uploads/2026/08/Art-Adda-April-2026-Poster-778x1024.jpeg">
+        <div class="ed-thumb"><img loading="lazy" alt=""></div>
+        <div class="ed-body">
+          <div class="ed-head"><span class="ed-date">Apr 2026</span><h3>Inspired by Nature</h3></div>
+          <p>A fresh set of works under the April Sunday light at Adda.</p>
+          <div class="ed-view">View edition ↗</div>
+        </div>
       </a>
-      <a class="ed-block" href="https://theartadda.in/editions/2026-01/" target="_blank" rel="noopener">
-        <div class="ed-head"><span class="ed-date">Jan 2026</span><h3>Breathe in Nature</h3></div>
-        <p>Priya Hegde opens 2026 with paintings, illustrations and digital work rooted in the quiet beauty of nature.</p>
-        <div class="ed-artists">Priya Hegde</div>
-        <div class="ed-view">View edition ↗</div>
+      <a class="ed-block" href="https://theartadda.in/editions/2026-01/" target="_blank" rel="noopener" data-thumb="https://theartadda.in/wp-content/uploads/2026/08/Art-Adda-Jan-2026-778x1024.jpg">
+        <div class="ed-thumb"><img loading="lazy" alt=""></div>
+        <div class="ed-body">
+          <div class="ed-head"><span class="ed-date">Jan 2026</span><h3>Breathe in Nature</h3></div>
+          <p>Priya Hegde opens 2026 with paintings, illustrations and digital work rooted in the quiet beauty of nature.</p>
+          <div class="ed-artists">Priya Hegde</div>
+          <div class="ed-view">View edition ↗</div>
+        </div>
       </a>
       <a class="ed-block" href="https://theartadda.in/editions/2025-11/" target="_blank" rel="noopener">
-        <div class="ed-head"><span class="ed-date">Nov 2025</span><h3>Children's Day Special</h3></div>
-        <p>A celebration of children's work, bold, colourful, playful and unexpected. Eight young artists put up their own work and met a curious community.</p>
-        <div class="ed-view">View edition ↗</div>
+        <div class="ed-body">
+          <div class="ed-head"><span class="ed-date">Nov 2025</span><h3>Children's Day Special</h3></div>
+          <p>A celebration of children's work, bold, colourful, playful and unexpected. Eight young artists put up their own work and met a curious community.</p>
+          <div class="ed-view">View edition ↗</div>
+        </div>
       </a>
-      <a class="ed-block" href="https://theartadda.in/editions/2025-10/" target="_blank" rel="noopener">
-        <div class="ed-head"><span class="ed-date">Oct 2025</span><h3>Studies in Form &amp; Figure</h3></div>
-        <p>Pradosh Nair presents portraits, landscapes and small studies in charcoal, watercolour and acrylic.</p>
-        <div class="ed-artists">Pradosh Nair</div>
-        <div class="ed-view">View edition ↗</div>
+      <a class="ed-block" href="https://theartadda.in/editions/2025-10/" target="_blank" rel="noopener" data-thumb="https://theartadda.in/wp-content/uploads/2026/08/Oct-2025-Art-Adda-Poster-778x1024.jpeg">
+        <div class="ed-thumb"><img loading="lazy" alt=""></div>
+        <div class="ed-body">
+          <div class="ed-head"><span class="ed-date">Oct 2025</span><h3>Studies in Form &amp; Figure</h3></div>
+          <p>Pradosh Nair presents portraits, landscapes and small studies in charcoal, watercolour and acrylic.</p>
+          <div class="ed-artists">Pradosh Nair</div>
+          <div class="ed-view">View edition ↗</div>
+        </div>
       </a>
-      <a class="ed-block" href="https://theartadda.in/editions/2025-08/" target="_blank" rel="noopener">
-        <div class="ed-head"><span class="ed-date">Aug 2025</span><h3>Landscapes, Architecture, Travels &amp; Tides</h3></div>
-        <p>Ramaa's heritage photography meets Sharada Arun's meditative watercolours.</p>
-        <div class="ed-artists">Ramaa · Sharada Arun</div>
-        <div class="ed-view">View edition ↗</div>
+      <a class="ed-block" href="https://theartadda.in/editions/2025-08/" target="_blank" rel="noopener" data-thumb="https://theartadda.in/wp-content/uploads/2026/08/Sharada-Landscape-677x1024.jpeg">
+        <div class="ed-thumb"><img loading="lazy" alt=""></div>
+        <div class="ed-body">
+          <div class="ed-head"><span class="ed-date">Aug 2025</span><h3>Landscapes, Architecture, Travels &amp; Tides</h3></div>
+          <p>Ramaa's heritage photography meets Sharada Arun's meditative watercolours.</p>
+          <div class="ed-artists">Ramaa · Sharada Arun</div>
+          <div class="ed-view">View edition ↗</div>
+        </div>
       </a>
-      <a class="ed-block" href="https://theartadda.in/editions/2025-07/" target="_blank" rel="noopener">
-        <div class="ed-head"><span class="ed-date">Jul 2025</span><h3>Murals &amp; Traditionals</h3></div>
-        <p>Nirmala Kamath's Kerala mural paintings alongside Simran Sridhar's mosaics and sketches.</p>
-        <div class="ed-artists">Nirmala Kamath · Simran Sridhar</div>
-        <div class="ed-view">View edition ↗</div>
+      <a class="ed-block" href="https://theartadda.in/editions/2025-07/" target="_blank" rel="noopener" data-thumb="https://theartadda.in/wp-content/uploads/2026/08/Art-Adda-July-2025-1024x768.jpeg">
+        <div class="ed-thumb"><img loading="lazy" alt=""></div>
+        <div class="ed-body">
+          <div class="ed-head"><span class="ed-date">Jul 2025</span><h3>Murals &amp; Traditionals</h3></div>
+          <p>Nirmala Kamath's Kerala mural paintings alongside Simran Sridhar's mosaics and sketches.</p>
+          <div class="ed-artists">Nirmala Kamath · Simran Sridhar</div>
+          <div class="ed-view">View edition ↗</div>
+        </div>
       </a>
     </div>
     <div class="ed-more"><a href="https://theartadda.in/editions" target="_blank" rel="noopener">All 9 editions on theartadda.in →</a></div>
@@ -430,17 +462,18 @@
       artists tagged Good Earth Malhar; check that tag before adding
       anyone new here.
     -->
-    <div class="artist-grid">
-      <a class="artist-card" href="https://theartadda.in/artists/disha/" target="_blank" rel="noopener"><span class="pin"></span><h4>Disha Sahu</h4><div class="medium">Urban Sketching · Watercolour</div><div class="artist-view">View profile ↗</div></a>
-      <a class="artist-card" href="https://theartadda.in/artists/nirmala/" target="_blank" rel="noopener"><span class="pin"></span><h4>Nirmala Kamath</h4><div class="medium">Kerala Mural Painting</div><div class="artist-view">View profile ↗</div></a>
-      <a class="artist-card" href="https://theartadda.in/artists/pradosh/" target="_blank" rel="noopener"><span class="pin"></span><h4>Pradosh Nair</h4><div class="medium">Charcoal · Watercolour · Acrylic</div><div class="artist-view">View profile ↗</div></a>
-      <a class="artist-card" href="https://theartadda.in/artists/prashansa/" target="_blank" rel="noopener"><span class="pin"></span><h4>Prashansa Daga</h4><div class="medium">Watercolour · Acrylic</div><div class="artist-view">View profile ↗</div></a>
-      <a class="artist-card" href="https://theartadda.in/artists/priya/" target="_blank" rel="noopener"><span class="pin"></span><h4>Priya Hegde</h4><div class="medium">Painting · Illustration · Digital</div><div class="artist-view">View profile ↗</div></a>
-      <a class="artist-card" href="https://theartadda.in/artists/ramaa/" target="_blank" rel="noopener"><span class="pin"></span><h4>Ramaa</h4><div class="medium">Travel &amp; Heritage Photography</div><div class="artist-view">View profile ↗</div></a>
-      <a class="artist-card" href="https://theartadda.in/artists/sangeetha/" target="_blank" rel="noopener"><span class="pin"></span><h4>Sangeetha Kadur</h4><div class="medium">Wildlife Art · Nature Journaling</div><div class="artist-view">View profile ↗</div></a>
-      <a class="artist-card" href="https://theartadda.in/artists/sharada/" target="_blank" rel="noopener"><span class="pin"></span><h4>Sharada Arun</h4><div class="medium">Watercolour</div><div class="artist-view">View profile ↗</div></a>
-      <a class="artist-card" href="https://theartadda.in/artists/sneha/" target="_blank" rel="noopener"><span class="pin"></span><h4>Sneha M L</h4><div class="medium">Contemporary · Abstract</div><div class="artist-view">View profile ↗</div></a>
-      <a class="artist-card" href="https://theartadda.in/artists/vydehi/" target="_blank" rel="noopener"><span class="pin"></span><h4>Vydehi Kadur</h4><div class="medium">Illustration · Underwater Photography</div><div class="artist-view">View profile ↗</div></a>
+    <div class="artist-grid" id="artistGrid">
+      <a class="artist-card" href="https://theartadda.in/artists/disha/" target="_blank" rel="noopener" data-photo="https://theartadda.in/wp-content/uploads/2026/08/Disha-Sahu-Profile-683x1024.jpg"><div class="artist-photo"><img loading="lazy" alt=""></div><h4>Disha Sahu</h4><div class="medium">Urban Sketching · Watercolour</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/nirmala/" target="_blank" rel="noopener" data-photo="https://theartadda.in/wp-content/uploads/2026/08/Nirmala-768x1024.jpeg"><div class="artist-photo"><img loading="lazy" alt=""></div><h4>Nirmala Kamath</h4><div class="medium">Kerala Mural Painting</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/pradosh/" target="_blank" rel="noopener" data-photo="https://theartadda.in/wp-content/uploads/2026/08/Prodosh_Nair_Artist_Profile-768x1024.jpeg"><div class="artist-photo"><img loading="lazy" alt=""></div><h4>Pradosh Nair</h4><div class="medium">Charcoal · Watercolour · Acrylic</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/prashansa/" target="_blank" rel="noopener" data-photo="https://theartadda.in/wp-content/uploads/2026/08/Prashansa.jpeg"><div class="artist-photo"><img loading="lazy" alt=""></div><h4>Prashansa Daga</h4><div class="medium">Watercolour · Acrylic</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/priya/" target="_blank" rel="noopener" data-photo="https://theartadda.in/wp-content/uploads/2026/08/Priya-Hegde-917x1024.jpeg"><div class="artist-photo"><img loading="lazy" alt=""></div><h4>Priya Hegde</h4><div class="medium">Painting · Illustration · Digital</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/ramaa/" target="_blank" rel="noopener" data-photo="https://theartadda.in/wp-content/uploads/2026/08/Ramaa-2.jpeg"><div class="artist-photo"><img loading="lazy" alt=""></div><h4>Ramaa</h4><div class="medium">Travel &amp; Heritage Photography</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/sangeetha/" target="_blank" rel="noopener" data-photo="https://theartadda.in/wp-content/uploads/2026/08/Sangeetha.jpeg"><div class="artist-photo"><img loading="lazy" alt=""></div><h4>Sangeetha Kadur</h4><div class="medium">Wildlife Art · Nature Journaling</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/sharada/" target="_blank" rel="noopener" data-photo="https://theartadda.in/wp-content/uploads/2026/08/Sharada-761x1024.jpeg"><div class="artist-photo"><img loading="lazy" alt=""></div><h4>Sharada Arun</h4><div class="medium">Watercolour</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/simran/" target="_blank" rel="noopener" data-photo="https://theartadda.in/wp-content/uploads/2026/08/Simran.jpeg"><div class="artist-photo"><img loading="lazy" alt=""></div><h4>Simran Sridhar</h4><div class="medium">Visual Artist</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/sneha/" target="_blank" rel="noopener" data-photo="https://theartadda.in/wp-content/uploads/2026/08/Sneha-676x1024.jpeg"><div class="artist-photo"><img loading="lazy" alt=""></div><h4>Sneha M L</h4><div class="medium">Contemporary · Abstract</div><div class="artist-view">View profile ↗</div></a>
+      <a class="artist-card" href="https://theartadda.in/artists/vydehi/" target="_blank" rel="noopener" data-photo="https://theartadda.in/wp-content/uploads/2026/08/Vydehi-Kadur-683x1024.jpeg"><div class="artist-photo"><img loading="lazy" alt=""></div><h4>Vydehi Kadur</h4><div class="medium">Illustration · Underwater Photography</div><div class="artist-view">View profile ↗</div></a>
       <div class="artist-more"><a href="https://theartadda.in/artists" target="_blank" rel="noopener">Full filterable directory ↗</a></div>
     </div>
   </section>
@@ -478,7 +511,7 @@
       <a href="https://wa.me/919364908349" target="_blank" rel="noopener">WhatsApp Bot ↗</a>
       <a href="https://malhar.community">malhar.community Home ↗</a>
     </div>
-    <p class="foot-note">Artist directory, edition archive, and guidelines are maintained live at theartadda.in and grow every month – this page was last checked against the source on 10 September 2026. This is a community reference page; visit theartadda.in for the current lists.</p>
+    <p class="foot-note">Artist directory, edition archive, and guidelines are maintained live at theartadda.in and grow every month – this page was last checked against the source on 24 September 2026. This is a community reference page; visit theartadda.in for the current lists.</p>
   </div>
 </footer>
 
@@ -564,6 +597,23 @@
     linkEl.href = 'https://theartadda.in/artists/' + pick.s + '/';
   }
   document.querySelectorAll('#heroPhotos .art').forEach(fillSlot);
+
+  // Edition thumbnails and artist portraits, hotlinked from theartadda.in
+  // via each card's data-thumb / data-photo attribute. If a link breaks
+  // (a file renamed or removed on their end), that one image quietly
+  // collapses away rather than showing a broken-image icon.
+  function loadCardImage(card, attr, imgSelector){
+    const url = card.dataset[attr];
+    if(!url) return;
+    const wrap = card.querySelector(imgSelector).parentElement;
+    const img = wrap.querySelector('img');
+    img.onerror = () => { wrap.style.display = 'none'; };
+    img.onload = () => img.classList.add('is-loaded');
+    img.alt = '';
+    img.src = url;
+  }
+  document.querySelectorAll('#editionsTimeline .ed-block[data-thumb]').forEach(el => loadCardImage(el, 'thumb', '.ed-thumb img'));
+  document.querySelectorAll('#artistGrid .artist-card[data-photo]').forEach(el => loadCardImage(el, 'photo', '.artist-photo img'));
 </script>
 
 </body>
